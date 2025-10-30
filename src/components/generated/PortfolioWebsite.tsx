@@ -358,7 +358,7 @@ const HomePage = ({
   }} exit={{
     opacity: 0
   }} className="min-h-screen pt-16" data-magicpath-id="91" data-magicpath-path="PortfolioWebsite.tsx">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-magicpath-id="92" data-magicpath-path="PortfolioWebsite.tsx">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:20px_20px]" data-magicpath-id="92" data-magicpath-path="PortfolioWebsite.tsx">
         <motion.div initial={{
         y: 20,
         opacity: 0
