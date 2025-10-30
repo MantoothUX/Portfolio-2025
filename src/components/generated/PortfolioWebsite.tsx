@@ -166,7 +166,7 @@ const ProjectCard = ({
   }} className="group cursor-pointer" onClick={onClick} style={{
     perspective: 1000
   }} data-magicpath-id="11" data-magicpath-path="PortfolioWebsite.tsx">
-      <div className="bg-white dark:bg-[#0f2912] overflow-hidden border border-green-200 dark:border-green-900/50 hover:shadow-2xl hover:shadow-green-500/10 dark:hover:shadow-green-500/20 transition-all duration-300" style={{
+      <div className="bg-white dark:bg-[#0f2912] overflow-hidden border border-green-200 dark:border-green-900/50 shadow-lg shadow-green-500/20 dark:shadow-green-500/30 hover:shadow-2xl hover:shadow-green-500/10 dark:hover:shadow-green-500/20 transition-all duration-300" style={{
       borderRadius: '12px'
     }} data-magicpath-id="12" data-magicpath-path="PortfolioWebsite.tsx">
         <div className="relative overflow-hidden bg-green-50 dark:bg-green-950/50 aspect-[4/3]" style={{
