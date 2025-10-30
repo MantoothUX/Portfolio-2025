@@ -152,9 +152,22 @@ const ProjectCard = ({
     y: 20
   }} transition={{
     duration: 0.3
-  }} className="group cursor-pointer" onClick={onClick} data-magicpath-id="13" data-magicpath-path="PortfolioWebsite.tsx">
-      <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-xl dark:hover:shadow-2xl transition-all duration-300" data-magicpath-id="14" data-magicpath-path="PortfolioWebsite.tsx">
-        <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-700 aspect-[4/3]" data-magicpath-id="15" data-magicpath-path="PortfolioWebsite.tsx">
+  }} whileHover={{
+    scale: 1.05,
+    y: -8,
+    transition: {
+      duration: 0.3,
+      ease: "easeOut"
+    }
+  }} className="group cursor-pointer" onClick={onClick} style={{
+    perspective: 1000
+  }} data-magicpath-id="13" data-magicpath-path="PortfolioWebsite.tsx">
+      <div className="bg-white dark:bg-gray-800 overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-2xl dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-shadow duration-300" style={{
+      borderRadius: '12px'
+    }} data-magicpath-id="14" data-magicpath-path="PortfolioWebsite.tsx">
+        <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-700 aspect-[4/3]" style={{
+        borderRadius: '12px 12px 0 0'
+      }} data-magicpath-id="15" data-magicpath-path="PortfolioWebsite.tsx">
           <motion.img src={project.image} alt={project.title} className="w-full h-full object-cover" whileHover={{
           scale: 1.05
         }} transition={{
@@ -162,18 +175,9 @@ const ProjectCard = ({
         }} data-magicpath-id="16" data-magicpath-path="PortfolioWebsite.tsx" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-magicpath-id="17" data-magicpath-path="PortfolioWebsite.tsx" />
         </div>
-        <div className="p-4 space-y-2" data-magicpath-id="18" data-magicpath-path="PortfolioWebsite.tsx" style={{
-        borderTopWidth: "0px",
-        borderTopColor: "rgb(61, 71, 82)",
-        borderRightWidth: "0px",
-        borderRightColor: "rgb(61, 71, 82)",
-        borderBottomWidth: "0px",
-        borderBottomColor: "rgb(61, 71, 82)",
-        borderLeftWidth: "0px",
-        borderLeftColor: "rgb(61, 71, 82)",
-        borderStyle: "solid",
+        <div className="p-4 space-y-2" style={{
         borderRadius: "0px 0px 12px 12px"
-      }}>
+      }} data-magicpath-id="18" data-magicpath-path="PortfolioWebsite.tsx">
           <div className="flex items-center justify-between" data-magicpath-id="19" data-magicpath-path="PortfolioWebsite.tsx">
             <span className="text-xs font-medium text-gray-500 dark:text-gray-400" data-magicpath-id="20" data-magicpath-path="PortfolioWebsite.tsx">{project.company}</span>
             <span className="text-xs text-gray-400 dark:text-gray-500" data-magicpath-id="21" data-magicpath-path="PortfolioWebsite.tsx">{project.year}</span>
