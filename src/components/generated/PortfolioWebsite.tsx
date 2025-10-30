@@ -180,7 +180,16 @@ const ProjectCard = ({
           <div className="absolute inset-0 bg-gradient-to-t from-[#13531C]/60 via-[#13531C]/0 to-[#13531C]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-magicpath-id="15" data-magicpath-path="PortfolioWebsite.tsx" />
         </div>
         <div className="p-4 space-y-2" style={{
-        borderRadius: "0px 0px 12px 12px"
+        borderTopWidth: "0px",
+        borderTopColor: "rgb(61, 71, 82)",
+        borderRightWidth: "0px",
+        borderRightColor: "rgb(61, 71, 82)",
+        borderBottomWidth: "0px",
+        borderBottomColor: "rgb(61, 71, 82)",
+        borderLeftWidth: "0px",
+        borderLeftColor: "rgb(61, 71, 82)",
+        borderStyle: "solid",
+        borderRadius: "0px"
       }} data-magicpath-id="16" data-magicpath-path="PortfolioWebsite.tsx">
           <div className="flex items-center justify-between" data-magicpath-id="17" data-magicpath-path="PortfolioWebsite.tsx">
             <span className="text-xs font-medium text-green-600 dark:text-green-400" data-magicpath-id="18" data-magicpath-path="PortfolioWebsite.tsx">{project.company}</span>
