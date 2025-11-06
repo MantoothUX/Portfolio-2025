@@ -429,7 +429,9 @@ const HomePage = ({
       }} transition={{
         delay: 0.1
       }} className="mb-12" data-magicpath-id="94" data-magicpath-path="PortfolioWebsite.tsx">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4" data-magicpath-id="95" data-magicpath-path="PortfolioWebsite.tsx">Staff-level UX designer crafting impactful and delightful experiences</h1>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4" data-magicpath-id="95" data-magicpath-path="PortfolioWebsite.tsx" style={{
+          color: "#7bf1a8"
+        }}>Staff-level UX designer crafting impactful and delightful experiences</h1>
           <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl" style={{
           display: "none"
         }} data-magicpath-id="96" data-magicpath-path="PortfolioWebsite.tsx">
