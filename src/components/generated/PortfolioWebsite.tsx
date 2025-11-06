@@ -123,11 +123,15 @@ const Navigation = ({
     }} className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-green-200 dark:border-green-900/50 rounded-full shadow-lg shadow-green-500/10 dark:shadow-green-500/20" data-magicpath-id="1" data-magicpath-path="PortfolioWebsite.tsx">
         <div className="flex items-center gap-2 px-6 py-3" data-magicpath-id="2" data-magicpath-path="PortfolioWebsite.tsx">
           <button onClick={() => onNavigate('home')} className={cn('flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full', currentPage === 'home' ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')} data-magicpath-id="3" data-magicpath-path="PortfolioWebsite.tsx">
-            <Briefcase className="w-4 h-4" data-magicpath-id="4" data-magicpath-path="PortfolioWebsite.tsx" />
+            <Briefcase className="w-4 h-4" data-magicpath-id="4" data-magicpath-path="PortfolioWebsite.tsx" style={{
+            display: "none"
+          }} />
             Work
           </button>
           <button onClick={() => onNavigate('about')} className={cn('flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full', currentPage === 'about' ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')} data-magicpath-id="5" data-magicpath-path="PortfolioWebsite.tsx">
-            <User className="w-4 h-4" data-magicpath-id="6" data-magicpath-path="PortfolioWebsite.tsx" />
+            <User className="w-4 h-4" data-magicpath-id="6" data-magicpath-path="PortfolioWebsite.tsx" style={{
+            display: "none"
+          }} />
             About
           </button>
           <div className="w-px h-6 bg-green-200 dark:bg-green-900/50 mx-1" data-magicpath-id="7" data-magicpath-path="PortfolioWebsite.tsx" />
