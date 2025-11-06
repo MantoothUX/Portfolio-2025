@@ -109,7 +109,7 @@ const Navigation = ({
   darkMode: boolean;
   onToggleDarkMode: () => void;
 }) => {
-  return <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50" data-magicpath-id="0" data-magicpath-path="PortfolioWebsite.tsx">
+  return <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
       <motion.div initial={{
       y: 100,
       opacity: 0
@@ -120,23 +120,23 @@ const Navigation = ({
       type: "spring",
       stiffness: 260,
       damping: 20
-    }} className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-green-200 dark:border-green-900/50 rounded-full shadow-lg shadow-green-500/10 dark:shadow-green-500/20" data-magicpath-id="1" data-magicpath-path="PortfolioWebsite.tsx">
-        <div className="flex items-center gap-2 px-6 py-3" data-magicpath-id="2" data-magicpath-path="PortfolioWebsite.tsx">
-          <button onClick={() => onNavigate('home')} className={cn('flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full', currentPage === 'home' ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')} data-magicpath-id="3" data-magicpath-path="PortfolioWebsite.tsx">
-            <Briefcase className="w-4 h-4" data-magicpath-id="4" data-magicpath-path="PortfolioWebsite.tsx" style={{
+    }} className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-green-200 dark:border-green-900/50 rounded-full shadow-lg shadow-green-500/10 dark:shadow-green-500/20">
+        <div className="flex items-center gap-2 px-6 py-3">
+          <button onClick={() => onNavigate('home')} className={cn('flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full', currentPage === 'home' ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}>
+            <Briefcase className="w-4 h-4" style={{
             display: "none"
           }} />
             Work
           </button>
-          <button onClick={() => onNavigate('about')} className={cn('flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full', currentPage === 'about' ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')} data-magicpath-id="5" data-magicpath-path="PortfolioWebsite.tsx">
-            <User className="w-4 h-4" data-magicpath-id="6" data-magicpath-path="PortfolioWebsite.tsx" style={{
+          <button onClick={() => onNavigate('about')} className={cn('flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full', currentPage === 'about' ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}>
+            <User className="w-4 h-4" style={{
             display: "none"
           }} />
             About
           </button>
-          <div className="w-px h-6 bg-green-200 dark:bg-green-900/50 mx-1" data-magicpath-id="7" data-magicpath-path="PortfolioWebsite.tsx" />
-          <button onClick={onToggleDarkMode} className="p-2 rounded-full text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" aria-label="Toggle dark mode" data-magicpath-id="8" data-magicpath-path="PortfolioWebsite.tsx">
-            {darkMode ? <Sun className="w-5 h-5" data-magicpath-id="9" data-magicpath-path="PortfolioWebsite.tsx" /> : <Moon className="w-5 h-5" data-magicpath-id="10" data-magicpath-path="PortfolioWebsite.tsx" />}
+          <div className="w-px h-6 bg-green-200 dark:bg-green-900/50 mx-1" />
+          <button onClick={onToggleDarkMode} className="p-2 rounded-full text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" aria-label="Toggle dark mode">
+            {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
         </div>
       </motion.div>
@@ -169,31 +169,31 @@ const ProjectCard = ({
     }
   }} className="group cursor-pointer" onClick={onClick} style={{
     perspective: 1000
-  }} data-magicpath-id="11" data-magicpath-path="PortfolioWebsite.tsx">
+  }}>
       <div className="bg-white dark:bg-zinc-900 overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-lg shadow-gray-500/10 dark:shadow-black/30 hover:shadow-2xl hover:shadow-gray-500/20 dark:hover:shadow-black/40 transition-all duration-300" style={{
       borderRadius: '12px'
-    }} data-magicpath-id="12" data-magicpath-path="PortfolioWebsite.tsx">
+    }}>
         <div className="relative overflow-hidden bg-gray-50 dark:bg-zinc-950/50 aspect-[4/3]" style={{
         borderRadius: '12px 12px 0 0'
-      }} data-magicpath-id="13" data-magicpath-path="PortfolioWebsite.tsx">
+      }}>
           <motion.img src={project.image} alt={project.title} className="w-full h-full object-cover" whileHover={{
           scale: 1.05
         }} transition={{
           duration: 0.4
-        }} data-magicpath-id="14" data-magicpath-path="PortfolioWebsite.tsx" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-magicpath-id="15" data-magicpath-path="PortfolioWebsite.tsx" />
+        }} />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
-        <div className="p-4 space-y-2" data-magicpath-id="16" data-magicpath-path="PortfolioWebsite.tsx">
-          <div className="flex items-center justify-between" data-magicpath-id="17" data-magicpath-path="PortfolioWebsite.tsx">
-            <span className="text-xs font-medium text-green-600 dark:text-green-400" data-magicpath-id="18" data-magicpath-path="PortfolioWebsite.tsx">{project.company}</span>
-            <span className="text-xs text-green-500 dark:text-green-500" data-magicpath-id="19" data-magicpath-path="PortfolioWebsite.tsx">{project.year}</span>
+        <div className="p-4 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-medium text-green-600 dark:text-green-400">{project.company}</span>
+            <span className="text-xs text-green-500 dark:text-green-500">{project.year}</span>
           </div>
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors line-clamp-1" data-magicpath-id="20" data-magicpath-path="PortfolioWebsite.tsx">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors line-clamp-1">
             {project.title}
           </h3>
-          <p className="text-xs text-gray-700 dark:text-gray-300 line-clamp-2" data-magicpath-id="21" data-magicpath-path="PortfolioWebsite.tsx">{project.description}</p>
-          <div className="flex flex-wrap gap-1.5 pt-1" data-magicpath-id="22" data-magicpath-path="PortfolioWebsite.tsx">
-            {project.tags.slice(0, 2).map(tag => <span key={tag} className="px-2 py-0.5 text-xs font-medium text-green-800 dark:text-green-300 bg-green-50 dark:bg-green-900/50 rounded-full" data-magicpath-id="23" data-magicpath-path="PortfolioWebsite.tsx">
+          <p className="text-xs text-gray-700 dark:text-gray-300 line-clamp-2">{project.description}</p>
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {project.tags.slice(0, 2).map(tag => <span key={tag} className="px-2 py-0.5 text-xs font-medium text-green-800 dark:text-green-300 bg-green-50 dark:bg-green-900/50 rounded-full">
                 {tag}
               </span>)}
           </div>
@@ -221,7 +221,7 @@ const ProjectModal = ({
     opacity: 1
   }} exit={{
     opacity: 0
-  }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-8" onClick={onClose} data-magicpath-id="24" data-magicpath-path="PortfolioWebsite.tsx">
+  }} className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-8" onClick={onClose}>
       {/* Scrim/Backdrop */}
       <motion.div initial={{
       opacity: 0
@@ -229,7 +229,7 @@ const ProjectModal = ({
       opacity: 1
     }} exit={{
       opacity: 0
-    }} className="absolute inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm" data-magicpath-id="25" data-magicpath-path="PortfolioWebsite.tsx" />
+    }} className="absolute inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm" />
 
       {/* Modal Content */}
       <motion.div initial={{
@@ -248,23 +248,23 @@ const ProjectModal = ({
       type: "spring",
       damping: 25,
       stiffness: 300
-    }} className="relative w-full max-w-6xl max-h-[90vh] bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl overflow-hidden flex flex-col" onClick={e => e.stopPropagation()} data-magicpath-id="26" data-magicpath-path="PortfolioWebsite.tsx">
+    }} className="relative w-full max-w-6xl max-h-[90vh] bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
         {/* Header with close button */}
-        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-zinc-800" data-magicpath-id="27" data-magicpath-path="PortfolioWebsite.tsx">
-          <div className="flex items-center gap-3 text-sm text-green-600 dark:text-green-400" data-magicpath-id="28" data-magicpath-path="PortfolioWebsite.tsx">
-            <span data-magicpath-id="29" data-magicpath-path="PortfolioWebsite.tsx">{project.company}</span>
-            <span data-magicpath-id="30" data-magicpath-path="PortfolioWebsite.tsx">•</span>
-            <span data-magicpath-id="31" data-magicpath-path="PortfolioWebsite.tsx">{project.year}</span>
-            <span data-magicpath-id="32" data-magicpath-path="PortfolioWebsite.tsx">•</span>
-            <span data-magicpath-id="33" data-magicpath-path="PortfolioWebsite.tsx">{project.role}</span>
+        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-zinc-800">
+          <div className="flex items-center gap-3 text-sm text-green-600 dark:text-green-400">
+            <span>{project.company}</span>
+            <span>•</span>
+            <span>{project.year}</span>
+            <span>•</span>
+            <span>{project.role}</span>
           </div>
-          <button onClick={onClose} className="flex items-center justify-center w-10 h-10 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Close modal" data-magicpath-id="34" data-magicpath-path="PortfolioWebsite.tsx">
-            <X className="w-5 h-5" data-magicpath-id="35" data-magicpath-path="PortfolioWebsite.tsx" />
+          <button onClick={onClose} className="flex items-center justify-center w-10 h-10 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Close modal">
+            <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Scrollable content */}
-        <div className="overflow-y-auto flex-1 px-6 py-8 sm:px-8 md:px-12" data-magicpath-id="36" data-magicpath-path="PortfolioWebsite.tsx">
+        <div className="overflow-y-auto flex-1 px-6 py-8 sm:px-8 md:px-12">
           <motion.div initial={{
           y: 20,
           opacity: 0
@@ -273,55 +273,55 @@ const ProjectModal = ({
           opacity: 1
         }} transition={{
           delay: 0.1
-        }} data-magicpath-id="37" data-magicpath-path="PortfolioWebsite.tsx">
-            <div className="mb-6" data-magicpath-id="38" data-magicpath-path="PortfolioWebsite.tsx">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4" data-magicpath-id="39" data-magicpath-path="PortfolioWebsite.tsx">
+        }}>
+            <div className="mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
                 {project.title}
               </h1>
-              <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300" data-magicpath-id="40" data-magicpath-path="PortfolioWebsite.tsx">{project.description}</p>
+              <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300">{project.description}</p>
             </div>
 
-            <div className="flex flex-wrap gap-2 mb-8" data-magicpath-id="41" data-magicpath-path="PortfolioWebsite.tsx">
-              {project.tags.map(tag => <span key={tag} className="px-4 py-2 text-sm font-medium text-green-800 dark:text-green-300 bg-green-50 dark:bg-green-900/50 rounded-full border border-green-200 dark:border-green-900/50" data-magicpath-id="42" data-magicpath-path="PortfolioWebsite.tsx">
+            <div className="flex flex-wrap gap-2 mb-8">
+              {project.tags.map(tag => <span key={tag} className="px-4 py-2 text-sm font-medium text-green-800 dark:text-green-300 bg-green-50 dark:bg-green-900/50 rounded-full border border-green-200 dark:border-green-900/50">
                   {tag}
                 </span>)}
             </div>
 
-            <div className="rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800" data-magicpath-id="43" data-magicpath-path="PortfolioWebsite.tsx">
-              <img src={project.image} alt={project.title} className="w-full h-auto" data-magicpath-id="44" data-magicpath-path="PortfolioWebsite.tsx" />
+            <div className="rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
+              <img src={project.image} alt={project.title} className="w-full h-auto" />
             </div>
 
-            <div className="space-y-12" data-magicpath-id="45" data-magicpath-path="PortfolioWebsite.tsx">
-              <section data-magicpath-id="46" data-magicpath-path="PortfolioWebsite.tsx">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4" data-magicpath-id="47" data-magicpath-path="PortfolioWebsite.tsx">Overview</h2>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed" data-magicpath-id="48" data-magicpath-path="PortfolioWebsite.tsx">{project.overview}</p>
+            <div className="space-y-12">
+              <section>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Overview</h2>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.overview}</p>
               </section>
 
-              <section data-magicpath-id="49" data-magicpath-path="PortfolioWebsite.tsx">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4" data-magicpath-id="50" data-magicpath-path="PortfolioWebsite.tsx">Challenges</h2>
-                <ul className="space-y-3" data-magicpath-id="51" data-magicpath-path="PortfolioWebsite.tsx">
-                  {project.challenges.map((challenge, index) => <li key={index} className="flex gap-3" data-magicpath-id="52" data-magicpath-path="PortfolioWebsite.tsx">
-                      <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0" data-magicpath-id="53" data-magicpath-path="PortfolioWebsite.tsx">•</span>
-                      <span className="text-gray-700 dark:text-gray-300" data-magicpath-id="54" data-magicpath-path="PortfolioWebsite.tsx">{challenge}</span>
+              <section>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Challenges</h2>
+                <ul className="space-y-3">
+                  {project.challenges.map((challenge, index) => <li key={index} className="flex gap-3">
+                      <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0">•</span>
+                      <span className="text-gray-700 dark:text-gray-300">{challenge}</span>
                     </li>)}
                 </ul>
               </section>
 
-              <section data-magicpath-id="55" data-magicpath-path="PortfolioWebsite.tsx">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4" data-magicpath-id="56" data-magicpath-path="PortfolioWebsite.tsx">Solutions</h2>
-                <ul className="space-y-3" data-magicpath-id="57" data-magicpath-path="PortfolioWebsite.tsx">
-                  {project.solutions.map((solution, index) => <li key={index} className="flex gap-3" data-magicpath-id="58" data-magicpath-path="PortfolioWebsite.tsx">
-                      <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0" data-magicpath-id="59" data-magicpath-path="PortfolioWebsite.tsx">•</span>
-                      <span className="text-gray-700 dark:text-gray-300" data-magicpath-id="60" data-magicpath-path="PortfolioWebsite.tsx">{solution}</span>
+              <section>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Solutions</h2>
+                <ul className="space-y-3">
+                  {project.solutions.map((solution, index) => <li key={index} className="flex gap-3">
+                      <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0">•</span>
+                      <span className="text-gray-700 dark:text-gray-300">{solution}</span>
                     </li>)}
                 </ul>
               </section>
 
-              <section data-magicpath-id="61" data-magicpath-path="PortfolioWebsite.tsx">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4" data-magicpath-id="62" data-magicpath-path="PortfolioWebsite.tsx">Outcomes</h2>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" data-magicpath-id="63" data-magicpath-path="PortfolioWebsite.tsx">
-                  {project.outcomes.map((outcome, index) => <div key={index} className="p-6 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700" data-magicpath-id="64" data-magicpath-path="PortfolioWebsite.tsx">
-                      <p className="text-gray-900 dark:text-white font-medium" data-magicpath-id="65" data-magicpath-path="PortfolioWebsite.tsx">{outcome}</p>
+              <section>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Outcomes</h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {project.outcomes.map((outcome, index) => <div key={index} className="p-6 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700">
+                      <p className="text-gray-900 dark:text-white font-medium">{outcome}</p>
                     </div>)}
                 </div>
               </section>
@@ -338,8 +338,8 @@ const AboutPage = () => {
     opacity: 1
   }} exit={{
     opacity: 0
-  }} className="min-h-screen pb-24" data-magicpath-id="66" data-magicpath-path="PortfolioWebsite.tsx">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-magicpath-id="67" data-magicpath-path="PortfolioWebsite.tsx">
+  }} className="min-h-screen pb-24">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div initial={{
         y: 20,
         opacity: 0
@@ -348,34 +348,34 @@ const AboutPage = () => {
         opacity: 1
       }} transition={{
         delay: 0.1
-      }} className="space-y-12" data-magicpath-id="68" data-magicpath-path="PortfolioWebsite.tsx">
-          <div data-magicpath-id="69" data-magicpath-path="PortfolioWebsite.tsx">
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6" data-magicpath-id="70" data-magicpath-path="PortfolioWebsite.tsx">About Me</h1>
-            <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed" data-magicpath-id="71" data-magicpath-path="PortfolioWebsite.tsx">
-              <p data-magicpath-id="72" data-magicpath-path="PortfolioWebsite.tsx">
+      }} className="space-y-12">
+          <div>
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">About Me</h1>
+            <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+              <p>
                 Hi! I'm a UX designer passionate about creating intuitive, delightful experiences that solve real user
                 problems. With over 8 years of experience in the industry, I've had the privilege of working with
                 leading companies to transform complex challenges into elegant solutions.
               </p>
-              <p data-magicpath-id="73" data-magicpath-path="PortfolioWebsite.tsx">
+              <p>
                 My approach combines deep user research, rapid prototyping, and close collaboration with engineering
                 teams to deliver products that users love. I believe the best design is invisible—it just works.
               </p>
-              <p data-magicpath-id="74" data-magicpath-path="PortfolioWebsite.tsx">
+              <p>
                 When I'm not pushing pixels, you can find me mentoring junior designers, speaking at design conferences,
                 or exploring new cities for creative inspiration.
               </p>
             </div>
           </div>
 
-          <div data-magicpath-id="75" data-magicpath-path="PortfolioWebsite.tsx">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6" data-magicpath-id="76" data-magicpath-path="PortfolioWebsite.tsx">Skills & Expertise</h2>
-            <div className="grid sm:grid-cols-2 gap-6" data-magicpath-id="77" data-magicpath-path="PortfolioWebsite.tsx">
-              {[['User Research', 'Usability Testing', 'User Interviews', 'A/B Testing'], ['UI Design', 'Design Systems', 'Prototyping', 'Interaction Design'], ['Tools', 'Figma', 'Adobe XD', 'Principle', 'Framer'], ['Other', 'HTML/CSS', 'Design Thinking', 'Agile/Scrum']].map(([category, ...skills]) => <div key={category} className="space-y-3" data-magicpath-id="78" data-magicpath-path="PortfolioWebsite.tsx">
-                  <h3 className="font-semibold text-gray-900 dark:text-white" data-magicpath-id="79" data-magicpath-path="PortfolioWebsite.tsx">{category}</h3>
-                  <ul className="space-y-2" data-magicpath-id="80" data-magicpath-path="PortfolioWebsite.tsx">
-                    {skills.map(skill => <li key={skill} className="text-gray-700 dark:text-gray-300 text-sm flex items-center gap-2" data-magicpath-id="81" data-magicpath-path="PortfolioWebsite.tsx">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 dark:bg-green-500" data-magicpath-id="82" data-magicpath-path="PortfolioWebsite.tsx" />
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Skills & Expertise</h2>
+            <div className="grid sm:grid-cols-2 gap-6">
+              {[['User Research', 'Usability Testing', 'User Interviews', 'A/B Testing'], ['UI Design', 'Design Systems', 'Prototyping', 'Interaction Design'], ['Tools', 'Figma', 'Adobe XD', 'Principle', 'Framer'], ['Other', 'HTML/CSS', 'Design Thinking', 'Agile/Scrum']].map(([category, ...skills]) => <div key={category} className="space-y-3">
+                  <h3 className="font-semibold text-gray-900 dark:text-white">{category}</h3>
+                  <ul className="space-y-2">
+                    {skills.map(skill => <li key={skill} className="text-gray-700 dark:text-gray-300 text-sm flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-500 dark:bg-green-500" />
                         {skill}
                       </li>)}
                   </ul>
@@ -383,19 +383,19 @@ const AboutPage = () => {
             </div>
           </div>
 
-          <div data-magicpath-id="83" data-magicpath-path="PortfolioWebsite.tsx">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6" data-magicpath-id="84" data-magicpath-path="PortfolioWebsite.tsx">Let's Connect</h2>
-            <div className="flex flex-wrap gap-4" data-magicpath-id="85" data-magicpath-path="PortfolioWebsite.tsx">
-              <a href="mailto:hello@example.com" className="flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors" data-magicpath-id="86" data-magicpath-path="PortfolioWebsite.tsx">
-                <Mail className="w-5 h-5" data-magicpath-id="87" data-magicpath-path="PortfolioWebsite.tsx" />
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Let's Connect</h2>
+            <div className="flex flex-wrap gap-4">
+              <a href="mailto:hello@example.com" className="flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors">
+                <Mail className="w-5 h-5" />
                 Email Me
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors" data-magicpath-id="88" data-magicpath-path="PortfolioWebsite.tsx">
-                <Linkedin className="w-5 h-5" data-magicpath-id="89" data-magicpath-path="PortfolioWebsite.tsx" />
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                <Linkedin className="w-5 h-5" />
                 LinkedIn
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors" data-magicpath-id="90" data-magicpath-path="PortfolioWebsite.tsx">
-                <Github className="w-5 h-5" data-magicpath-id="91" data-magicpath-path="PortfolioWebsite.tsx" />
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                <Github className="w-5 h-5" />
                 GitHub
               </a>
             </div>
@@ -418,8 +418,8 @@ const HomePage = ({
     opacity: 1
   }} exit={{
     opacity: 0
-  }} className="min-h-screen pb-24" data-magicpath-id="92" data-magicpath-path="PortfolioWebsite.tsx">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-magicpath-id="93" data-magicpath-path="PortfolioWebsite.tsx">
+  }} className="min-h-screen pb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div initial={{
         y: 20,
         opacity: 0
@@ -428,13 +428,13 @@ const HomePage = ({
         opacity: 1
       }} transition={{
         delay: 0.1
-      }} className="mb-12" data-magicpath-id="94" data-magicpath-path="PortfolioWebsite.tsx">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4" data-magicpath-id="95" data-magicpath-path="PortfolioWebsite.tsx" style={{
+      }} className="mb-12">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4" style={{
           color: "#7bf1a8"
         }}>Staff-level UX designer crafting impactful and delightful experiences</h1>
           <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl" style={{
           display: "none"
-        }} data-magicpath-id="96" data-magicpath-path="PortfolioWebsite.tsx">
+        }}>
             I help companies build products that users love through research-driven design and thoughtful interactions.
           </p>
         </motion.div>
@@ -447,17 +447,17 @@ const HomePage = ({
         opacity: 1
       }} transition={{
         delay: 0.2
-      }} className="mb-8" data-magicpath-id="97" data-magicpath-path="PortfolioWebsite.tsx">
-          <div className="flex flex-wrap gap-2" data-magicpath-id="98" data-magicpath-path="PortfolioWebsite.tsx">
-            {companies.map(company => <button key={company} onClick={() => setSelectedCompany(company)} className={cn('px-4 py-2 rounded-full text-sm font-medium transition-all', selectedCompany === company ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')} data-magicpath-id="99" data-magicpath-path="PortfolioWebsite.tsx">
+      }} className="mb-8">
+          <div className="flex flex-wrap gap-2">
+            {companies.map(company => <button key={company} onClick={() => setSelectedCompany(company)} className={cn('px-4 py-2 rounded-full text-sm font-medium transition-all', selectedCompany === company ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')}>
                 {company === 'all' ? 'All Projects' : company}
               </button>)}
           </div>
         </motion.div>
 
-        <AnimatePresence mode="popLayout" data-magicpath-id="100" data-magicpath-path="PortfolioWebsite.tsx">
-          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" data-magicpath-id="101" data-magicpath-path="PortfolioWebsite.tsx">
-            {filteredProjects.map(project => <ProjectCard key={project.id} project={project} onClick={() => onProjectClick(project)} data-magicpath-id="102" data-magicpath-path="PortfolioWebsite.tsx" />)}
+        <AnimatePresence mode="popLayout">
+          <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredProjects.map(project => <ProjectCard key={project.id} project={project} onClick={() => onProjectClick(project)} />)}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -487,23 +487,23 @@ export const PortfolioWebsite = (props: PortfolioWebsiteProps) => {
   };
 
   // @return
-  return <div className={cn('min-h-screen bg-white dark:bg-zinc-950 transition-colors duration-300 relative', props.className)} data-magicpath-id="103" data-magicpath-path="PortfolioWebsite.tsx">
+  return <div className={cn('min-h-screen bg-white dark:bg-zinc-950 transition-colors duration-300 relative', props.className)}>
       {/* Grid pattern background that fills entire viewport */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" data-magicpath-id="104" data-magicpath-path="PortfolioWebsite.tsx" />
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
       
       {/* Content layer */}
-      <div className="relative z-10" data-magicpath-id="105" data-magicpath-path="PortfolioWebsite.tsx">
-        <Navigation currentPage={currentPage} onNavigate={page => setCurrentPage(page as 'home' | 'about')} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} data-magicpath-id="106" data-magicpath-path="PortfolioWebsite.tsx" />
+      <div className="relative z-10">
+        <Navigation currentPage={currentPage} onNavigate={page => setCurrentPage(page as 'home' | 'about')} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />
         
-        <AnimatePresence mode="wait" data-magicpath-id="107" data-magicpath-path="PortfolioWebsite.tsx">
-          {currentPage === 'home' && <HomePage key="home" onProjectClick={handleProjectClick} data-magicpath-id="108" data-magicpath-path="PortfolioWebsite.tsx" />}
-          {currentPage === 'about' && <AboutPage key="about" data-magicpath-id="109" data-magicpath-path="PortfolioWebsite.tsx" />}
+        <AnimatePresence mode="wait">
+          {currentPage === 'home' && <HomePage key="home" onProjectClick={handleProjectClick} />}
+          {currentPage === 'about' && <AboutPage key="about" />}
         </AnimatePresence>
       </div>
 
       {/* Project Modal */}
-      <AnimatePresence data-magicpath-id="110" data-magicpath-path="PortfolioWebsite.tsx">
-        {selectedProject && <ProjectModal key="project-modal" project={selectedProject} onClose={handleCloseModal} data-magicpath-id="111" data-magicpath-path="PortfolioWebsite.tsx" />}
+      <AnimatePresence>
+        {selectedProject && <ProjectModal key="project-modal" project={selectedProject} onClose={handleCloseModal} />}
       </AnimatePresence>
     </div>;
 };
