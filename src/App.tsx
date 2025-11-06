@@ -1,11 +1,9 @@
 import { useMemo } from 'react';
 import { Container, Theme } from './settings/types';
 import { PortfolioWebsite } from './components/generated/PortfolioWebsite';
-
 let theme: Theme = 'light';
 // only use 'centered' container for standalone components, never for full page apps or websites.
 let container: Container = 'none';
-
 function App() {
   function setTheme(theme: Theme) {
     if (theme === 'dark') {
@@ -14,23 +12,21 @@ function App() {
       document.documentElement.classList.remove('dark');
     }
   }
-
   setTheme(theme);
-
   const generatedComponent = useMemo(() => {
     // THIS IS WHERE THE TOP LEVEL GENRATED COMPONENT WILL BE RETURNED!
     return <PortfolioWebsite />;
   }, []);
-
   if (container === 'centered') {
-    return (
-      <div className="h-full w-full flex flex-col items-center justify-center">
+    return <div className="h-full w-full flex flex-col items-center justify-center" style={{
+      background: "radial-gradient(circle, #123623 6.84%, #18181b 68.06%)"
+    }}>
         {generatedComponent}
-      </div>
-    );
+      </div>;
   } else {
-    return generatedComponent;
+    return <div style={{
+      background: "radial-gradient(circle, #123623 6.84%, #18181b 68.06%)"
+    }}>{generatedComponent}</div>;
   }
 }
-
 export default App;
