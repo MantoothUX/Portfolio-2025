@@ -1,7 +1,11 @@
 {
-  "name": "component-forge",
+  "name": "portfolio-2025",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MantoothUX/Portfolio-2025.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
