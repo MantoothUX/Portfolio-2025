@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Briefcase, User, Mail, Linkedin, Github, Moon, Sun, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '../../lib/utils';
+import contentData from '../../content.json';
+
 type Project = {
   id: string;
   title: string;
@@ -19,7 +22,14 @@ type Project = {
 type PortfolioWebsiteProps = {
   className?: string;
 };
-const mockProjects: Project[] = [{
+
+// Use content from content.json, fallback to mock data if not available
+const getProjects = (): Project[] => {
+  if (contentData?.projects && Array.isArray(contentData.projects) && contentData.projects.length > 0) {
+    return contentData.projects as Project[];
+  }
+  // Fallback to mock data
+  return [{
   id: '1',
   title: 'E-commerce Redesign',
   company: 'Amazon',
@@ -97,18 +107,22 @@ const mockProjects: Project[] = [{
   challenges: ['Overwhelming search results', 'Complex filtering system', 'Booking anxiety and decision fatigue'],
   solutions: ['AI-powered personalized recommendations', 'Smart filters that learn preferences', 'Detailed property previews with virtual tours'],
   outcomes: ['40% faster booking time', '55% increase in booking conversion', 'NPS score increased from 42 to 68']
-}];
+  }];
+};
+
+const projects = getProjects();
+
 const Navigation = ({
-  currentPage,
-  onNavigate,
   darkMode,
   onToggleDarkMode
 }: {
-  currentPage: string;
-  onNavigate: (page: string) => void;
   darkMode: boolean;
   onToggleDarkMode: () => void;
 }) => {
+  const location = useLocation();
+  const isWork = location.pathname === '/' || location.pathname === '/work';
+  const isAbout = location.pathname === '/about';
+
   return <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
       <motion.div initial={{
       y: 100,
@@ -122,18 +136,18 @@ const Navigation = ({
       damping: 20
     }} className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-green-200 dark:border-green-900/50 rounded-full shadow-lg shadow-green-500/10 dark:shadow-green-500/20">
         <div className="flex items-center gap-2 px-6 py-3">
-          <button onClick={() => onNavigate('home')} className={cn('flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full', currentPage === 'home' ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}>
+          <Link to="/work" className={cn('flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full', isWork ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}>
             <Briefcase className="w-4 h-4" style={{
             display: "none"
           }} />
             Work
-          </button>
-          <button onClick={() => onNavigate('about')} className={cn('flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full', currentPage === 'about' ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}>
+          </Link>
+          <Link to="/about" className={cn('flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full', isAbout ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}>
             <User className="w-4 h-4" style={{
             display: "none"
           }} />
             About
-          </button>
+          </Link>
           <div className="w-px h-6 bg-green-200 dark:bg-green-900/50 mx-1" />
           <button onClick={onToggleDarkMode} className="p-2 rounded-full text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" aria-label="Toggle dark mode">
             {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -275,7 +289,7 @@ const ProjectModal = ({
           delay: 0.1
         }}>
             <div className="mb-6">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">
                 {project.title}
               </h1>
               <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300">{project.description}</p>
@@ -293,12 +307,12 @@ const ProjectModal = ({
 
             <div className="space-y-12">
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Overview</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Overview</h2>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.overview}</p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Challenges</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Challenges</h2>
                 <ul className="space-y-3">
                   {project.challenges.map((challenge, index) => <li key={index} className="flex gap-3">
                       <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0">•</span>
@@ -308,7 +322,7 @@ const ProjectModal = ({
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Solutions</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Solutions</h2>
                 <ul className="space-y-3">
                   {project.solutions.map((solution, index) => <li key={index} className="flex gap-3">
                       <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0">•</span>
@@ -318,7 +332,7 @@ const ProjectModal = ({
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Outcomes</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Outcomes</h2>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {project.outcomes.map((outcome, index) => <div key={index} className="p-6 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700">
                       <p className="text-gray-900 dark:text-white font-medium">{outcome}</p>
@@ -331,7 +345,34 @@ const ProjectModal = ({
       </motion.div>
     </motion.div>;
 };
-const AboutPage = () => {
+const AboutPage = ({
+  darkMode
+}: {
+  darkMode: boolean;
+}) => {
+  const aboutContent = contentData?.about || {
+    headline: "About Me",
+    photo: "",
+    bio: [
+      "Hi! I'm a UX designer passionate about creating intuitive, delightful experiences that solve real user problems. With over 8 years of experience in the industry, I've had the privilege of working with leading companies to transform complex challenges into elegant solutions.",
+      "My approach combines deep user research, rapid prototyping, and close collaboration with engineering teams to deliver products that users love. I believe the best design is invisible—it just works.",
+      "When I'm not pushing pixels, you can find me mentoring junior designers, speaking at design conferences, or exploring new cities for creative inspiration."
+    ],
+    resume: "",
+    skills: {
+      "User Research": ["Usability Testing", "User Interviews", "A/B Testing"],
+      "UI Design": ["Design Systems", "Prototyping", "Interaction Design"],
+      "Tools": ["Figma", "Adobe XD", "Principle", "Framer"],
+      "Other": ["HTML/CSS", "Design Thinking", "Agile/Scrum"]
+    }
+  };
+
+  const contactInfo = contentData?.contact || {
+    email: "hello@example.com",
+    linkedin: "https://linkedin.com",
+    github: "https://github.com"
+  };
+
   return <motion.div initial={{
     opacity: 0
   }} animate={{
@@ -350,28 +391,59 @@ const AboutPage = () => {
         delay: 0.1
       }} className="space-y-12">
           <div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">About Me</h1>
-            <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
-              <p>
-                Hi! I'm a UX designer passionate about creating intuitive, delightful experiences that solve real user
-                problems. With over 8 years of experience in the industry, I've had the privilege of working with
-                leading companies to transform complex challenges into elegant solutions.
-              </p>
-              <p>
-                My approach combines deep user research, rapid prototyping, and close collaboration with engineering
-                teams to deliver products that users love. I believe the best design is invisible—it just works.
-              </p>
-              <p>
-                When I'm not pushing pixels, you can find me mentoring junior designers, speaking at design conferences,
-                or exploring new cities for creative inspiration.
-              </p>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-6 font-serif-display" style={{
+              color: darkMode ? "#7bf1a8" : "#13531C"
+            }}>{aboutContent.headline}</h1>
+            <div className="flex flex-col md:flex-row gap-8 items-start">
+              {aboutContent.photo && (
+                <div className="flex-shrink-0">
+                  <img 
+                    src={aboutContent.photo} 
+                    alt="Josh Mantooth" 
+                    className="w-64 h-80 sm:w-72 sm:h-96 object-cover"
+                    style={{ borderRadius: '20px' }}
+                    onError={(e) => {
+                      console.error('Image failed to load:', aboutContent.photo);
+                    }}
+                  />
+                </div>
+              )}
+              <div className="flex-1 space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+                {aboutContent.bio.map((paragraph, index) => {
+                  // Check if paragraph contains "resume" and we have a resume URL
+                  if (paragraph.toLowerCase().includes("resume") && aboutContent.resume) {
+                    const parts = paragraph.split(/(resume)/i);
+                    return (
+                      <p key={index}>
+                        {parts[0]}
+                        {parts[1] && (
+                          <>
+                            <a 
+                              href={aboutContent.resume} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="text-[#13531C] dark:text-green-400 hover:underline font-medium"
+                            >
+                              {parts[1]}
+                            </a>
+                            {parts[2]}
+                          </>
+                        )}
+                      </p>
+                    );
+                  }
+                  return <p key={index}>{paragraph}</p>;
+                })}
+              </div>
             </div>
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Skills & Expertise</h2>
+            <h2 className="text-2xl font-bold mb-6 font-serif-display" style={{
+              color: darkMode ? "#7bf1a8" : "#13531C"
+            }}>Skills & Expertise</h2>
             <div className="grid sm:grid-cols-2 gap-6">
-              {[['User Research', 'Usability Testing', 'User Interviews', 'A/B Testing'], ['UI Design', 'Design Systems', 'Prototyping', 'Interaction Design'], ['Tools', 'Figma', 'Adobe XD', 'Principle', 'Framer'], ['Other', 'HTML/CSS', 'Design Thinking', 'Agile/Scrum']].map(([category, ...skills]) => <div key={category} className="space-y-3">
+              {Object.entries(aboutContent.skills).map(([category, skills]) => <div key={category} className="space-y-3">
                   <h3 className="font-semibold text-gray-900 dark:text-white">{category}</h3>
                   <ul className="space-y-2">
                     {skills.map(skill => <li key={skill} className="text-gray-700 dark:text-gray-300 text-sm flex items-center gap-2">
@@ -384,17 +456,19 @@ const AboutPage = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Let's Connect</h2>
+            <h2 className="text-2xl font-bold mb-6 font-serif-display" style={{
+              color: darkMode ? "#7bf1a8" : "#13531C"
+            }}>Let's Connect</h2>
             <div className="flex flex-wrap gap-4">
-              <a href="mailto:hello@example.com" className="flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors">
+              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors">
                 <Mail className="w-5 h-5" />
                 Email Me
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+              <a href={contactInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
                 <Linkedin className="w-5 h-5" />
                 LinkedIn
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+              <a href={contactInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
                 <Github className="w-5 h-5" />
                 GitHub
               </a>
@@ -405,13 +479,19 @@ const AboutPage = () => {
     </motion.div>;
 };
 const HomePage = ({
-  onProjectClick
+  onProjectClick,
+  darkMode
 }: {
   onProjectClick: (project: Project) => void;
+  darkMode: boolean;
 }) => {
   const [selectedCompany, setSelectedCompany] = useState<string>('all');
-  const companies = ['all', ...Array.from(new Set(mockProjects.map(p => p.company)))];
-  const filteredProjects = selectedCompany === 'all' ? mockProjects : mockProjects.filter(p => p.company === selectedCompany);
+  const heroContent = contentData?.hero || {
+    title: "Staff-level UX designer crafting impactful and delightful experiences",
+    subtitle: "I help companies build products that users love through research-driven design and thoughtful interactions."
+  };
+  const companies = ['all', ...Array.from(new Set(projects.map(p => p.company)))];
+  const filteredProjects = selectedCompany === 'all' ? projects : projects.filter(p => p.company === selectedCompany);
   return <motion.div initial={{
     opacity: 0
   }} animate={{
@@ -429,9 +509,12 @@ const HomePage = ({
       }} transition={{
         delay: 0.1
       }} className="mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-4" style={{
-          color: "#7bf1a8"
-        }}>Staff-level UX designer crafting impactful and delightful experiences</h1>
+          <p className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Josh Mantooth
+          </p>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 font-serif-display" style={{
+          color: darkMode ? "#7bf1a8" : "#13531C"
+        }}>{heroContent.title}</h1>
           <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl" style={{
           display: "none"
         }}>
@@ -466,9 +549,11 @@ const HomePage = ({
 
 // @component: PortfolioWebsite
 export const PortfolioWebsite = (props: PortfolioWebsiteProps) => {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about'>('home');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -476,12 +561,35 @@ export const PortfolioWebsite = (props: PortfolioWebsiteProps) => {
       document.documentElement.classList.remove('dark');
     }
   }, [darkMode]);
+
+  // Handle hash-based modal routing
+  useEffect(() => {
+    const hash = location.hash.replace('#', '');
+    if (hash && (location.pathname === '/' || location.pathname === '/work')) {
+      const project = projects.find(p => p.id === hash || p.title.toLowerCase().replace(/\s+/g, '-') === hash);
+      if (project && project.id !== selectedProject?.id) {
+        setSelectedProject(project);
+      }
+    } else if (!hash && selectedProject) {
+      // Hash was removed, close modal
+      setSelectedProject(null);
+    }
+  }, [location.hash, location.pathname, selectedProject?.id]);
+
   const handleProjectClick = (project: Project) => {
     setSelectedProject(project);
+    // Update hash for shareable URLs
+    navigate(`/work#${project.id}`, { replace: true });
   };
+
   const handleCloseModal = () => {
     setSelectedProject(null);
+    // Remove hash when closing modal
+    if (location.pathname === '/work' || location.pathname === '/') {
+      navigate(location.pathname, { replace: true });
+    }
   };
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
@@ -493,11 +601,15 @@ export const PortfolioWebsite = (props: PortfolioWebsiteProps) => {
       
       {/* Content layer */}
       <div className="relative z-10">
-        <Navigation currentPage={currentPage} onNavigate={page => setCurrentPage(page as 'home' | 'about')} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />
+        <Navigation darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />
         
         <AnimatePresence mode="wait">
-          {currentPage === 'home' && <HomePage key="home" onProjectClick={handleProjectClick} />}
-          {currentPage === 'about' && <AboutPage key="about" />}
+          {(location.pathname === '/' || location.pathname === '/work') && (
+            <HomePage key="work" onProjectClick={handleProjectClick} darkMode={darkMode} />
+          )}
+          {location.pathname === '/about' && (
+            <AboutPage key="about" darkMode={darkMode} />
+          )}
         </AnimatePresence>
       </div>
 

@@ -1,0 +1,56 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "title": "Project Title",
+      "company": "Company Name",
+      "description": "Brief description of the project and its impact",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+      "tags": ["UX Research", "UI Design", "Prototyping"],
+      "year": "2024",
+      "role": "Your Role",
+      "overview": "Detailed overview of the project, what it was about, and your approach.",
+      "challenges": [
+        "Challenge 1",
+        "Challenge 2",
+        "Challenge 3"
+      ],
+      "solutions": [
+        "Solution 1",
+        "Solution 2",
+        "Solution 3"
+      ],
+      "outcomes": [
+        "Outcome/metric 1",
+        "Outcome/metric 2",
+        "Outcome/metric 3"
+      ]
+    }
+  ],
+  "about": {
+    "headline": "Hi, I'm Josh",
+    "photo": "/josh-photo.jpg",
+    "bio": [
+      "I'm a staff-level product designer with 10+ years solving complex problems and leading ambitious projects for companies of all sizes. I'm passionate about creating stylish, intuitive solutions that work for real people at scale.",
+      "For the past 4+ years at Shopify, I led teams and designed features that help millions of merchants start, scale, and market their businesses.",
+      "Before UX design, I spent 7 years at world-class advertising agencies managing teams and clients through creative campaigns from ideation to launch. Check out my resume for the full story.",
+      "When I'm not working, you'll find me cooking, playing ice hockey, running, catching live music, or outdoors with my family."
+    ],
+    "resume": "/JM_resume_general_11.6.2025.pdf",
+    "skills": {
+      "Design": ["Collaborative design", "Rapid prototyping", "UI design", "Copywriting", "Critique", "Leadership and mentorship", "Stakeholder alignment"],
+      "Tools": ["Figma", "FigJam", "Framer", "Cursor", "Claude", "ChatGPT", "Midjourney"],
+      "Strategy & research": ["User research", "Concept and usability testing", "System mapping", "User journey mapping", "User-driven storytelling", "Marketing strategy", "Market research", "Product strategy"]
+    }
+  },
+  "contact": {
+    "email": "mantoothux@gmail.com",
+    "linkedin": "https://linkedin.com/in/joshmantooth",
+    "github": "https://github.com/mantoothux"
+  },
+  "hero": {
+    "title": "Staff UX designer solving complex problems with delightful experiences",
+    "subtitle": "Optional subtitle (currently hidden)"
+  }
+}
+

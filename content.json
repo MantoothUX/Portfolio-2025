@@ -1,0 +1,53 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "title": "Project Title",
+      "company": "Company Name",
+      "description": "Brief description of the project and its impact",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+      "tags": ["UX Research", "UI Design", "Prototyping"],
+      "year": "2024",
+      "role": "Your Role",
+      "overview": "Detailed overview of the project, what it was about, and your approach.",
+      "challenges": [
+        "Challenge 1",
+        "Challenge 2",
+        "Challenge 3"
+      ],
+      "solutions": [
+        "Solution 1",
+        "Solution 2",
+        "Solution 3"
+      ],
+      "outcomes": [
+        "Outcome/metric 1",
+        "Outcome/metric 2",
+        "Outcome/metric 3"
+      ]
+    }
+  ],
+  "about": {
+    "bio": [
+      "First paragraph of your bio",
+      "Second paragraph of your bio",
+      "Third paragraph of your bio"
+    ],
+    "skills": {
+      "User Research": ["Usability Testing", "User Interviews", "A/B Testing"],
+      "Design": ["UI Design", "Design Systems", "Prototyping", "Interaction Design"],
+      "Tools": ["Figma", "Adobe XD", "Principle", "Framer"],
+      "Other": ["HTML/CSS", "Design Thinking", "Agile/Scrum"]
+    }
+  },
+  "contact": {
+    "email": "your.email@example.com",
+    "linkedin": "https://linkedin.com/in/yourprofile",
+    "github": "https://github.com/yourusername"
+  },
+  "hero": {
+    "title": "Your headline/tagline here",
+    "subtitle": "Optional subtitle (currently hidden)"
+  }
+}
+

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Container, Theme } from './settings/types';
 import { PortfolioWebsite } from './components/generated/PortfolioWebsite';
 let theme: Theme = 'light';
@@ -15,7 +16,13 @@ function App() {
   setTheme(theme);
   const generatedComponent = useMemo(() => {
     // THIS IS WHERE THE TOP LEVEL GENRATED COMPONENT WILL BE RETURNED!
-    return <PortfolioWebsite />;
+    return (
+      <Routes>
+        <Route path="/" element={<Navigate to="/work" replace />} />
+        <Route path="/work" element={<PortfolioWebsite />} />
+        <Route path="/about" element={<PortfolioWebsite />} />
+      </Routes>
+    );
   }, []);
   if (container === 'centered') {
     return <div className="h-full w-full flex flex-col items-center justify-center" style={{

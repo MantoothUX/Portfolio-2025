@@ -48,6 +48,7 @@ const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 mediaQuery.addEventListener('change', forceLightMode);
 
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App.tsx';
 import { RootDnd } from './dnd-kit/RootDnd.tsx';
@@ -56,12 +57,14 @@ import { MoveProvider } from './dnd-kit/MoveContext.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <MoveProvider>
-      <DragStateProvider>
-        <RootDnd>
-          <App />
-        </RootDnd>
-      </DragStateProvider>
-    </MoveProvider>
+    <BrowserRouter>
+      <MoveProvider>
+        <DragStateProvider>
+          <RootDnd>
+            <App />
+          </RootDnd>
+        </DragStateProvider>
+      </MoveProvider>
+    </BrowserRouter>
   </StrictMode>
 );
