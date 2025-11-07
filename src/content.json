@@ -2,28 +2,27 @@
   "projects": [
     {
       "id": "1",
-      "title": "Project Title",
-      "company": "Company Name",
-      "description": "Brief description of the project and its impact",
-      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-      "tags": ["UX Research", "UI Design", "Prototyping"],
-      "year": "2024",
-      "role": "Your Role",
-      "overview": "Detailed overview of the project, what it was about, and your approach.",
+      "title": "U.S. capitals quiz game",
+      "company": "Personal Project",
+      "description": "A fun, vibe coded game built in react.",
+      "image": "/projects/us-capitals-game/card.png",
+      "tags": ["Prompt engineering"],
+      "year": "2025",
+      "role": "Designer & Developer",
+      "category": "Personal projects",
+      "overview": "A fun, vibe coded game built in react that challenges users to identify U.S. states and their capitals.",
       "challenges": [
-        "Challenge 1",
-        "Challenge 2",
-        "Challenge 3"
+        "Creating an engaging game experience",
+        "Building with React and modern web technologies"
       ],
       "solutions": [
-        "Solution 1",
-        "Solution 2",
-        "Solution 3"
+        "Designed an intuitive quiz interface",
+        "Implemented smooth animations and interactions",
+        "Built with React for optimal performance"
       ],
       "outcomes": [
-        "Outcome/metric 1",
-        "Outcome/metric 2",
-        "Outcome/metric 3"
+        "Successfully deployed interactive game",
+        "Demonstrated full-stack development skills"
       ]
     }
   ],

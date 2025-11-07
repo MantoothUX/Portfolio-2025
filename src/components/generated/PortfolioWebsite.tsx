@@ -14,6 +14,7 @@ type Project = {
   tags: string[];
   year: string;
   role: string;
+  category?: string;
   overview: string;
   challenges: string[];
   solutions: string[];
@@ -485,13 +486,13 @@ const HomePage = ({
   onProjectClick: (project: Project) => void;
   darkMode: boolean;
 }) => {
-  const [selectedCompany, setSelectedCompany] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const heroContent = contentData?.hero || {
     title: "Staff-level UX designer crafting impactful and delightful experiences",
     subtitle: "I help companies build products that users love through research-driven design and thoughtful interactions."
   };
-  const companies = ['all', ...Array.from(new Set(projects.map(p => p.company)))];
-  const filteredProjects = selectedCompany === 'all' ? projects : projects.filter(p => p.company === selectedCompany);
+  const categories = ['all', 'Personal projects', 'Shopify', 'RigUp', 'Texas by Texas', 'Loom', 'Thread', 'Finish Line'];
+  const filteredProjects = selectedCategory === 'all' ? projects : projects.filter(p => p.category === selectedCategory);
   return <motion.div initial={{
     opacity: 0
   }} animate={{
@@ -532,8 +533,8 @@ const HomePage = ({
         delay: 0.2
       }} className="mb-8">
           <div className="flex flex-wrap gap-2">
-            {companies.map(company => <button key={company} onClick={() => setSelectedCompany(company)} className={cn('px-4 py-2 rounded-full text-sm font-medium transition-all', selectedCompany === company ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')}>
-                {company === 'all' ? 'All Projects' : company}
+            {categories.map(category => <button key={category} onClick={() => setSelectedCategory(category)} className={cn('px-4 py-2 rounded-full text-sm font-medium transition-all', selectedCategory === category ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')}>
+                {category === 'all' ? 'All Projects' : category}
               </button>)}
           </div>
         </motion.div>
