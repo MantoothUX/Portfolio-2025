@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Briefcase, User, Mail, Linkedin, Github, Moon, Sun, X } from 'lucide-react';
+import { ArrowLeft, Briefcase, User, Mail, Linkedin, Github, Moon, Sun, X, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 import contentData from '../../content.json';
@@ -9,17 +9,21 @@ type Project = {
   id: string;
   title: string;
   company: string;
-  description: string;
+  description: string; // Description shown in modal
+  cardDescription?: string; // Optional: shorter description for card (falls back to description)
   image: string; // Image for the project card
   modalImage?: string; // Optional: separate image for the modal hero (falls back to image if not provided)
   tags: string[];
   year: string;
   role: string;
   category?: string;
-  overview: string;
-  challenges: string[];
-  solutions: string[];
-  outcomes: string[];
+  overview?: string; // Optional: only show if provided
+  challenges?: string[]; // Optional: only show if provided
+  solutions?: string[]; // Optional: only show if provided
+  outcomes?: string[]; // Optional: only show if provided
+  growthAndEvolution?: string; // Optional: growth and evolution section text
+  externalUrl?: string; // Optional: external link URL (e.g., live site, demo)
+  galleryImages?: string[]; // Optional: array of image URLs for gallery/carousel
 };
 type PortfolioWebsiteProps = {
   className?: string;
@@ -186,10 +190,10 @@ const ProjectCard = ({
   }} className="group cursor-pointer" onClick={onClick} style={{
     perspective: 1000
   }}>
-      <div className="bg-white dark:bg-zinc-900 overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-lg shadow-gray-500/10 dark:shadow-black/30 hover:shadow-2xl hover:shadow-gray-500/20 dark:hover:shadow-black/40 transition-all duration-300" style={{
+      <div className="bg-white dark:bg-zinc-900 overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-lg shadow-gray-500/10 dark:shadow-black/30 hover:shadow-2xl hover:shadow-gray-500/20 dark:hover:shadow-black/40 transition-all duration-300 flex flex-col h-full" style={{
       borderRadius: '12px'
     }}>
-        <div className="relative overflow-hidden bg-gray-50 dark:bg-zinc-950/50 aspect-[4/3]" style={{
+        <div className="relative overflow-hidden bg-gray-50 dark:bg-zinc-950/50 aspect-[4/3] flex-shrink-0" style={{
         borderRadius: '12px 12px 0 0'
       }}>
           <motion.img src={project.image} alt={project.title} className="w-full h-full object-cover" whileHover={{
@@ -199,12 +203,12 @@ const ProjectCard = ({
         }} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
-        <div className="p-4 space-y-2">
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors line-clamp-1">
+        <div className="p-4 flex flex-col flex-grow">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors line-clamp-1 mb-2">
             {project.title}
           </h3>
-          <p className="text-xs text-gray-700 dark:text-gray-300 line-clamp-2">{project.description}</p>
-          <div className="flex flex-wrap gap-1.5 pt-1">
+          <p className="text-xs text-gray-700 dark:text-gray-300 line-clamp-2 min-h-[2.5rem] flex items-start">{project.cardDescription || project.description}</p>
+          <div className="flex flex-wrap gap-1.5 pt-2 mt-auto">
             {project.tags.slice(0, 2).map(tag => <span key={tag} className="px-2 py-0.5 text-xs font-medium text-green-800 dark:text-green-300 bg-green-50 dark:bg-green-900/50 rounded-full">
                 {tag}
               </span>)}
@@ -213,6 +217,50 @@ const ProjectCard = ({
       </div>
     </motion.div>;
 };
+
+const ImageGallery = ({
+  images
+}: {
+  images: string[];
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
+  return <div className="relative rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
+      {images.length > 1 && (
+        <>
+          <button onClick={goToPrevious} className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Previous image">
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Next image">
+            <ChevronRight className="w-6 h-6" />
+          </button>
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+            {images.map((_, index) => <button key={index} onClick={() => setCurrentIndex(index)} className={cn('w-2 h-2 rounded-full transition-all', index === currentIndex ? 'bg-white w-6' : 'bg-white/50')} aria-label={`Go to image ${index + 1}`} />)}
+          </div>
+        </>
+      )}
+      <AnimatePresence mode="wait">
+        <motion.img key={currentIndex} src={images[currentIndex]} alt={`Gallery image ${currentIndex + 1}`} className="w-full h-auto" initial={{
+        opacity: 0
+      }} animate={{
+        opacity: 1
+      }} exit={{
+        opacity: 0
+      }} transition={{
+        duration: 0.3
+      }} />
+      </AnimatePresence>
+    </div>;
+};
+
 const ProjectModal = ({
   project,
   onClose
@@ -293,50 +341,86 @@ const ProjectModal = ({
               <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300">{project.description}</p>
             </div>
 
-            <div className="flex flex-wrap gap-2 mb-8">
-              {project.tags.map(tag => <span key={tag} className="px-4 py-2 text-sm font-medium text-green-800 dark:text-green-300 bg-green-50 dark:bg-green-900/50 rounded-full border border-green-200 dark:border-green-900/50">
-                  {tag}
-                </span>)}
-            </div>
-
-            <div className="rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
-              <img src={project.modalImage || project.image} alt={project.title} className="w-full h-auto" />
-            </div>
+            {project.galleryImages && project.galleryImages.length > 0 ? (
+              <ImageGallery images={project.galleryImages} />
+            ) : (
+              <div className="rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
+                <img src={project.modalImage || project.image} alt={project.title} className="w-full h-auto" />
+              </div>
+            )}
 
             <div className="space-y-12">
-              <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Overview</h2>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.overview}</p>
-              </section>
+              {project.overview && (
+                <section>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Overview</h2>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">{project.overview}</p>
+                  {project.externalUrl && (
+                    <a 
+                      href={project.externalUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors font-medium"
+                    >
+                      Play the game
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
+                </section>
+              )}
 
-              <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Challenges</h2>
-                <ul className="space-y-3">
-                  {project.challenges.map((challenge, index) => <li key={index} className="flex gap-3">
-                      <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0">•</span>
-                      <span className="text-gray-700 dark:text-gray-300">{challenge}</span>
-                    </li>)}
-                </ul>
-              </section>
+              {project.challenges && project.challenges.length > 0 && (
+                <section>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Challenges</h2>
+                  {project.challenges.length === 1 ? (
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.challenges[0]}</p>
+                  ) : (
+                    <ul className="space-y-3">
+                      {project.challenges.map((challenge, index) => <li key={index} className="flex gap-3">
+                          <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0">•</span>
+                          <span className="text-gray-700 dark:text-gray-300">{challenge}</span>
+                        </li>)}
+                    </ul>
+                  )}
+                </section>
+              )}
 
-              <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Solutions</h2>
-                <ul className="space-y-3">
-                  {project.solutions.map((solution, index) => <li key={index} className="flex gap-3">
-                      <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0">•</span>
-                      <span className="text-gray-700 dark:text-gray-300">{solution}</span>
-                    </li>)}
-                </ul>
-              </section>
+              {project.solutions && project.solutions.length > 0 && (
+                <section>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Solution</h2>
+                  {project.solutions.length === 1 ? (
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.solutions[0]}</p>
+                  ) : (
+                    <ul className="space-y-3">
+                      {project.solutions.map((solution, index) => <li key={index} className="flex gap-3">
+                          <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0">•</span>
+                          <span className="text-gray-700 dark:text-gray-300">{solution}</span>
+                        </li>)}
+                    </ul>
+                  )}
+                </section>
+              )}
 
-              <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Outcomes</h2>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {project.outcomes.map((outcome, index) => <div key={index} className="p-6 bg-gray-50 dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700">
-                      <p className="text-gray-900 dark:text-white font-medium">{outcome}</p>
-                    </div>)}
-                </div>
-              </section>
+              {project.outcomes && project.outcomes.length > 0 && (
+                <section>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Outcomes</h2>
+                  {project.outcomes.length === 1 ? (
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.outcomes[0]}</p>
+                  ) : (
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {project.outcomes.map((outcome, index) => <div key={index} className="p-6 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700" style={{ borderRadius: '20px' }}>
+                          <p className="text-gray-900 dark:text-white font-medium">{outcome}</p>
+                        </div>)}
+                    </div>
+                  )}
+                </section>
+              )}
+
+              {project.growthAndEvolution && (
+                <section>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Growth and evolution</h2>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.growthAndEvolution}</p>
+                </section>
+              )}
             </div>
           </motion.div>
         </div>

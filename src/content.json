@@ -4,26 +4,80 @@
       "id": "1",
       "title": "U.S. capitals quiz game",
       "company": "Personal",
-      "description": "A fun, vibe coded game built in react.",
-      "image": "/us-capitals-game/card.png",
-      "modalImage": "/us-capitals-game/Capitals.gif",
+      "description": "Retro-style game I vibe coded in react",
+      "image": "/projects/us-capitals-game/card.png",
+      "modalImage": "/projects/us-capitals-game/Capitals.gif",
       "tags": ["Prompt engineering"],
       "year": "2025",
       "role": "Designer & Developer",
       "category": "Personal",
-      "overview": "A fun, vibe coded game built in react that challenges users to identify U.S. states and their capitals.",
+      "overview": "As a kid, one of my biggest feats in academia was my knowledge of all U.S. capitals. When my son became interested in learning states and capitals, I decided to create this game to help him learn. I wanted to create a game that was fun and engaging, but also educational. It took me about 5 hours to build, test, iterate and deploy.",
+      "externalUrl": "https://us-capitals-game.vercel.app/",
+      "outcomes": [
+        "My son asks to play the game almost every day",
+        "\"This is awesome! Did you really build it?\" - My wife"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Shopify marketing automations",
+      "company": "Shopify",
+      "description": "Designed, launched and evolved a no-code automated email marketing platform that helped merchants engage with customers and grow sales",
+      "cardDescription": "End-to-end design from MVP launch to full-scale platform",
+      "image": "/projects/marketing-automations/marketing_automations_hero.png",
+      "galleryImages": [
+        "/projects/marketing-automations/Template-library.png",
+        "/projects/marketing-automations/Template-detail.png",
+        "/projects/marketing-automations/WYSIWYG_Email_Editor.png",
+        "/projects/marketing-automations/Custom_workflow.png",
+        "/projects/marketing-automations/Marketing-automation-detail.png"
+      ],
+      "tags": ["UX Design", "User Research"],
+      "year": "2021-2023",
+      "role": "Design, research, user testing",
+      "category": "Shopify",
+      "overview": "Shopify's automated emails were limited and required knowledge of code to make edits, which led merchants to pay for 3rd party automated marketing services.",
       "challenges": [
-        "Creating an engaging game experience",
-        "Building with React and modern web technologies"
+        "Shopify automated emails required knowledge of code to make edits",
+        "Merchants were paying for 3rd party automated marketing services",
+        "Integrating disparate apps to create a cohesive experience",
+        "Cross-team alignment on vision and prioritzation of templates to build"
       ],
       "solutions": [
-        "Designed an intuitive quiz interface",
-        "Implemented smooth animations and interactions",
-        "Built with React for optimal performance"
+        "I collaborated with multiple designers and cross-functional teams to design an automated email marketing platform. The platform integrated functionality from two existing apps into a cohesive experience that offered marketing automation templates, a no-code email edtior, a customizable workflow builder and metrics to help merchants monitor and improve their automated emails."
+      ],
+      "growthAndEvolution": "After a successful launch, I spent the next year leading the vision, growth and evolution of the product. I established a series of collaborative, cross functional design workshops that streamlined my team's process from concept design to production."
+    },
+    {
+      "id": "3",
+      "title": "Shopify package management",
+      "company": "Shopify",
+      "description": "Increased shipping cost accuracy by enabling merchants to assign packages to individual product variants",
+      "cardDescription": "A feature that solved a top merchant frustration",
+      "image": "/projects/variant-level-packages/variant-level-package-assignment-hero.png",
+      "modalImage": "/projects/variant-level-packages/Variant-level package assignment.gif",
+      "galleryImages": [
+        "/projects/variant-level-packages/Prod1_bulk edit.png",
+        "/projects/variant-level-packages/Prod1_bulk edit_modal.png",
+        "/projects/variant-level-packages/All-variant_bulk_column.png",
+        "/projects/variant-level-packages/All-variant_bulk_selector.png",
+        "/projects/variant-level-packages/package setings_add.png"
+      ],
+      "tags": ["UX Design", "Cross-team collaboration"],
+      "year": "2025",
+      "role": "Design lead",
+      "category": "Shopify",
+      "challenges": [
+        "Merchants could only set one default package for all products, causing incorrect shipping costs at checkout and tedious manual corrections",
+        "Large merchants can have thousands of product variants",
+        "Package management touches multiple surfaces across the admin, requiring alignment across domain teams",
+        "A short timeline requiring fast development while ensuring implementation quality"
+      ],
+      "solutions": [
+        "Designed and drove alignment on a product variant-level package management solution that emphasized ease of setup and scalability"
       ],
       "outcomes": [
-        "Successfully deployed interactive game",
-        "Demonstrated full-stack development skills"
+        "The feature was launched in Shopify summer edition 2025. It gained immediate and steady adoption, significantly improving shipping accuracy for thousands of merchants across 1 million+ product variants and counting."
       ]
     }
   ],
@@ -31,7 +85,7 @@
     "headline": "Hi, I'm Josh",
     "photo": "/josh-photo.jpg",
     "bio": [
-      "I'm a staff-level product designer with 10+ years solving complex problems and leading ambitious projects for companies of all sizes. I'm passionate about creating stylish, intuitive solutions that work for real people at scale.",
+      "I'm a staff-level product designer with 10+ years solving complex problems and leading ambitious projects for companies of all sizes. I'm passionate about creating stylish, intuitive solutions that work for real people at scale. Over the last year I've been incorporating AI tools into my craft, and have become proficient at AI-assited coding.",
       "For the past 4+ years at Shopify, I led teams and designed features that help millions of merchants start, scale, and market their businesses.",
       "Before UX design, I spent 7 years at world-class advertising agencies managing teams and clients through creative campaigns from ideation to launch. Check out my resume for the full story.",
       "When I'm not working, you'll find me cooking, playing ice hockey, running, catching live music, or outdoors with my family."
