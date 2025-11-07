@@ -3,9 +3,10 @@
     {
       "id": "1",
       "title": "U.S. capitals quiz game",
-      "company": "Personal Project",
+      "company": "Personal",
       "description": "A fun, vibe coded game built in react.",
       "image": "/us-capitals-game/card.png",
+      "modalImage": "/us-capitals-game/Capitals.gif",
       "tags": ["Prompt engineering"],
       "year": "2025",
       "role": "Designer & Developer",

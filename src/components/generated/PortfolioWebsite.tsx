@@ -10,7 +10,8 @@ type Project = {
   title: string;
   company: string;
   description: string;
-  image: string;
+  image: string; // Image for the project card
+  modalImage?: string; // Optional: separate image for the modal hero (falls back to image if not provided)
   tags: string[];
   year: string;
   role: string;
@@ -299,7 +300,7 @@ const ProjectModal = ({
             </div>
 
             <div className="rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
-              <img src={project.image} alt={project.title} className="w-full h-auto" />
+              <img src={project.modalImage || project.image} alt={project.title} className="w-full h-auto" />
             </div>
 
             <div className="space-y-12">
