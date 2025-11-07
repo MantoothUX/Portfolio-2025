@@ -5,11 +5,11 @@
       "title": "U.S. capitals quiz game",
       "company": "Personal Project",
       "description": "A fun, vibe coded game built in react.",
-      "image": "/projects/us-capitals-game/card.png",
+      "image": "/us-capitals-game/card.png",
       "tags": ["Prompt engineering"],
       "year": "2025",
       "role": "Designer & Developer",
-      "category": "Personal projects",
+      "category": "Personal",
       "overview": "A fun, vibe coded game built in react that challenges users to identify U.S. states and their capitals.",
       "challenges": [
         "Creating an engaging game experience",

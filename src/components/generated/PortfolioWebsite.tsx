@@ -199,10 +199,6 @@ const ProjectCard = ({
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
         <div className="p-4 space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-medium text-green-600 dark:text-green-400">{project.company}</span>
-            <span className="text-xs text-green-500 dark:text-green-500">{project.year}</span>
-          </div>
           <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors line-clamp-1">
             {project.title}
           </h3>
@@ -491,7 +487,7 @@ const HomePage = ({
     title: "Staff-level UX designer crafting impactful and delightful experiences",
     subtitle: "I help companies build products that users love through research-driven design and thoughtful interactions."
   };
-  const categories = ['all', 'Personal projects', 'Shopify', 'RigUp', 'Texas by Texas', 'Loom', 'Thread', 'Finish Line'];
+  const categories = ['all', 'Personal', 'Shopify', 'RigUp', 'Texas by Texas', 'Loom', 'Thread', 'Finish Line'];
   const filteredProjects = selectedCategory === 'all' ? projects : projects.filter(p => p.category === selectedCategory);
   return <motion.div initial={{
     opacity: 0
@@ -534,7 +530,7 @@ const HomePage = ({
       }} className="mb-8">
           <div className="flex flex-wrap gap-2">
             {categories.map(category => <button key={category} onClick={() => setSelectedCategory(category)} className={cn('px-4 py-2 rounded-full text-sm font-medium transition-all', selectedCategory === category ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')}>
-                {category === 'all' ? 'All Projects' : category}
+                {category === 'all' ? 'All' : category}
               </button>)}
           </div>
         </motion.div>
