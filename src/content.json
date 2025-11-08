@@ -19,39 +19,6 @@
       ]
     },
     {
-      "id": "2",
-      "title": "Shopify marketing automations",
-      "company": "Shopify",
-      "description": "Designed, launched and evolved a no-code automated email marketing platform that helped merchants engage with customers and grow sales",
-      "cardDescription": "End-to-end design from MVP launch to full-scale platform",
-      "image": "/projects/marketing-automations/marketing_automations_hero.png",
-      "galleryImages": [
-        "/projects/marketing-automations/Template-library.png",
-        "/projects/marketing-automations/Template-detail.png",
-        "/projects/marketing-automations/WYSIWYG_Email_Editor.png",
-        "/projects/marketing-automations/Custom_workflow.png",
-        "/projects/marketing-automations/Marketing-automation-detail.png"
-      ],
-      "tags": ["UX/UI Design", "User research"],
-      "year": "2021-2023",
-      "role": "Design, research, user testing",
-      "category": "Shopify",
-      "overview": "Shopify's automated emails were limited and required knowledge of code to make edits, which led merchants to pay for 3rd party automated marketing services.",
-      "challenges": [
-        "Shopify did not offer customizable marketing email workflows",
-        "Editing emails was clunky and required coding experience",
-        "Merchants were paying for 3rd party automated marketing services"
-      ],
-      "solutions": [
-        "I collaborated with multiple designers and cross-functional teams to design an automated email marketing platform. The platform integrated functionality from two existing apps into a cohesive experience that offered:",
-        "A library of marketing automation templates", 
-        "No-code email editing", 
-        "Customizable workflow builder",
-        "Metrics and reporting to help merchants monitor and improve their automated emails"
-      ],
-      "growthAndEvolution": "After a successful launch, I spent the next year leading the vision, growth and evolution of the product. I established a series of collaborative, cross functional design workshops that streamlined my team's process from concept design to production."
-    },
-    {
       "id": "3",
       "title": "Shopify package management",
       "company": "Shopify",
@@ -84,57 +51,20 @@
       ]
     },
     {
-      "id": "4",
-      "title": "Loom",
-      "company": "Loom",
-      "description": "Designed, launched and evolved a marketplace connecting early-stage startups with technical freelancers",
-      "cardDescription": "A marketplace connecting startups with technical freelancers",
-      "image": "/projects/loom/Loom_Grid_1.jpg",
+      "id": "11",
+      "title": "Shopify fulfillment future vision",
+      "company": "Shopify",
+      "description": "Designed future vision of Shopify shipping and fulfillment",
+      "cardDescription": "Designed future vision of Shopify shipping and fulfillment",
+      "image": "/projects/fulfillment-future-vision/tbd.jpg",
       "galleryImages": [
-        "/projects/loom/loom_profile_sm.jpg",
-        "/projects/loom/Loom_Grid_1.jpg",
-        "/projects/loom/Loom_homepage.png",
-        "/projects/loom/Loom_Dash_Master.png"
+        "/projects/fulfillment-future-vision/tbd.png"
       ],
-      "tags": ["UX/UI Design", "Cross-functional collaboration"],
-      "year": "2016-2018",
-      "role": "UX/UI design, research, product strategy",
-      "category": "Loom",
-      "overview": "I led design, research,and product strategy from MVP to polished product in a lean, fast-paced startup environment. I developed and evolved processes for collaborative, cross-functional problem solving and design. I also worked closely with my engineering partners to develop a design system and component library to increase our speed from concept to production."
-    },
-    {
-      "id": "5",
-      "title": "Thread",
-      "company": "Thread",
-      "description": "Responsive web design for a blockchain service to power contracts and payments between companies and freelancers",
-      "cardDescription": "Responsive web design project",
-      "image": "/projects/thread/Thread-in-situ.png",
-      "galleryImages": [
-        "/projects/thread/Thread-in-situ.png",
-        "/projects/thread/Thread-responsive.png",
-        "/projects/thread/Thread_Pre-ICO_System Flow.png"
-      ],
-      "tags": ["UX/UI Design", "Creative direction"],
-      "year": "2018",
-      "role": "UX/UI design, research, creative direction",
-      "category": "Thread",
-      "overview": "I led research, design, branding and social strategy to promote a blockchain service launch. The goal of the service was to power contracts and payments between companies and freelancers. The site needed to be trustworthy, professional, informative, persuasive, and responsive for all device sizes."
-    },
-    {
-      "id": "6",
-      "title": "Finish Line app",
-      "company": "Finish Line",
-      "description": "Strategy and vision design for the Finish Line mobile app",
-      "cardDescription": "Mobile app strategy and design",
-      "image": "/projects/finish-line/FinishLine_card.jpg",
-      "galleryImages": [
-        "/projects/finish-line/Live_app_Images.png"
-      ],
-      "tags": ["UX/UI Design", "User research"],
-      "year": "2015",
-      "role": "UX/UI design, research",
-      "category": "Finish Line",
-      "overview": "As a freelance designer at GreenStone, I helped design the future vision of Finish Line's mobile app and online retail experiences to help them stand out and increase sales in a competitive market. Finish Line launched their overhauled mobile app in early 2017."
+      "tags": ["UX/UI Design", "User research", "Product strategy"],
+      "year": "2025",
+      "role": "Design lead, research, strategy",
+      "category": "Shopify",
+      "overview": "[tbd]"
     },
     {
       "id": "7",
@@ -185,6 +115,39 @@
       "overview": "[tbd]"
     },
     {
+      "id": "2",
+      "title": "Shopify marketing automations",
+      "company": "Shopify",
+      "description": "Designed, launched and evolved a no-code automated email marketing platform that helped merchants engage with customers and grow sales",
+      "cardDescription": "End-to-end design from MVP launch to full-scale platform",
+      "image": "/projects/marketing-automations/marketing_automations_hero.png",
+      "galleryImages": [
+        "/projects/marketing-automations/Template-library.png",
+        "/projects/marketing-automations/Template-detail.png",
+        "/projects/marketing-automations/WYSIWYG_Email_Editor.png",
+        "/projects/marketing-automations/Custom_workflow.png",
+        "/projects/marketing-automations/Marketing-automation-detail.png"
+      ],
+      "tags": ["UX/UI Design", "User research"],
+      "year": "2021-2023",
+      "role": "Design, research, user testing",
+      "category": "Shopify",
+      "overview": "Shopify's automated emails were limited and required knowledge of code to make edits, which led merchants to pay for 3rd party automated marketing services.",
+      "challenges": [
+        "Shopify did not offer customizable marketing email workflows",
+        "Editing emails was clunky and required coding experience",
+        "Merchants were paying for 3rd party automated marketing services"
+      ],
+      "solutions": [
+        "I collaborated with multiple designers and cross-functional teams to design an automated email marketing platform. The platform integrated functionality from two existing apps into a cohesive experience that offered:",
+        "A library of marketing automation templates", 
+        "No-code email editing", 
+        "Customizable workflow builder",
+        "Metrics and reporting to help merchants monitor and improve their automated emails"
+      ],
+      "growthAndEvolution": "After a successful launch, I spent the next year leading the vision, growth and evolution of the product. I established a series of collaborative, cross functional design workshops that streamlined my team's process from concept design to production."
+    },
+    {
       "id": "10",
       "title": "RigUp",
       "company": "RigUp",
@@ -201,22 +164,6 @@
       "overview": "From 2019-2021 I led design on key projects across user types and product areas:\n\n- Strategic redesign and refactor of the core platform\n\n- Ground-up design and build of a new client experience\n\n- Streamlined worker onboarding experience\n\n- Ground-up design and rebuild of the internal admin experience"
     },
     {
-      "id": "11",
-      "title": "Shopify fulfillment future vision",
-      "company": "Shopify",
-      "description": "Designed future vision of Shopify shipping and fulfillment",
-      "cardDescription": "Designed future vision of Shopify shipping and fulfillment",
-      "image": "/projects/fulfillment-future-vision/tbd.jpg",
-      "galleryImages": [
-        "/projects/fulfillment-future-vision/tbd.png"
-      ],
-      "tags": ["UX/UI Design", "User research", "Product strategy"],
-      "year": "2025",
-      "role": "Design lead, research, strategy",
-      "category": "Shopify",
-      "overview": "[tbd]"
-    },
-    {
       "id": "12",
       "title": "Texas by Texas app",
       "company": "Texas by Texas",
@@ -231,6 +178,59 @@
       "role": "UX/UI design, user testing",
       "category": "Texas by Texas",
       "overview": "[tbd]"
+    },
+    {
+      "id": "5",
+      "title": "Thread",
+      "company": "Thread",
+      "description": "Responsive web design for a blockchain service to power contracts and payments between companies and freelancers",
+      "cardDescription": "Responsive web design project",
+      "image": "/projects/thread/Thread-in-situ.png",
+      "galleryImages": [
+        "/projects/thread/Thread-in-situ.png",
+        "/projects/thread/Thread-responsive.png",
+        "/projects/thread/Thread_Pre-ICO_System Flow.png"
+      ],
+      "tags": ["UX/UI Design", "Creative direction"],
+      "year": "2018",
+      "role": "UX/UI design, research, creative direction",
+      "category": "Thread",
+      "overview": "I led research, design, branding and social strategy to promote a blockchain service launch. The goal of the service was to power contracts and payments between companies and freelancers. The site needed to be trustworthy, professional, informative, persuasive, and responsive for all device sizes."
+    },
+    {
+      "id": "4",
+      "title": "Loom",
+      "company": "Loom",
+      "description": "Designed, launched and evolved a marketplace connecting early-stage startups with technical freelancers",
+      "cardDescription": "A marketplace connecting startups with technical freelancers",
+      "image": "/projects/loom/Loom_Grid_1.jpg",
+      "galleryImages": [
+        "/projects/loom/loom_profile_sm.jpg",
+        "/projects/loom/Loom_Grid_1.jpg",
+        "/projects/loom/Loom_homepage.png",
+        "/projects/loom/Loom_Dash_Master.png"
+      ],
+      "tags": ["UX/UI Design", "Cross-functional collaboration"],
+      "year": "2016-2018",
+      "role": "UX/UI design, research, product strategy",
+      "category": "Loom",
+      "overview": "I led design, research,and product strategy from MVP to polished product in a lean, fast-paced startup environment. I developed and evolved processes for collaborative, cross-functional problem solving and design. I also worked closely with my engineering partners to develop a design system and component library to increase our speed from concept to production."
+    },
+    {
+      "id": "6",
+      "title": "Finish Line app",
+      "company": "Finish Line",
+      "description": "Strategy and vision design for the Finish Line mobile app",
+      "cardDescription": "Mobile app strategy and design",
+      "image": "/projects/finish-line/FinishLine_card.jpg",
+      "galleryImages": [
+        "/projects/finish-line/Live_app_Images.png"
+      ],
+      "tags": ["UX/UI Design", "User research"],
+      "year": "2015",
+      "role": "UX/UI design, research",
+      "category": "Finish Line",
+      "overview": "As a freelance designer at GreenStone, I helped design the future vision of Finish Line's mobile app and online retail experiences to help them stand out and increase sales in a competitive market. Finish Line launched their overhauled mobile app in early 2017."
     }
   ],
   "about": {
@@ -259,4 +259,3 @@
     "subtitle": "Optional subtitle (currently hidden)"
   }
 }
-
