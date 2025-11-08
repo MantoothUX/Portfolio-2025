@@ -9,7 +9,7 @@
       "modalImage": "/projects/us-capitals-game/Capitals.gif",
       "tags": ["Prompt engineering", "UX/UI design"],
       "year": "2025",
-      "role": "Designer & Developer",
+      "role": "UX design, prompt engineer",
       "category": "Personal",
       "overview": "As a kid, one of my biggest feats in academia was my knowledge of all U.S. capitals. When my son became interested in learning states and capitals, I decided to create this game to help him learn. I wanted to create a game that was fun and engaging, but also educational. It took me about 5 hours to build, test, iterate and deploy.",
       "externalUrl": "https://us-capitals-game.vercel.app/",
@@ -38,13 +38,16 @@
       "category": "Shopify",
       "overview": "Shopify's automated emails were limited and required knowledge of code to make edits, which led merchants to pay for 3rd party automated marketing services.",
       "challenges": [
-        "Shopify automated emails required knowledge of code to make edits",
-        "Merchants were paying for 3rd party automated marketing services",
-        "Integrating disparate apps to create a cohesive experience",
-        "Cross-team alignment on vision and prioritzation of templates to build"
+        "Shopify did not offer customizable marketing email workflows",
+        "Editing emails was clunky and required coding experience",
+        "Merchants were paying for 3rd party automated marketing services"
       ],
       "solutions": [
-        "I collaborated with multiple designers and cross-functional teams to design an automated email marketing platform. The platform integrated functionality from two existing apps into a cohesive experience that offered marketing automation templates, a no-code email edtior, a customizable workflow builder and metrics to help merchants monitor and improve their automated emails."
+        "I collaborated with multiple designers and cross-functional teams to design an automated email marketing platform. The platform integrated functionality from two existing apps into a cohesive experience that offered:",
+        "A library of marketing automation templates", 
+        "No-code email editing", 
+        "Customizable workflow builder",
+        "Metrics and reporting to help merchants monitor and improve their automated emails"
       ],
       "growthAndEvolution": "After a successful launch, I spent the next year leading the vision, growth and evolution of the product. I established a series of collaborative, cross functional design workshops that streamlined my team's process from concept design to production."
     },
@@ -95,8 +98,8 @@
       ],
       "tags": ["UX/UI Design", "Cross-functional collaboration"],
       "year": "2016-2018",
-      "role": "Design lead, UX/UI design, research, product strategy",
-      "category": "Startup",
+      "role": "UX/UI design, research, product strategy",
+      "category": "Loom",
       "overview": "I led design, research,and product strategy from MVP to polished product in a lean, fast-paced startup environment. I developed and evolved processes for collaborative, cross-functional problem solving and design. I also worked closely with my engineering partners to develop a design system and component library to increase our speed from concept to production."
     },
     {
@@ -114,7 +117,7 @@
       "tags": ["UX/UI Design", "Creative direction"],
       "year": "2018",
       "role": "UX/UI design, research, creative direction",
-      "category": "Startup",
+      "category": "Thread",
       "overview": "I led research, design, branding and social strategy to promote a blockchain service launch. The goal of the service was to power contracts and payments between companies and freelancers. The site needed to be trustworthy, professional, informative, persuasive, and responsive for all device sizes."
     }
   ],

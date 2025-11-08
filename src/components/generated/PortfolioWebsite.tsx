@@ -208,11 +208,13 @@ const ProjectCard = ({
             {project.title}
           </h3>
           <p className="text-xs text-gray-700 dark:text-gray-300 line-clamp-2 min-h-[2.5rem] flex items-start">{project.cardDescription || project.description}</p>
-          <div className="flex flex-wrap gap-1.5 pt-2 mt-auto">
-            {project.tags.slice(0, 2).map(tag => <span key={tag} className="px-2 py-0.5 text-xs font-medium text-green-800 dark:text-green-300 bg-green-50 dark:bg-green-900/50 rounded-full">
-                {tag}
-              </span>)}
-          </div>
+          {project.year && (
+            <div className="flex flex-wrap gap-1.5 pt-2 mt-auto">
+              <span className="px-2 py-0.5 text-xs font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-full">
+                {project.year}
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </motion.div>;
@@ -314,8 +316,6 @@ const ProjectModal = ({
           <div className="flex items-center gap-3 text-sm text-green-600 dark:text-green-400">
             <span>{project.company}</span>
             <span>•</span>
-            <span>{project.year}</span>
-            <span>•</span>
             <span>{project.role}</span>
           </div>
           <button onClick={onClose} className="flex items-center justify-center w-10 h-10 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Close modal">
@@ -338,7 +338,12 @@ const ProjectModal = ({
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">
                 {project.title}
               </h1>
-              <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300">{project.description}</p>
+              <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-3">{project.description}</p>
+              {project.year && (
+                <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800">
+                  {project.year}
+                </span>
+              )}
             </div>
 
             {project.galleryImages && project.galleryImages.length > 0 ? (
@@ -350,7 +355,7 @@ const ProjectModal = ({
             )}
 
             <div className="max-w-4xl space-y-12">
-              {project.overview && (
+              {project.overview && project.id !== "2" && (
                 <section>
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Overview</h2>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">{project.overview}</p>
@@ -389,6 +394,16 @@ const ProjectModal = ({
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Solution</h2>
                   {project.solutions.length === 1 ? (
                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.solutions[0]}</p>
+                  ) : project.id === "2" ? (
+                    <div>
+                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">{project.solutions[0]}</p>
+                      <ul className="space-y-3">
+                        {project.solutions.slice(1).map((solution, index) => <li key={index} className="flex gap-3">
+                            <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0">•</span>
+                            <span className="text-gray-700 dark:text-gray-300">{solution}</span>
+                          </li>)}
+                      </ul>
+                    </div>
                   ) : (
                     <ul className="space-y-3">
                       {project.solutions.map((solution, index) => <li key={index} className="flex gap-3">
