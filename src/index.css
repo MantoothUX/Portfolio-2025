@@ -159,6 +159,13 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  /* Apply background to html for overscroll areas - matches container background */
+  html {
+    background-color: #ffffff;
+  }
+  html.dark {
+    background-color: #18181b; /* zinc-950 */
+  }
   html,
   body,
   #root {

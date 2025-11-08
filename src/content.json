@@ -7,7 +7,7 @@
       "description": "Retro-style game I vibe coded in react",
       "image": "/projects/us-capitals-game/card.png",
       "modalImage": "/projects/us-capitals-game/Capitals.gif",
-      "tags": ["Prompt engineering"],
+      "tags": ["Prompt engineering", "UX/UI design"],
       "year": "2025",
       "role": "Designer & Developer",
       "category": "Personal",
@@ -32,7 +32,7 @@
         "/projects/marketing-automations/Custom_workflow.png",
         "/projects/marketing-automations/Marketing-automation-detail.png"
       ],
-      "tags": ["UX Design", "User Research"],
+      "tags": ["UX/UI Design", "User research"],
       "year": "2021-2023",
       "role": "Design, research, user testing",
       "category": "Shopify",
@@ -63,7 +63,7 @@
         "/projects/variant-level-packages/All-variant_bulk_selector.png",
         "/projects/variant-level-packages/package setings_add.png"
       ],
-      "tags": ["UX Design", "Cross-team collaboration"],
+      "tags": ["UX/UI Design", "Cross-team collaboration", "Cross-functional collaboration"],
       "year": "2025",
       "role": "Design lead",
       "category": "Shopify",
@@ -79,6 +79,43 @@
       "outcomes": [
         "The feature was launched in Shopify summer edition 2025. It gained immediate and steady adoption, significantly improving shipping accuracy for thousands of merchants across 1 million+ product variants and counting."
       ]
+    },
+    {
+      "id": "4",
+      "title": "Loom",
+      "company": "Loom",
+      "description": "Designed, launched and evolved a marketplace connecting early-stage startups with technical freelancers",
+      "cardDescription": "A marketplace connecting startups with technical freelancers",
+      "image": "/projects/loom/Loom_Grid_1.jpg",
+      "galleryImages": [
+        "/projects/loom/loom_profile_sm.jpg",
+        "/projects/loom/Loom_Grid_1.jpg",
+        "/projects/loom/Loom_homepage.png",
+        "/projects/loom/Loom_Dash_Master.png"
+      ],
+      "tags": ["UX/UI Design", "Cross-functional collaboration"],
+      "year": "2016-2018",
+      "role": "Design lead, UX/UI design, research, product strategy",
+      "category": "Startup",
+      "overview": "I led design, research,and product strategy from MVP to polished product in a lean, fast-paced startup environment. I developed and evolved processes for collaborative, cross-functional problem solving and design. I also worked closely with my engineering partners to develop a design system and component library to increase our speed from concept to production."
+    },
+    {
+      "id": "5",
+      "title": "Thread",
+      "company": "Thread",
+      "description": "Responsive web design for a blockchain service to power contracts and payments between companies and freelancers",
+      "cardDescription": "Responsive web design project",
+      "image": "/projects/thread/Thread-in-situ.png",
+      "galleryImages": [
+        "/projects/thread/Thread-in-situ.png",
+        "/projects/thread/Thread-responsive.png",
+        "/projects/thread/Thread_Pre-ICO_System Flow.png"
+      ],
+      "tags": ["UX/UI Design", "Creative direction"],
+      "year": "2018",
+      "role": "UX/UI design, research, creative direction",
+      "category": "Startup",
+      "overview": "I led research, design, branding and social strategy to promote a blockchain service launch. The goal of the service was to power contracts and payments between companies and freelancers. The site needed to be trustworthy, professional, informative, persuasive, and responsive for all device sizes."
     }
   ],
   "about": {

@@ -25,15 +25,11 @@ function App() {
     );
   }, []);
   if (container === 'centered') {
-    return <div className="h-full w-full flex flex-col items-center justify-center" style={{
-      background: "radial-gradient(circle, #123623 6.84%, #18181b 68.06%)"
-    }}>
-        {generatedComponent}
-      </div>;
+    return <div className="h-full w-full flex flex-col items-center justify-center">
+      {generatedComponent}
+    </div>;
   } else {
-    return <div style={{
-      background: "radial-gradient(circle, #123623 6.84%, #18181b 68.06%)"
-    }}>{generatedComponent}</div>;
+    return <div>{generatedComponent}</div>;
   }
 }
 export default App;

@@ -233,7 +233,7 @@ const ImageGallery = ({
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
-  return <div className="relative rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
+  return <div className="max-w-4xl relative rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
       {images.length > 1 && (
         <>
           <button onClick={goToPrevious} className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Previous image">
@@ -344,12 +344,12 @@ const ProjectModal = ({
             {project.galleryImages && project.galleryImages.length > 0 ? (
               <ImageGallery images={project.galleryImages} />
             ) : (
-              <div className="rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
+              <div className="max-w-4xl rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
                 <img src={project.modalImage || project.image} alt={project.title} className="w-full h-auto" />
               </div>
             )}
 
-            <div className="space-y-12">
+            <div className="max-w-4xl space-y-12">
               {project.overview && (
                 <section>
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Overview</h2>
