@@ -334,7 +334,7 @@ const ProjectModal = ({
         }} transition={{
           delay: 0.1
         }}>
-            <div className="mb-6">
+            <div className="max-w-4xl mb-6">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">
                 {project.title}
               </h1>
