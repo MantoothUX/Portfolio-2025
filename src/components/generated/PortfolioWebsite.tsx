@@ -142,13 +142,13 @@ const Navigation = ({
       damping: 20
     }} className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-green-200 dark:border-green-900/50 rounded-full shadow-lg shadow-green-500/10 dark:shadow-green-500/20">
         <div className="flex items-center gap-2 px-6 py-3">
-          <Link to="/work" className={cn('flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full', isWork ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}>
+          <Link to="/work" className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isWork ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}>
             <Briefcase className="w-4 h-4" style={{
             display: "none"
           }} />
             Work
           </Link>
-          <Link to="/about" className={cn('flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full', isAbout ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}>
+          <Link to="/about" className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isAbout ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}>
             <User className="w-4 h-4" style={{
             display: "none"
           }} />
@@ -204,13 +204,13 @@ const ProjectCard = ({
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
         <div className="p-4 flex flex-col flex-grow">
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors line-clamp-1 mb-2">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors line-clamp-1 mb-2 font-serif-display">
             {project.title}
           </h3>
           <p className="text-xs text-gray-700 dark:text-gray-300 line-clamp-2 min-h-[2.5rem] flex items-start">{project.cardDescription || project.description}</p>
           {project.year && (
             <div className="flex flex-wrap gap-1.5 pt-2 mt-auto">
-              <span className="px-2 py-0.5 text-xs font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-full">
+              <span className="px-2 py-0.5 text-xs font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-full">
                 {project.year}
               </span>
             </div>
@@ -335,12 +335,12 @@ const ProjectModal = ({
           delay: 0.1
         }}>
             <div className="max-w-4xl mb-6">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white mb-4 font-serif-display leading-tight">
                 {project.title}
               </h1>
               <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-3">{project.description}</p>
               {project.year && (
-                <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800">
+                <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800">
                   {project.year}
                 </span>
               )}
@@ -357,14 +357,14 @@ const ProjectModal = ({
             <div className="max-w-4xl space-y-12">
               {project.overview && project.id !== "2" && (
                 <section>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Overview</h2>
+                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Overview</h2>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">{project.overview}</p>
                   {project.externalUrl && (
                     <a 
                       href={project.externalUrl} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors font-medium"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors font-semibold"
                     >
                       Play the game
                       <ExternalLink className="w-4 h-4" />
@@ -375,13 +375,13 @@ const ProjectModal = ({
 
               {project.challenges && project.challenges.length > 0 && (
                 <section>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Challenges</h2>
+                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Challenges</h2>
                   {project.challenges.length === 1 ? (
                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.challenges[0]}</p>
                   ) : (
                     <ul className="space-y-3">
                       {project.challenges.map((challenge, index) => <li key={index} className="flex gap-3">
-                          <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0">•</span>
+                          <span className="text-green-500 dark:text-green-500 font-semibold flex-shrink-0">•</span>
                           <span className="text-gray-700 dark:text-gray-300">{challenge}</span>
                         </li>)}
                     </ul>
@@ -391,7 +391,7 @@ const ProjectModal = ({
 
               {project.solutions && project.solutions.length > 0 && (
                 <section>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Solution</h2>
+                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Solution</h2>
                   {project.solutions.length === 1 ? (
                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.solutions[0]}</p>
                   ) : project.id === "2" ? (
@@ -399,7 +399,7 @@ const ProjectModal = ({
                       <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">{project.solutions[0]}</p>
                       <ul className="space-y-3">
                         {project.solutions.slice(1).map((solution, index) => <li key={index} className="flex gap-3">
-                            <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0">•</span>
+                            <span className="text-green-500 dark:text-green-500 font-semibold flex-shrink-0">•</span>
                             <span className="text-gray-700 dark:text-gray-300">{solution}</span>
                           </li>)}
                       </ul>
@@ -407,7 +407,7 @@ const ProjectModal = ({
                   ) : (
                     <ul className="space-y-3">
                       {project.solutions.map((solution, index) => <li key={index} className="flex gap-3">
-                          <span className="text-green-500 dark:text-green-500 font-medium flex-shrink-0">•</span>
+                          <span className="text-green-500 dark:text-green-500 font-semibold flex-shrink-0">•</span>
                           <span className="text-gray-700 dark:text-gray-300">{solution}</span>
                         </li>)}
                     </ul>
@@ -417,13 +417,13 @@ const ProjectModal = ({
 
               {project.outcomes && project.outcomes.length > 0 && (
                 <section>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Outcomes</h2>
+                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Outcomes</h2>
                   {project.outcomes.length === 1 ? (
                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.outcomes[0]}</p>
                   ) : (
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                       {project.outcomes.map((outcome, index) => <div key={index} className="p-6 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700" style={{ borderRadius: '20px' }}>
-                          <p className="text-gray-900 dark:text-white font-medium">{outcome}</p>
+                          <p className="text-gray-900 dark:text-white font-semibold">{outcome}</p>
                         </div>)}
                     </div>
                   )}
@@ -432,7 +432,7 @@ const ProjectModal = ({
 
               {project.growthAndEvolution && (
                 <section>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 font-serif-display">Growth and evolution</h2>
+                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Growth and evolution</h2>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.growthAndEvolution}</p>
                 </section>
               )}
@@ -488,7 +488,7 @@ const AboutPage = ({
         delay: 0.1
       }} className="space-y-12">
           <div>
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6 font-serif-display" style={{
+            <h1 className="text-4xl sm:text-5xl font-extralight mb-6 font-serif-display" style={{
               color: darkMode ? "#7bf1a8" : "#13531C"
             }}>{aboutContent.headline}</h1>
             <div className="flex flex-col md:flex-row gap-8 items-start">
@@ -519,7 +519,7 @@ const AboutPage = ({
                               href={aboutContent.resume} 
                               target="_blank" 
                               rel="noopener noreferrer"
-                              className="text-[#13531C] dark:text-green-400 hover:underline font-medium"
+                              className="text-[#13531C] dark:text-green-400 hover:underline font-semibold"
                             >
                               {parts[1]}
                             </a>
@@ -536,7 +536,7 @@ const AboutPage = ({
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold mb-6 font-serif-display" style={{
+            <h2 className="text-2xl font-extralight mb-6 font-serif-display" style={{
               color: darkMode ? "#7bf1a8" : "#13531C"
             }}>Skills & Expertise</h2>
             <div className="grid sm:grid-cols-2 gap-6">
@@ -553,7 +553,7 @@ const AboutPage = ({
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold mb-6 font-serif-display" style={{
+            <h2 className="text-2xl font-extralight mb-6 font-serif-display" style={{
               color: darkMode ? "#7bf1a8" : "#13531C"
             }}>Let's Connect</h2>
             <div className="flex flex-wrap gap-4">
@@ -606,10 +606,10 @@ const HomePage = ({
       }} transition={{
         delay: 0.1
       }} className="mb-12">
-          <p className="text-lg sm:text-xl lg:text-2xl font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <p className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
             Josh Mantooth
           </p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 font-serif-display" style={{
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold mb-4 font-serif-display leading-tight" style={{
           color: darkMode ? "#7bf1a8" : "#13531C"
         }}>{heroContent.title}</h1>
           <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl" style={{
@@ -629,7 +629,7 @@ const HomePage = ({
         delay: 0.2
       }} className="mb-8">
           <div className="flex flex-wrap gap-2">
-            {categories.map(category => <button key={category} onClick={() => setSelectedCategory(category)} className={cn('px-4 py-2 rounded-full text-sm font-medium transition-all', selectedCategory === category ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')}>
+            {categories.map(category => <button key={category} onClick={() => setSelectedCategory(category)} className={cn('px-4 py-2 rounded-full text-sm font-semibold transition-all', selectedCategory === category ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')}>
                 {category === 'all' ? 'All' : category}
               </button>)}
           </div>

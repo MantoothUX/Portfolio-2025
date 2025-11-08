@@ -71,7 +71,7 @@ body {
   --text-5xl: 3rem;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-serif-display: 'DM Serif Display', serif;
+  --font-serif-display: 'Cormorant Garamond', serif;
   --radius-lg: 0;
   --radius-md: 0;
   --radius-sm: 0;
