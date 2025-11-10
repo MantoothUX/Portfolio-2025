@@ -535,6 +535,28 @@ const AboutPage = ({
             </div>
           </div>
 
+          <div className="my-12">
+            <h2 className="text-2xl font-extralight mb-6 font-serif-display" style={{
+              color: darkMode ? "#7bf1a8" : "#13531C"
+            }}>Process</h2>
+            {/* Mobile/vertical layout SVG */}
+            <div className="md:hidden max-w-[192px]">
+              <img 
+                src={darkMode ? "/Process_diagram_vertical_dark.svg" : "/Process_diagram_vertical_light.svg"}
+                alt="Design process"
+                className="w-full h-auto"
+              />
+            </div>
+            {/* Desktop/horizontal layout SVG */}
+            <div className="hidden md:block max-w-6xl mx-auto">
+              <img 
+                src={darkMode ? "/Process_diagram_horizontal_dark.svg" : "/Process_diagram_horizontal_light.svg"}
+                alt="Design process"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+
           <div>
             <h2 className="text-2xl font-extralight mb-6 font-serif-display" style={{
               color: darkMode ? "#7bf1a8" : "#13531C"
@@ -543,7 +565,7 @@ const AboutPage = ({
               {Object.entries(aboutContent.skills).map(([category, skills]) => <div key={category} className="space-y-3">
                   <h3 className="font-semibold text-gray-900 dark:text-white">{category}</h3>
                   <ul className="space-y-2">
-                    {skills.map(skill => <li key={skill} className="text-gray-700 dark:text-gray-300 text-sm flex items-center gap-2">
+                    {skills.map(skill => <li key={skill} className="text-gray-700 dark:text-gray-300 text-base leading-relaxed flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500 dark:bg-green-500" />
                         {skill}
                       </li>)}
