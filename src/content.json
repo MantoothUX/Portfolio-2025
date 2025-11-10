@@ -33,9 +33,9 @@
         "/projects/variant-level-packages/All-variant_bulk_selector.png",
         "/projects/variant-level-packages/package setings_add.png"
       ],
-      "tags": ["UX/UI Design", "Cross-team collaboration", "Cross-functional collaboration"],
+      "tags": ["Product design lead", "Cross-team collaboration", "Cross-functional collaboration"],
       "year": "2025",
-      "role": "Design lead",
+      "role": "Product design lead",
       "category": "Shopify",
       "challenges": [
         "Merchants could only set one default package for all products, causing incorrect shipping costs at checkout and tedious manual corrections",
@@ -60,9 +60,9 @@
       "galleryImages": [
         "/projects/fulfillment-future-vision/tbd.png"
       ],
-      "tags": ["UX/UI Design", "User research", "Product strategy"],
+      "tags": ["Product design lead", "User research", "Product strategy"],
       "year": "2025",
-      "role": "Design lead, research, strategy",
+      "role": "Product design lead",
       "category": "Shopify",
       "overview": "[tbd]"
     },
@@ -76,9 +76,9 @@
       "galleryImages": [
         "/projects/shipping-profiles-redesign/tbd.png"
       ],
-      "tags": ["UX/UI Design", "User research"],
+      "tags": ["Product design", "User research"],
       "year": "2024-2025",
-      "role": "UX/UI design, user testing",
+      "role": "Product design, user testing",
       "category": "Shopify",
       "overview": "[tbd]"
     },
@@ -92,9 +92,9 @@
       "galleryImages": [
         "/projects/flat-rates/tbd.png"
       ],
-      "tags": ["UX/UI Design", "User research"],
+      "tags": ["Product design lead", "User research"],
       "year": "2024",
-      "role": "UX/UI design, user testing",
+      "role": "Product design lead",
       "category": "Shopify",
       "overview": "[tbd]"
     },
@@ -108,9 +108,9 @@
       "galleryImages": [
         "/projects/pick-lists/tbd.png"
       ],
-      "tags": ["UX/UI Design"],
+      "tags": ["Product design lead"],
       "year": "2024",
-      "role": "Design lead",
+      "role": "Product design lead",
       "category": "Shopify",
       "overview": "[tbd]"
     },
@@ -128,9 +128,9 @@
         "/projects/marketing-automations/Custom_workflow.png",
         "/projects/marketing-automations/Marketing-automation-detail.png"
       ],
-      "tags": ["UX/UI Design", "User research"],
+      "tags": ["Product design", "User research"],
       "year": "2021-2023",
-      "role": "Design, research, user testing",
+      "role": "Product design, research, user testing",
       "category": "Shopify",
       "overview": "Shopify's automated emails were limited and required knowledge of code to make edits, which led merchants to pay for 3rd party automated marketing services.",
       "challenges": [
@@ -159,7 +159,7 @@
       ],
       "tags": ["UX/UI Design", "User research"],
       "year": "2019-2021",
-      "role": "UX/UI design, research, user testing",
+      "role": "Product design, research, user testing",
       "category": "RigUp",
       "overview": "From 2019-2021 I led design on key projects across user types and product areas:\n\n- Strategic redesign and refactor of the core platform\n\n- Ground-up design and build of a new client experience\n\n- Streamlined worker onboarding experience\n\n- Ground-up design and rebuild of the internal admin experience"
     },
@@ -175,7 +175,7 @@
       ],
       "tags": ["UX/UI Design", "User research"],
       "year": "2018-2019",
-      "role": "UX/UI design, user testing",
+      "role": "Product design, user testing",
       "category": "Texas by Texas",
       "overview": "[tbd]"
     },
@@ -210,9 +210,9 @@
         "/projects/loom/Loom_homepage.png",
         "/projects/loom/Loom_Dash_Master.png"
       ],
-      "tags": ["UX/UI Design", "Cross-functional collaboration"],
+      "tags": ["Product design", "Cross-functional collaboration"],
       "year": "2016-2018",
-      "role": "UX/UI design, research, product strategy",
+      "role": "Product design lead",
       "category": "Loom",
       "overview": "I led design, research,and product strategy from MVP to polished product in a lean, fast-paced startup environment. I developed and evolved processes for collaborative, cross-functional problem solving and design. I also worked closely with my engineering partners to develop a design system and component library to increase our speed from concept to production."
     },
