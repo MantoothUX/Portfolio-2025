@@ -21,9 +21,12 @@ type Project = {
   challenges?: string[]; // Optional: only show if provided
   solutions?: string[]; // Optional: only show if provided
   outcomes?: string[]; // Optional: only show if provided
+  highlights?: string[]; // Optional: highlights section with bullet points
   growthAndEvolution?: string; // Optional: growth and evolution section text
   externalUrl?: string; // Optional: external link URL (e.g., live site, demo)
   galleryImages?: string[]; // Optional: array of image URLs for gallery/carousel
+  galleryFooter?: string; // Optional: footer text below image gallery
+  hidden?: boolean; // Optional: hide project from display
 };
 type PortfolioWebsiteProps = {
   className?: string;
@@ -196,7 +199,7 @@ const ProjectCard = ({
         <div className="relative overflow-hidden bg-gray-50 dark:bg-zinc-950/50 aspect-[4/3] flex-shrink-0" style={{
         borderRadius: '12px 12px 0 0'
       }}>
-          <motion.img src={project.image} alt={project.title} className={`w-full h-full ${project.id === "10" ? "object-contain" : "object-cover"}`} whileHover={{
+          <motion.img src={project.image} alt={project.title} className={`w-full h-full ${project.id === "10" || project.id === "9" ? "object-contain" : "object-cover"}`} whileHover={{
           scale: 1.05
         }} transition={{
           duration: 0.4
@@ -221,9 +224,11 @@ const ProjectCard = ({
 };
 
 const ImageGallery = ({
-  images
+  images,
+  footer
 }: {
   images: string[];
+  footer?: string;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -235,31 +240,38 @@ const ImageGallery = ({
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
-  return <div className="max-w-4xl relative rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
-      {images.length > 1 && (
-        <>
-          <button onClick={goToPrevious} className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Previous image">
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Next image">
-            <ChevronRight className="w-6 h-6" />
-          </button>
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
-            {images.map((_, index) => <button key={index} onClick={() => setCurrentIndex(index)} className={cn('w-2 h-2 rounded-full transition-all', index === currentIndex ? 'bg-white w-6' : 'bg-white/50')} aria-label={`Go to image ${index + 1}`} />)}
-          </div>
-        </>
+  return <div className="max-w-4xl mb-12">
+      <div className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-800">
+        {images.length > 1 && (
+          <>
+            <button onClick={goToPrevious} className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Previous image">
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Next image">
+              <ChevronRight className="w-6 h-6" />
+            </button>
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+              {images.map((_, index) => <button key={index} onClick={() => setCurrentIndex(index)} className={cn('w-2 h-2 rounded-full transition-all', index === currentIndex ? 'bg-white w-6' : 'bg-white/50')} aria-label={`Go to image ${index + 1}`} />)}
+            </div>
+          </>
+        )}
+        <AnimatePresence mode="wait">
+          <motion.img key={currentIndex} src={images[currentIndex]} alt={`Gallery image ${currentIndex + 1}`} className="w-full h-auto" initial={{
+          opacity: 0
+        }} animate={{
+          opacity: 1
+        }} exit={{
+          opacity: 0
+        }} transition={{
+          duration: 0.3
+        }} />
+        </AnimatePresence>
+      </div>
+      {footer && (
+        <div className="mt-4 text-center">
+          <p className="text-sm text-gray-500 dark:text-gray-400 italic">{footer}</p>
+        </div>
       )}
-      <AnimatePresence mode="wait">
-        <motion.img key={currentIndex} src={images[currentIndex]} alt={`Gallery image ${currentIndex + 1}`} className="w-full h-auto" initial={{
-        opacity: 0
-      }} animate={{
-        opacity: 1
-      }} exit={{
-        opacity: 0
-      }} transition={{
-        duration: 0.3
-      }} />
-      </AnimatePresence>
     </div>;
 };
 
@@ -346,11 +358,10 @@ const ProjectModal = ({
               )}
             </div>
 
-            {project.galleryImages && project.galleryImages.length > 0 ? (
-              <ImageGallery images={project.galleryImages} />
-            ) : (
+            {/* Hero image - show modalImage if available */}
+            {project.modalImage && (
               <div className="max-w-4xl rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
-                <img src={project.modalImage || project.image} alt={project.title} className="w-full h-auto" />
+                <img src={project.modalImage} alt={project.title} className="w-full h-auto" />
               </div>
             )}
 
@@ -455,7 +466,26 @@ const ProjectModal = ({
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.growthAndEvolution}</p>
                 </section>
               )}
+
+              {project.highlights && project.highlights.length > 0 && (
+                <section>
+                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Highlights</h2>
+                  <ul className="space-y-3">
+                    {project.highlights.map((highlight, index) => <li key={index} className="flex gap-3">
+                        <span className="text-green-500 dark:text-green-500 font-semibold flex-shrink-0">•</span>
+                        <span className="text-gray-700 dark:text-gray-300">{highlight}</span>
+                      </li>)}
+                  </ul>
+                </section>
+              )}
             </div>
+
+            {/* Image carousel - show at the end after all sections */}
+            {project.galleryImages && project.galleryImages.length > 0 && (
+              <div className="mt-12">
+                <ImageGallery images={project.galleryImages} footer={project.galleryFooter} />
+              </div>
+            )}
           </motion.div>
         </div>
       </motion.div>
@@ -600,7 +630,7 @@ const AboutPage = ({
             <div className="flex flex-wrap gap-4">
               <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors">
                 <Mail className="w-5 h-5" />
-                Email Me
+                Email
               </a>
               <a href={contactInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
                 <Linkedin className="w-5 h-5" />
@@ -628,8 +658,11 @@ const HomePage = ({
     title: "Staff-level UX designer crafting impactful and delightful experiences",
     subtitle: "I help companies build products that users love through research-driven design and thoughtful interactions."
   };
-  const categories = ['all', 'Personal', 'Shopify', 'RigUp', 'Texas by Texas', 'Loom', 'Thread', 'Finish Line'];
-  const filteredProjects = selectedCategory === 'all' ? projects : projects.filter(p => p.category === selectedCategory);
+  const categories = ['all', 'Shopify', 'RigUp', 'Texas by Texas', 'Loom', 'Thread', 'Finish Line', 'Personal'];
+  const visibleProjects = projects.filter(p => !p.hidden);
+  const filteredProjects = selectedCategory === 'all' 
+    ? [...visibleProjects.filter(p => p.category !== 'Personal'), ...visibleProjects.filter(p => p.category === 'Personal')]
+    : visibleProjects.filter(p => p.category === selectedCategory);
   return <motion.div initial={{
     opacity: 0
   }} animate={{

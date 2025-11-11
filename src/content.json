@@ -64,7 +64,8 @@
       "year": "2025",
       "role": "Product design lead",
       "category": "Shopify",
-      "overview": "[tbd]"
+      "overview": "[tbd]",
+      "hidden": true
     },
     {
       "id": "7",
@@ -80,7 +81,8 @@
       "year": "2024-2025",
       "role": "Product design, user testing",
       "category": "Shopify",
-      "overview": "[tbd]"
+      "overview": "[tbd]",
+      "hidden": true
     },
     {
       "id": "8",
@@ -96,23 +98,41 @@
       "year": "2024",
       "role": "Product design lead",
       "category": "Shopify",
-      "overview": "[tbd]"
+      "overview": "[tbd]",
+      "hidden": true
     },
     {
       "id": "9",
-      "title": "Shopify pick lists",
+      "title": "Order printer app",
       "company": "Shopify",
-      "description": "Launched pick lists for Shopify Order Printer app",
-      "cardDescription": "Launched pick lists for Shopify Order Printer app",
-      "image": "/projects/pick-lists/tbd.jpg",
+      "description": "Designed features and the future vision of the Shopify order printer app",
+      "cardDescription": "Designed features and the future vision of the Shopify order printer app",
+      "image": "/projects/order-printer-vision/OP_Templates.png",
+      "modalImage": "/projects/order-printer-vision/picklist visual.gif",
       "galleryImages": [
-        "/projects/pick-lists/tbd.png"
+        "/projects/order-printer-vision/OP_Templates.png",
+        "/projects/order-printer-vision/OP_picklist_preview.png",
+        "/projects/order-printer-vision/OP_picklist_printmulti.png",
+        "/projects/order-printer-vision/OP_picklist_printpreview.png"
       ],
-      "tags": ["Product design lead"],
-      "year": "2024",
-      "role": "Product design lead",
+      "galleryFooter": "*Most of the work is ongoing and confidential. Additional work samples can be shared in private",
+      "tags": ["UX/UI Design"],
+      "year": "2024-2025",
+      "role": "Design lead",
       "category": "Shopify",
-      "overview": "[tbd]"
+      "overview": "Shopify Order Printer helps merchants customize, create and print important documents in that streamline their fulfillment worflows.\n\nI led design on an initiative to ship new templates, simplify the editing experience and incorporate AI for advanced customization.",
+      "challenges": [
+        "Order Printer didn't offer baseline templates merchants needed",
+        "Templates required coding knowledge to make edits",
+        "Shopify merchants were paying for 3rd-party apps that provided more templates and easier editing",
+        "Several high profile Shopify project launches relied on new Order Printer templates"
+      ],
+      "highlights": [
+        "Launched a no-code pick list template",
+        "Led design on a template refactor to work better with new features",
+        "Designed an improved no-code editor experience for all templates",
+        "Designed the future vision of the Order Printer app that encorporates Shopify Sidekick for ai-driven template creation and customization"
+      ]
     },
     {
       "id": "2",
