@@ -1,6 +1,6 @@
-# Deployment Guide - Mantoothux.com
+# Deployment Guide - Josh Mantooth Portfolio
 
-This guide will walk you through deploying your portfolio website to replace your Squarespace site.
+This guide will walk you through deploying Josh Mantooth's portfolio website to mantoothux.com.
 
 ## Prerequisites
 
@@ -10,15 +10,15 @@ This guide will walk you through deploying your portfolio website to replace you
 
 ## Step 1: Update Your Content
 
-Before deploying, make sure to update `src/content.json` with your real content from mantoothux.com:
+Before deploying, make sure `src/content.json` contains all of Josh's portfolio content:
 
 1. Open `src/content.json`
-2. Replace all placeholder content with your actual:
-   - Projects (copy from your Squarespace site)
-   - About section (bio, skills)
+2. Verify all content is up to date:
+   - Projects (portfolio work samples)
+   - About section (bio, skills, photo)
    - Contact information (email, LinkedIn, GitHub)
    - Hero title
-3. See `CONTENT_INSTRUCTIONS.md` for detailed structure
+3. See `CONTENT_INSTRUCTIONS.md` for detailed content structure
 
 ## Step 2: Test Locally
 
@@ -29,9 +29,51 @@ npm run preview
 
 Visit the preview URL to verify everything looks correct.
 
-## Step 3: Deploy to Netlify (Recommended)
+## Step 3: Deploy to Vercel (Recommended)
 
-### Option A: Deploy via Netlify Dashboard (Easiest)
+### Option A: Deploy via Vercel Dashboard (Easiest)
+
+1. **Prepare your code:**
+   - Make sure all changes are committed to git
+   - Push to GitHub
+
+2. **Sign up/Login to Vercel:**
+   - Go to [vercel.com](https://www.vercel.com)
+   - Sign up with GitHub (easiest option)
+
+3. **Deploy:**
+   - Click "Add New Project"
+   - Import your GitHub repository: `MantoothUX/Portfolio-2025`
+   - Vercel will auto-detect settings from `vercel.json`:
+     - Build command: `npm run build`
+     - Output directory: `dist`
+     - Framework: None (Vite)
+   - Click "Deploy"
+
+4. **Configure Custom Domain:**
+   - Go to Project Settings → Domains
+   - Add `mantoothux.com`
+   - Follow Vercel's instructions for DNS setup
+
+### Option B: Deploy via Vercel CLI
+
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Login to Vercel
+vercel login
+
+# Deploy (first time)
+vercel
+
+# Deploy to production
+vercel --prod
+```
+
+## Step 4: Deploy to Netlify (Alternative)
+
+### Option A: Deploy via Netlify Dashboard
 
 1. **Prepare your code:**
    - Make sure all changes are committed to git
@@ -71,9 +113,19 @@ netlify deploy --prod
 netlify deploy --prod --dir=dist
 ```
 
-## Step 4: Configure DNS
+## Step 5: Configure DNS
 
-Once your site is deployed on Netlify, you'll need to update your DNS records:
+Once your site is deployed on Vercel or Netlify, you'll need to update your DNS records:
+
+### For Vercel:
+1. Go to Project Settings → Domains
+2. Add `mantoothux.com` and `www.mantoothux.com`
+3. Vercel will provide DNS records to add:
+   - A record or CNAME for root domain
+   - CNAME for www subdomain
+4. Update DNS at your domain registrar (GoDaddy, etc.)
+
+### For Netlify:
 
 ### If Netlify provides a CNAME:
 1. Go to your domain registrar (where you bought mantoothux.com)
@@ -94,23 +146,13 @@ Once your site is deployed on Netlify, you'll need to update your DNS records:
 
 **Note:** DNS changes can take 24-48 hours to propagate. Netlify will automatically provision an SSL certificate once DNS is configured.
 
-## Step 5: Verify Deployment
+## Step 6: Verify Deployment
 
 1. Wait for DNS propagation (check with [whatsmydns.net](https://www.whatsmydns.net))
 2. Visit `mantoothux.com` to verify it's working
 3. Test all pages and links
 4. Check mobile responsiveness
 
-## Alternative: Deploy to Vercel
-
-If you prefer Vercel:
-
-1. Go to [vercel.com](https://vercel.com)
-2. Sign up with GitHub
-3. Import your repository
-4. Vercel will auto-detect Vite settings
-5. Add custom domain: `mantoothux.com`
-6. Update DNS as instructed by Vercel
 
 ## Troubleshooting
 
@@ -134,7 +176,8 @@ If you prefer Vercel:
 - **Build command:** `npm run build`
 - **Publish directory:** `dist`
 - **Content file:** `src/content.json`
-- **Netlify config:** `netlify.toml` (already created)
+- **Vercel config:** `vercel.json` (already created)
+- **Netlify config:** `netlify.toml` (alternative deployment option)
 
 ## Need Help?
 

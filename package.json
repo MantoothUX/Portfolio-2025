@@ -1,7 +1,9 @@
 {
   "name": "portfolio-2025",
+  "description": "Portfolio website for Josh Mantooth - Staff-level product designer",
   "private": true,
   "version": "1.0.0",
+  "author": "Josh Mantooth",
   "repository": {
     "type": "git",
     "url": "https://github.com/MantoothUX/Portfolio-2025.git"

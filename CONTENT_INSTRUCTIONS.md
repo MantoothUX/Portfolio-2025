@@ -2,7 +2,7 @@
 
 ## Quick Start
 
-To update your portfolio content, edit the file `src/content.json` with your real information from mantoothux.com.
+To update the portfolio content for Josh Mantooth's portfolio, edit the file `src/content.json` with project information, bio, and contact details.
 
 ## Content Structure
 
@@ -41,47 +41,48 @@ Each project should have:
   "projects": [
     {
       "id": "1",
-      "title": "E-commerce Platform Redesign",
-      "company": "Tech Company",
-      "description": "Redesigned checkout flow resulting in 30% conversion increase",
-      "image": "https://example.com/project-image.jpg",
-      "tags": ["UX Research", "UI Design"],
-      "year": "2024",
-      "role": "Lead UX Designer",
-      "overview": "Led a complete redesign of the e-commerce platform...",
-      "challenges": ["High cart abandonment", "Complex checkout process"],
-      "solutions": ["Simplified to 3 steps", "Added trust indicators"],
-      "outcomes": ["30% conversion increase", "40% reduction in abandonment"]
+      "title": "Shopify Marketing Automations",
+      "company": "Shopify",
+      "description": "End-to-end design from MVP launch to full-scale platform",
+      "image": "/projects/marketing-automations/marketing_automations_hero.png",
+      "tags": ["UX/UI Design", "User Research"],
+      "year": "2021-2023",
+      "role": "Design, research, user testing",
+      "overview": "Designed, launched and evolved a no-code automated email marketing platform...",
+      "challenges": ["Shopify did not offer customizable marketing email workflows"],
+      "solutions": ["I collaborated with multiple designers and cross-functional teams..."],
+      "outcomes": ["Successfully launched Marketing Automations platform"]
     }
   ],
   "about": {
+    "headline": "Hi, I'm Josh",
     "bio": [
-      "Your first bio paragraph here...",
-      "Your second bio paragraph here..."
+      "I'm a staff-level product designer with 10+ years solving complex problems...",
+      "For the past 4+ years at Shopify, I led teams and designed features..."
     ],
     "skills": {
-      "User Research": ["Usability Testing", "User Interviews"],
-      "Design": ["UI Design", "Prototyping"]
+      "Design": ["Collaborative design", "Rapid prototyping", "UI design"],
+      "Tools": ["Figma", "FigJam", "Framer", "Cursor"],
+      "Strategy & research": ["User research", "Concept and usability testing"]
     }
   },
   "contact": {
-    "email": "josh@mantoothux.com",
+    "email": "mantoothux@gmail.com",
     "linkedin": "https://linkedin.com/in/joshmantooth",
-    "github": "https://github.com/joshmantooth"
+    "github": "https://github.com/MantoothUX"
   },
   "hero": {
-    "title": "Staff-level UX designer crafting impactful and delightful experiences"
+    "title": "Staff UX designer solving complex problems with delightful experiences"
   }
 }
 ```
 
 ## Tips
 
-1. Copy content directly from your Squarespace site (mantoothux.com)
-2. For images, you can:
-   - Use Unsplash URLs (free stock photos)
-   - Upload to a service like Cloudinary or Imgur
-   - Host them in your project's public folder
-3. After updating content.json, run `npm run build` to test locally
-4. The site will automatically use mock data if content.json is empty or missing projects
+1. All project images should be placed in the `public/projects/[project-name]/` directory
+2. For images:
+   - Upload project images to `public/projects/[project-name]/`
+   - Reference them in content.json as `/projects/[project-name]/filename.png`
+3. After updating content.json, run `npm run dev` to preview changes locally
+4. The site uses the content from `src/content.json` - make sure all required fields are populated
 

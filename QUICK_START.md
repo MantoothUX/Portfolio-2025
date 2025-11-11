@@ -5,7 +5,7 @@
 1. ✅ Content system set up - Edit `src/content.json` to update all content
 2. ✅ Portfolio component updated to read from content.json
 3. ✅ Build tested and working
-4. ✅ Netlify deployment configuration ready
+4. ✅ Vercel deployment configuration ready (`vercel.json`)
 5. ✅ Deployment guide created
 
 ## 🚀 Next Steps (Do These Now)
@@ -30,36 +30,35 @@ npm run preview
 
 Visit the preview URL and verify everything looks good.
 
-### 3. Deploy to Netlify (10-15 minutes)
+### 3. Deploy to Vercel (10-15 minutes)
 
 **Easiest Method:**
 
 1. Push your code to GitHub (if not already)
-2. Go to [netlify.com](https://www.netlify.com) and sign up/login
-3. Click "Add new site" → "Import an existing project"
-4. Connect your GitHub repo
-5. Netlify auto-detects settings (build: `npm run build`, publish: `dist`)
-6. Click "Deploy site"
+2. Go to [vercel.com](https://www.vercel.com) and sign up/login with GitHub
+3. Click "Add New Project"
+4. Import your GitHub repository: `MantoothUX/Portfolio-2025`
+5. Vercel auto-detects settings from `vercel.json` (build: `npm run build`, output: `dist`)
+6. Click "Deploy"
 
 **Then add your domain:**
 
-1. In Netlify, go to Site settings → Domain management
-2. Click "Add custom domain"
-3. Enter `mantoothux.com`
-4. Follow Netlify's DNS instructions
+1. In Vercel, go to Project Settings → Domains
+2. Add `mantoothux.com` and `www.mantoothux.com`
+3. Follow Vercel's DNS instructions
 
 ### 4. Update DNS (5 minutes)
 
 In your domain registrar's DNS settings:
 
-- Add the CNAME or A records that Netlify provides
+- Add the DNS records that Vercel provides (A record or CNAME)
 - Wait 24-48 hours for DNS propagation
-- Netlify automatically provides SSL certificate
+- Vercel automatically provides SSL certificate
 
 ## 📋 Files You Need to Know
 
 - `src/content.json` - **Edit this** to update all your content
-- `netlify.toml` - Deployment config (already set up)
+- `vercel.json` - Vercel deployment config (already set up)
 - `DEPLOYMENT_GUIDE.md` - Detailed deployment instructions
 - `CONTENT_INSTRUCTIONS.md` - Content structure guide
 
@@ -68,8 +67,8 @@ In your domain registrar's DNS settings:
 1. Fill in `src/content.json` with your real content
 2. Run `npm run build` to test
 3. Push to GitHub
-4. Deploy on Netlify (drag & drop the `dist` folder works too!)
-5. Add custom domain in Netlify
+4. Deploy on Vercel (connect GitHub repo)
+5. Add custom domain in Vercel
 6. Update DNS at your registrar
 7. Wait for DNS propagation
 8. Done! 🎉

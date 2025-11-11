@@ -1,17 +1,20 @@
 # Portfolio Website - Josh Mantooth
 
-A modern, custom-built portfolio website showcasing UX design work and experience. Built with React, TypeScript, and Tailwind CSS.
+A modern, custom-built portfolio website for **Josh Mantooth**, a staff-level product designer showcasing UX design work and experience. Built with React, TypeScript, and Tailwind CSS.
 
 **Live Site:** [mantoothux.com](https://mantoothux.com)
 
 ## ✨ Features
 
 - **Modern Design**: Clean, responsive design with dark/light mode support
-- **Project Showcase**: Interactive project cards with detailed modal views
+- **Project Showcase**: Interactive project cards with detailed modal views and image galleries
+- **Project Filtering**: Filter projects by category (Shopify, Personal, etc.)
 - **Content Management**: Easy-to-update JSON-based content system
 - **Performance**: Fast, optimized React application with Vite
 - **Accessibility**: Semantic HTML and keyboard navigation support
 - **SEO Ready**: Proper meta tags and semantic structure
+- **URL Routing**: Shareable project links with hash-based routing
+- **Image Galleries**: Carousel support for multiple project images
 
 ## 🛠️ Tech Stack
 
@@ -21,14 +24,20 @@ A modern, custom-built portfolio website showcasing UX design work and experienc
 - **Routing**: React Router DOM
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
-- **Fonts**: DM Serif Display (headlines), System fonts (body)
+- **Fonts**: Cormorant Garamond (headlines, weight 600), System fonts (body)
 
 ## 📁 Project Structure
 
 ```
 ├── public/                 # Static assets (images, PDFs)
 │   ├── josh-photo.jpg
-│   └── JM_resume_general_11.6.2025.pdf
+│   ├── JM_resume_general_11.6.2025.pdf
+│   ├── Process_diagram_*.svg  # Process diagrams for About page
+│   └── projects/          # Project images organized by project
+│       ├── us-capitals-game/
+│       ├── marketing-automations/
+│       ├── Mantooth_Portfolio/
+│       └── ...
 ├── src/
 │   ├── components/
 │   │   └── generated/
@@ -37,7 +46,8 @@ A modern, custom-built portfolio website showcasing UX design work and experienc
 │   ├── App.tsx            # Root component with routing
 │   ├── main.tsx           # Entry point
 │   └── index.css          # Global styles
-├── netlify.toml           # Netlify deployment configuration
+├── vercel.json            # Vercel deployment configuration
+├── netlify.toml           # Netlify deployment configuration (alternative)
 └── package.json           # Dependencies and scripts
 ```
 
@@ -91,8 +101,9 @@ These colors are defined inline in components and can be updated in:
 
 ### Fonts
 
-- **Headlines**: DM Serif Display (loaded from Google Fonts)
-- **Body**: System font stack
+- **Headlines & Section Titles**: Cormorant Garamond (weight 600, loaded from Google Fonts)
+- **Project Titles**: System UI sans-serif
+- **Body Text**: System font stack
 
 To change fonts, update `index.html` and `src/index.css`.
 
@@ -111,9 +122,17 @@ npm run preview
 
 ## 🚢 Deployment
 
-This site is configured for deployment on Netlify. See `DEPLOYMENT_GUIDE.md` for detailed instructions.
+This site is configured for deployment on **Vercel** (primary) or Netlify. See `DEPLOYMENT_GUIDE.md` for detailed instructions.
 
-### Quick Deploy to Netlify
+### Quick Deploy to Vercel
+
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com) and sign up with GitHub
+3. Import your repository
+4. Vercel will auto-detect settings from `vercel.json`
+5. Configure your custom domain: `mantoothux.com`
+
+### Alternative: Deploy to Netlify
 
 1. Push your code to GitHub
 2. Connect your repository to Netlify
@@ -136,8 +155,10 @@ This site is configured for deployment on Netlify. See `DEPLOYMENT_GUIDE.md` for
 - Smooth transitions between modes
 
 ### Project Modals
-- Click any project card to view details
-- URL hash-based routing for shareable project links
+- Click any project card to view detailed project information
+- URL hash-based routing for shareable project links (e.g., `/work#project-1`)
+- Image galleries with carousel navigation
+- Flexible content sections (Overview, Challenges, Solutions, Outcomes, Highlights, Tools Used)
 - Smooth animations with Framer Motion
 
 ### Responsive Design
@@ -161,10 +182,12 @@ MIT License - See LICENSE file for details
 
 ## 👤 Author
 
-**Josh Mantooth**
+**Josh Mantooth** - Staff-level Product Designer
+
 - Portfolio: [mantoothux.com](https://mantoothux.com)
 - LinkedIn: [joshmantooth](https://linkedin.com/in/joshmantooth)
 - GitHub: [@MantoothUX](https://github.com/MantoothUX)
+- Email: mantoothux@gmail.com
 
 ---
 
