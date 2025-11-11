@@ -153,31 +153,32 @@
       "company": "RigUp",
       "description": "Led multiple responsive web and mobile app design projects",
       "cardDescription": "Responsive web and mobile app design",
-      "image": "/projects/rigup/tbd.jpg",
-      "galleryImages": [
-        "/projects/rigup/tbd.png"
-      ],
+      "image": "/projects/rigup/rigup_hero.png",
+      "modalImage": "/projects/rigup/rigup_hero.png",
       "tags": ["UX/UI Design", "User research"],
       "year": "2019-2021",
       "role": "Product design, research, user testing",
       "category": "RigUp",
-      "overview": "From 2019-2021 I led design on key projects across user types and product areas:\n\n- Strategic redesign and refactor of the core platform\n\n- Ground-up design and build of a new client experience\n\n- Streamlined worker onboarding experience\n\n- Ground-up design and rebuild of the internal admin experience"
+      "overview": "From 2019-2021 I led design on key projects across user types and product areas:\n\n- Strategic redesign and refactor of the admin experience\n\n- End-to-end design of a worker management experience\n\n- Streamlined worker onboarding experience\n\n- Redesign of workforce marketplace profiles"
     },
     {
       "id": "12",
-      "title": "Texas by Texas app",
-      "company": "Texas by Texas",
-      "description": "Designed key workflows for the Texas by Texas government services app",
-      "cardDescription": "Designed key workflows for government services app",
-      "image": "/projects/texas-by-texas/tbd.jpg",
+      "title": "Texas x Texas app",
+      "company": "Texas x Texas",
+      "description": "Collaboratively designed and led user testing on a user-friendly government services app",
+      "cardDescription": "Collaboratively designed a government services app",
+      "image": "/projects/TxT/Mobile_hero.png",
       "galleryImages": [
-        "/projects/texas-by-texas/tbd.png"
+        "/projects/TxT/Mobile_hero.png",
+        "/projects/TxT/Desk_landing.jpg",
+        "/projects/TxT/signup_1.jpg",
+        "/projects/TxT/dashboard.jpg",
+        "/projects/TxT/vehicle_lookup.jpg"
       ],
       "tags": ["UX/UI Design", "User research"],
       "year": "2018-2019",
       "role": "Product design, user testing",
-      "category": "Texas by Texas",
-      "overview": "[tbd]"
+      "category": "Texas by Texas",      "overview": "Texas government online services were dated, poorly designed, scattered, disparate, unintuitive and untrustworthy. I collaborated with a small team at Deloitte Digital to design, build and test a user-friendly government services app. The app centralizes and simplifies the most common government services for Texans. The responsive website and mobile app launched in 2021."
     },
     {
       "id": "5",
@@ -214,7 +215,7 @@
       "year": "2016-2018",
       "role": "Product design lead",
       "category": "Loom",
-      "overview": "I led design, research,and product strategy from MVP to polished product in a lean, fast-paced startup environment. I developed and evolved processes for collaborative, cross-functional problem solving and design. I also worked closely with my engineering partners to develop a design system and component library to increase our speed from concept to production."
+      "overview": "I led product design, research and product strategy from MVP to polished product in a lean, fast-paced startup environment. I developed and evolved processes for collaborative, cross-functional problem solving and design. I also worked closely with my engineering partners to develop a design system and component library to increase our speed from concept to production."
     },
     {
       "id": "6",

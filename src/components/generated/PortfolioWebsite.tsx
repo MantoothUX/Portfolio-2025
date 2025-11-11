@@ -196,7 +196,7 @@ const ProjectCard = ({
         <div className="relative overflow-hidden bg-gray-50 dark:bg-zinc-950/50 aspect-[4/3] flex-shrink-0" style={{
         borderRadius: '12px 12px 0 0'
       }}>
-          <motion.img src={project.image} alt={project.title} className="w-full h-full object-cover" whileHover={{
+          <motion.img src={project.image} alt={project.title} className={`w-full h-full ${project.id === "10" ? "object-contain" : "object-cover"}`} whileHover={{
           scale: 1.05
         }} transition={{
           duration: 0.4
@@ -358,7 +358,26 @@ const ProjectModal = ({
               {project.overview && project.id !== "2" && (
                 <section>
                   <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Overview</h2>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">{project.overview}</p>
+                  {project.overview.includes('\n-') || project.overview.startsWith('-') ? (
+                    <div className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                      {project.overview.split('\n').map((line, index) => {
+                        if (line.trim().startsWith('-')) {
+                          const bulletText = line.trim().substring(1).trim();
+                          return (
+                            <div key={index} className="flex gap-3 mb-3">
+                              <span className="text-green-500 dark:text-green-500 font-semibold flex-shrink-0">•</span>
+                              <span>{bulletText}</span>
+                            </div>
+                          );
+                        } else if (line.trim()) {
+                          return <p key={index} className="mb-3">{line.trim()}</p>;
+                        }
+                        return null;
+                      })}
+                    </div>
+                  ) : (
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">{project.overview}</p>
+                  )}
                   {project.externalUrl && (
                     <a 
                       href={project.externalUrl} 
