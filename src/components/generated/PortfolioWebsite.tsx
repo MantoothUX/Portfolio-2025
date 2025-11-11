@@ -22,6 +22,7 @@ type Project = {
   solutions?: string[]; // Optional: only show if provided
   outcomes?: string[]; // Optional: only show if provided
   highlights?: string[]; // Optional: highlights section with bullet points
+  toolsUsed?: string[]; // Optional: tools used section with bullet points (can contain HTML links)
   growthAndEvolution?: string; // Optional: growth and evolution section text
   externalUrl?: string; // Optional: external link URL (e.g., live site, demo)
   galleryImages?: string[]; // Optional: array of image URLs for gallery/carousel
@@ -199,7 +200,7 @@ const ProjectCard = ({
         <div className="relative overflow-hidden bg-gray-50 dark:bg-zinc-950/50 aspect-[4/3] flex-shrink-0" style={{
         borderRadius: '12px 12px 0 0'
       }}>
-          <motion.img src={project.image} alt={project.title} className={`w-full h-full ${project.id === "10" || project.id === "9" ? "object-contain" : "object-cover"}`} whileHover={{
+          <motion.img src={project.image} alt={project.title} className={`w-full h-full ${project.id === "10" || project.id === "9" || project.id === "0" ? "object-contain" : "object-cover"}`} whileHover={{
           scale: 1.05
         }} transition={{
           duration: 0.4
@@ -207,7 +208,7 @@ const ProjectCard = ({
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
         <div className="p-4 flex flex-col flex-grow">
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors line-clamp-1 mb-2 font-serif-display">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors line-clamp-1 mb-2">
             {project.title}
           </h3>
           <p className="text-xs text-gray-700 dark:text-gray-300 line-clamp-2 min-h-[2.5rem] flex items-start">{project.cardDescription || project.description}</p>
@@ -347,7 +348,7 @@ const ProjectModal = ({
           delay: 0.1
         }}>
             <div className="max-w-4xl mb-6">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white mb-4 font-serif-display leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white mb-4 leading-tight">
                 {project.title}
               </h1>
               <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-3">{project.description}</p>
@@ -358,8 +359,15 @@ const ProjectModal = ({
               )}
             </div>
 
-            {/* Hero image - show modalImage if available */}
-            {project.modalImage && (
+            {/* Image carousel - show right after title/year if galleryImages exist */}
+            {project.galleryImages && project.galleryImages.length > 0 && (
+              <div className="mb-12">
+                <ImageGallery images={project.galleryImages} footer={project.galleryFooter} />
+              </div>
+            )}
+
+            {/* Hero image - show modalImage if available and no galleryImages */}
+            {project.modalImage && (!project.galleryImages || project.galleryImages.length === 0) && (
               <div className="max-w-4xl rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
                 <img src={project.modalImage} alt={project.title} className="w-full h-auto" />
               </div>
@@ -445,21 +453,6 @@ const ProjectModal = ({
                 </section>
               )}
 
-              {project.outcomes && project.outcomes.length > 0 && (
-                <section>
-                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Outcomes</h2>
-                  {project.outcomes.length === 1 ? (
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.outcomes[0]}</p>
-                  ) : (
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {project.outcomes.map((outcome, index) => <div key={index} className="p-6 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700" style={{ borderRadius: '20px' }}>
-                          <p className="text-gray-900 dark:text-white font-semibold">{outcome}</p>
-                        </div>)}
-                    </div>
-                  )}
-                </section>
-              )}
-
               {project.growthAndEvolution && (
                 <section>
                   <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Growth and evolution</h2>
@@ -478,14 +471,89 @@ const ProjectModal = ({
                   </ul>
                 </section>
               )}
-            </div>
 
-            {/* Image carousel - show at the end after all sections */}
-            {project.galleryImages && project.galleryImages.length > 0 && (
-              <div className="mt-12">
-                <ImageGallery images={project.galleryImages} footer={project.galleryFooter} />
-              </div>
-            )}
+              {project.toolsUsed && project.toolsUsed.length > 0 && (
+                <section>
+                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Tools used</h2>
+                  <ul className="space-y-3">
+                    {project.toolsUsed.map((tool, index) => {
+                      // Check if tool contains a URL pattern
+                      const urlMatch = tool.match(/https?:\/\/[^\s]+/);
+                      if (urlMatch) {
+                        const url = urlMatch[0];
+                        const parts = tool.split(url);
+                        const beforeUrl = parts[0].trim();
+                        const afterUrl = parts[1]?.trim() || '';
+                        // If beforeUrl exists and is a single word, use it as link text
+                        const linkText = beforeUrl && !beforeUrl.includes(' ') ? beforeUrl : (url.includes('github.com') ? 'Github' : url);
+                        return (
+                          <li key={index} className="flex gap-3">
+                            <span className="text-green-500 dark:text-green-500 font-semibold flex-shrink-0">•</span>
+                            <span className="text-gray-700 dark:text-gray-300">
+                              {beforeUrl && beforeUrl.includes(' ') && <span>{beforeUrl} </span>}
+                              <a href={url} target="_blank" rel="noopener noreferrer" className="text-[#13531C] dark:text-green-400 hover:underline">
+                                {linkText}
+                              </a>
+                              {afterUrl && <span> {afterUrl}</span>}
+                            </span>
+                          </li>
+                        );
+                      }
+                      return (
+                        <li key={index} className="flex gap-3">
+                          <span className="text-green-500 dark:text-green-500 font-semibold flex-shrink-0">•</span>
+                          <span className="text-gray-700 dark:text-gray-300">{tool}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </section>
+              )}
+
+              {project.outcomes && project.outcomes.length > 0 && (
+                <section>
+                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Outcomes</h2>
+                  {project.outcomes.length === 1 ? (
+                    (() => {
+                      const outcome = project.outcomes[0];
+                      const attributionMatch = outcome.match(/^(.+?)\s*-\s*(.+)$/);
+                      if (attributionMatch) {
+                        const quote = attributionMatch[1].trim();
+                        const attribution = attributionMatch[2].trim();
+                        return (
+                          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                            {quote} - <span className="font-normal italic">{attribution}</span>
+                          </p>
+                        );
+                      }
+                      return <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{outcome}</p>;
+                    })()
+                  ) : (
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {project.outcomes.map((outcome, index) => {
+                        const attributionMatch = outcome.match(/^(.+?)\s*-\s*(.+)$/);
+                        if (attributionMatch) {
+                          const quote = attributionMatch[1].trim();
+                          const attribution = attributionMatch[2].trim();
+                          return (
+                            <div key={index} className="p-6 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700" style={{ borderRadius: '20px' }}>
+                              <p className="text-gray-900 dark:text-white font-semibold">
+                                {quote} - <span className="font-normal italic">{attribution}</span>
+                              </p>
+                            </div>
+                          );
+                        }
+                        return (
+                          <div key={index} className="p-6 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700" style={{ borderRadius: '20px' }}>
+                            <p className="text-gray-900 dark:text-white font-semibold">{outcome}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </section>
+              )}
+            </div>
           </motion.div>
         </div>
       </motion.div>

@@ -1,6 +1,37 @@
 {
   "projects": [
     {
+      "id": "0",
+      "title": "MantoothUX.com",
+      "company": "Personal",
+      "description": "Responsive portfolio website I designed and built with AI tools",
+      "cardDescription": "This website 🤯",
+      "image": "/projects/Mantooth_Portfolio/Portfolio_hero.png",
+      "galleryImages": [
+        "/projects/Mantooth_Portfolio/Portfolio_hero.png",
+        "/projects/Mantooth_Portfolio/Magic_path.png",
+        "/projects/Mantooth_Portfolio/Figma.png",
+        "/projects/Mantooth_Portfolio/Cursor.png"
+      ],
+      "tags": ["UX/UI Design", "AI-assisted coding"],
+      "year": "2025",
+      "role": "Design, development",
+      "category": "Personal",
+      "overview": "My previous portfolio site was built and managed through Squarespace. Squarespace is a decent no-code solution, but I found making edits to be tedious and unintuitive, and I wanted more control over the structure, content, motion and design details.\n\nI decided to challenge myself to design and build a new portfolio site in a week to test my proficiency with Cursor and other AI tools.",
+      "toolsUsed": [
+        "Figma",
+        "Magic path ai",
+        "Cursor",
+        "Github https://github.com/MantoothUX/Portfolio-2025",
+        "Vercel"
+      ],
+      "outcomes": [
+        "Designed, built and launched this site in 4 days",
+        "\"This is a pretty cool website\" - You, probably",
+        "\"I'm proud of you, Joshua\" - My Mom"
+      ]
+    },
+    {
       "id": "1",
       "title": "U.S. capitals quiz game",
       "company": "Personal",
@@ -258,7 +289,7 @@
     "headline": "Hi, I'm Josh",
     "photo": "/josh-photo.jpg",
     "bio": [
-      "I'm a staff-level product designer with 10+ years solving complex problems and leading ambitious projects for companies of all sizes. I'm passionate about creating stylish, intuitive solutions that work for real people at scale. Over the last year I've been incorporating AI tools into my craft, and have become proficient at AI-assited coding.",
+      "I'm a staff-level product designer with 10+ years of experience solving complex problems and leading ambitious projects for product orgs of all sizes. I'm passionate about designing stylish, intuitive solutions that work for real people at scale. Over the last year I've been incorporating AI tools into my process, and have become proficient at AI-assisted coding.",
       "For the past 4+ years at Shopify, I led teams and designed features that help millions of merchants start, scale, and market their businesses.",
       "Before UX design, I spent 7 years at world-class advertising agencies managing teams and clients through creative campaigns from ideation to launch. Check out my resume for the full story.",
       "When I'm not working, you'll find me cooking, playing ice hockey, running, catching live music, or outdoors with my family."
