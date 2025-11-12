@@ -284,7 +284,7 @@ const ImageGallery = ({
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
-  return <div className="max-w-4xl mb-12">
+  return <div className="w-full max-w-full sm:max-w-2xl md:max-w-4xl mb-12">
       <div className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-800 bg-gray-100 dark:bg-zinc-900">
         {images.length > 1 && (
           <>
@@ -300,7 +300,7 @@ const ImageGallery = ({
           </>
         )}
         {/* Crossfade transition - all images preloaded and stacked */}
-        <div className="relative w-full" style={{ minHeight: '300px' }}>
+        <div className="relative w-full">
           {images.map((src, index) => {
             const isActive = index === currentIndex;
             const isLoaded = loadedImages.has(src);
@@ -416,7 +416,7 @@ const ProjectModal = ({
         </div>
 
         {/* Scrollable content */}
-        <div className="overflow-y-auto flex-1 px-6 py-8 sm:px-8 md:px-12">
+        <div className="overflow-y-auto flex-1 px-4 py-8 sm:px-6 md:px-8 lg:px-12">
           <motion.div initial={{
           y: 20,
           opacity: 0
@@ -447,7 +447,7 @@ const ProjectModal = ({
 
             {/* Hero image - show modalImage if available and no galleryImages */}
             {project.modalImage && (!project.galleryImages || project.galleryImages.length === 0) && (
-              <div className="max-w-4xl rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
+              <div className="w-full max-w-full sm:max-w-2xl md:max-w-4xl rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
                 <img src={project.modalImage} alt={project.title} className="w-full h-auto" />
               </div>
             )}
@@ -666,11 +666,7 @@ const AboutPage = ({
     github: "https://github.com"
   };
 
-  return <motion.div initial={{
-    opacity: 0
-  }} animate={{
-    opacity: 1
-  }} exit={{
+  return <motion.div exit={{
     opacity: 0
   }} className="min-h-screen pb-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -815,11 +811,7 @@ const HomePage = ({
         if (!a.disabled && b.disabled) return -1;
         return 0;
       });
-  return <motion.div initial={{
-    opacity: 0
-  }} animate={{
-    opacity: 1
-  }} exit={{
+  return <motion.div exit={{
     opacity: 0
   }} className="min-h-screen pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -885,6 +877,13 @@ export const PortfolioWebsite = (props: PortfolioWebsiteProps) => {
     }
   }, [darkMode]);
 
+  // Scroll to top when route changes
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    });
+  }, [location.pathname]);
+
   // Handle hash-based modal routing
   useEffect(() => {
     const hash = location.hash.replace('#', '');
@@ -924,7 +923,7 @@ export const PortfolioWebsite = (props: PortfolioWebsiteProps) => {
   // @return
   return <div className={cn('min-h-screen bg-white dark:bg-zinc-950 transition-colors duration-300 relative', props.className)}>
       {/* Grid pattern background that fills entire viewport */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+      <div className="fixed inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
       
       {/* Content layer */}
       <div className="relative z-10">
