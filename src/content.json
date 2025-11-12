@@ -283,6 +283,32 @@
       "role": "UX/UI design, research",
       "category": "Finish Line",
       "overview": "As a freelance designer at GreenStone, I helped design the future vision of Finish Line's mobile app and online retail experiences to help them stand out and increase sales in a competitive market. Finish Line launched their overhauled mobile app in early 2017."
+    },
+    {
+      "id": "13",
+      "title": "Shopify shipping profiles",
+      "company": "Shopify",
+      "description": "Redesigned shipping profiles to be market-driven and more intuitive",
+      "cardDescription": "Redesigned shipping profiles to be market-driven and more intuitive",
+      "image": "/projects/coming-soon/Coming-soon.png",
+      "tags": ["Product design"],
+      "year": "2024-2025",
+      "role": "Product design",
+      "category": "Shopify",
+      "disabled": true
+    },
+    {
+      "id": "14",
+      "title": "Shopify fulfillment future vision",
+      "company": "Shopify",
+      "description": "Designed the future vision of Shopify shipping and fulfillment workflows",
+      "cardDescription": "Designed the future vision of Shopify shipping and fulfillment workflows",
+      "image": "/projects/coming-soon/Coming-soon.png",
+      "tags": ["Product design"],
+      "year": "2024-2025",
+      "role": "Product design",
+      "category": "Shopify",
+      "disabled": true
     }
   ],
   "about": {

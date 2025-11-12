@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Briefcase, User, Mail, Linkedin, Github, Moon, Sun, X, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -28,6 +28,7 @@ type Project = {
   galleryImages?: string[]; // Optional: array of image URLs for gallery/carousel
   galleryFooter?: string; // Optional: footer text below image gallery
   hidden?: boolean; // Optional: hide project from display
+  disabled?: boolean; // Optional: disable project card (placeholder, no modal)
 };
 type PortfolioWebsiteProps = {
   className?: string;
@@ -173,48 +174,50 @@ const ProjectCard = ({
   project: Project;
   onClick: () => void;
 }) => {
+  const isDisabled = project.disabled === true;
+  
   return <motion.div layout initial={{
     opacity: 0,
     y: 20
   }} animate={{
-    opacity: 1,
+    opacity: isDisabled ? 0.6 : 1,
     y: 0
   }} exit={{
     opacity: 0,
     y: 20
   }} transition={{
     duration: 0.3
-  }} whileHover={{
+  }} whileHover={isDisabled ? {} : {
     scale: 1.05,
     y: -8,
     transition: {
       duration: 0.3,
       ease: "easeOut"
     }
-  }} className="group cursor-pointer" onClick={onClick} style={{
+  }} className={cn("group flex flex-col h-full", isDisabled ? "cursor-not-allowed" : "cursor-pointer")} onClick={isDisabled ? undefined : onClick} style={{
     perspective: 1000
   }}>
-      <div className="bg-white dark:bg-zinc-900 overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-lg shadow-gray-500/10 dark:shadow-black/30 hover:shadow-2xl hover:shadow-gray-500/20 dark:hover:shadow-black/40 transition-all duration-300 flex flex-col h-full" style={{
+      <div className={cn("bg-white dark:bg-zinc-900 overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-lg shadow-gray-500/10 dark:shadow-black/30 transition-all duration-300 flex flex-col h-full", !isDisabled && "hover:shadow-2xl hover:shadow-gray-500/20 dark:hover:shadow-black/40", isDisabled && "border-gray-300 dark:border-zinc-700")} style={{
       borderRadius: '12px'
     }}>
         <div className="relative overflow-hidden bg-gray-50 dark:bg-zinc-950/50 aspect-[4/3] flex-shrink-0" style={{
         borderRadius: '12px 12px 0 0'
       }}>
-          <motion.img src={project.image} alt={project.title} className={`w-full h-full ${project.id === "10" || project.id === "9" || project.id === "0" ? "object-contain" : "object-cover"}`} whileHover={{
+          <motion.img src={project.image} alt={project.title} className="w-full h-full object-cover" whileHover={isDisabled ? {} : {
           scale: 1.05
         }} transition={{
           duration: 0.4
-        }} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        }} style={isDisabled ? { filter: 'grayscale(100%)' } : {}} />
+          {!isDisabled && <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />}
         </div>
         <div className="p-4 flex flex-col flex-grow">
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors line-clamp-1 mb-2">
+          <h3 className={cn("text-base font-semibold line-clamp-1 mb-2 transition-colors", isDisabled ? "text-gray-400 dark:text-gray-500" : "text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300")}>
             {project.title}
           </h3>
-          <p className="text-xs text-gray-700 dark:text-gray-300 line-clamp-2 min-h-[2.5rem] flex items-start">{project.cardDescription || project.description}</p>
+          <p className={cn("text-xs line-clamp-2 min-h-[2.5rem] flex items-start", isDisabled ? "text-gray-400 dark:text-gray-500" : "text-gray-700 dark:text-gray-300")}>{project.cardDescription || project.description}</p>
           {project.year && (
             <div className="flex flex-wrap gap-1.5 pt-2 mt-auto">
-              <span className="px-2 py-0.5 text-xs font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-full">
+              <span className={cn("px-2 py-0.5 text-xs font-semibold rounded-full", isDisabled ? "text-gray-400 dark:text-gray-600 bg-gray-50 dark:bg-gray-900" : "text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800")}>
                 {project.year}
               </span>
             </div>
@@ -232,6 +235,46 @@ const ImageGallery = ({
   footer?: string;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  const [isPreloading, setIsPreloading] = useState(true);
+
+  // Preload all images when component mounts
+  useEffect(() => {
+    let loadedCount = 0;
+    const totalImages = images.length;
+    
+    const preloadImages = () => {
+      if (totalImages === 0) {
+        setIsPreloading(false);
+        return;
+      }
+
+      images.forEach((src) => {
+        const img = new Image();
+        img.onload = () => {
+          setLoadedImages((prev) => {
+            const next = new Set(prev);
+            next.add(src);
+            loadedCount++;
+            // Once all images are loaded, hide preloading state
+            if (loadedCount === totalImages) {
+              setIsPreloading(false);
+            }
+            return next;
+          });
+        };
+        img.onerror = () => {
+          loadedCount++;
+          if (loadedCount === totalImages) {
+            setIsPreloading(false);
+          }
+        };
+        img.src = src;
+      });
+    };
+    
+    preloadImages();
+  }, [images]);
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -242,31 +285,67 @@ const ImageGallery = ({
   };
 
   return <div className="max-w-4xl mb-12">
-      <div className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-800">
+      <div className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-800 bg-gray-100 dark:bg-zinc-900">
         {images.length > 1 && (
           <>
-            <button onClick={goToPrevious} className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Previous image">
+            <button onClick={goToPrevious} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Previous image">
               <ChevronLeft className="w-6 h-6" />
             </button>
-            <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Next image">
+            <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Next image">
               <ChevronRight className="w-6 h-6" />
             </button>
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
               {images.map((_, index) => <button key={index} onClick={() => setCurrentIndex(index)} className={cn('w-2 h-2 rounded-full transition-all', index === currentIndex ? 'bg-white w-6' : 'bg-white/50')} aria-label={`Go to image ${index + 1}`} />)}
             </div>
           </>
         )}
-        <AnimatePresence mode="wait">
-          <motion.img key={currentIndex} src={images[currentIndex]} alt={`Gallery image ${currentIndex + 1}`} className="w-full h-auto" initial={{
-          opacity: 0
-        }} animate={{
-          opacity: 1
-        }} exit={{
-          opacity: 0
-        }} transition={{
-          duration: 0.3
-        }} />
-        </AnimatePresence>
+        {/* Crossfade transition - all images preloaded and stacked */}
+        <div className="relative w-full" style={{ minHeight: '300px' }}>
+          {images.map((src, index) => {
+            const isActive = index === currentIndex;
+            const isLoaded = loadedImages.has(src);
+            
+            // Render all loaded images, or the active one if not yet loaded
+            if (!isLoaded && !isActive) {
+              return null;
+            }
+            
+            return (
+              <motion.img
+                key={src}
+                src={src}
+                alt={`Gallery image ${index + 1}`}
+                className={cn("w-full h-auto", isActive ? "relative block" : "absolute top-0 left-0 w-full h-auto")}
+                style={{
+                  pointerEvents: 'none',
+                }}
+                initial={false}
+                animate={{
+                  opacity: isActive && isLoaded ? 1 : 0,
+                }}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeInOut"
+                }}
+                onLoad={() => {
+                  if (!loadedImages.has(src)) {
+                    setLoadedImages((prev) => {
+                      const next = new Set(prev);
+                      next.add(src);
+                      return next;
+                    });
+                  }
+                }}
+              />
+            );
+          })}
+        </div>
+        {/* Loading indicator */}
+        {(isPreloading || !loadedImages.has(images[currentIndex])) && (
+          <div className="absolute inset-0 flex items-center justify-center z-0 bg-gray-100 dark:bg-zinc-900">
+            <div className="w-8 h-8 border-2 border-gray-300 dark:border-gray-600 border-t-gray-600 dark:border-t-gray-400 rounded-full animate-spin" />
+          </div>
+        )}
       </div>
       {footer && (
         <div className="mt-4 text-center">
@@ -729,8 +808,13 @@ const HomePage = ({
   const categories = ['all', 'Shopify', 'RigUp', 'Texas by Texas', 'Loom', 'Thread', 'Finish Line', 'Personal'];
   const visibleProjects = projects.filter(p => !p.hidden);
   const filteredProjects = selectedCategory === 'all' 
-    ? [...visibleProjects.filter(p => p.category !== 'Personal'), ...visibleProjects.filter(p => p.category === 'Personal')]
-    : visibleProjects.filter(p => p.category === selectedCategory);
+    ? [...visibleProjects.filter(p => p.category !== 'Personal' && !p.disabled), ...visibleProjects.filter(p => p.category === 'Personal' && !p.disabled), ...visibleProjects.filter(p => p.disabled)]
+    : visibleProjects.filter(p => p.category === selectedCategory).sort((a, b) => {
+        // Move disabled projects to the end
+        if (a.disabled && !b.disabled) return 1;
+        if (!a.disabled && b.disabled) return -1;
+        return 0;
+      });
   return <motion.div initial={{
     opacity: 0
   }} animate={{
@@ -816,6 +900,10 @@ export const PortfolioWebsite = (props: PortfolioWebsiteProps) => {
   }, [location.hash, location.pathname, selectedProject?.id]);
 
   const handleProjectClick = (project: Project) => {
+    // Don't open modal for disabled/placeholder projects
+    if (project.disabled) {
+      return;
+    }
     setSelectedProject(project);
     // Update hash for shareable URLs
     navigate(`/work#${project.id}`, { replace: true });
