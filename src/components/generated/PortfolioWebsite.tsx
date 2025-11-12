@@ -455,7 +455,7 @@ const ProjectModal = ({
             <div className="max-w-4xl space-y-12">
               {project.overview && project.id !== "2" && (
                 <section>
-                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Overview</h2>
+                  <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Overview</h2>
                   {project.overview.includes('\n-') || project.overview.startsWith('-') ? (
                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                       {project.overview.split('\n').map((line, index) => {
@@ -492,7 +492,7 @@ const ProjectModal = ({
 
               {project.challenges && project.challenges.length > 0 && (
                 <section>
-                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Challenges</h2>
+                  <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Challenges</h2>
                   {project.challenges.length === 1 ? (
                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.challenges[0]}</p>
                   ) : (
@@ -508,7 +508,7 @@ const ProjectModal = ({
 
               {project.solutions && project.solutions.length > 0 && (
                 <section>
-                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Solution</h2>
+                  <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Solution</h2>
                   {project.solutions.length === 1 ? (
                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.solutions[0]}</p>
                   ) : project.id === "2" ? (
@@ -534,14 +534,14 @@ const ProjectModal = ({
 
               {project.growthAndEvolution && (
                 <section>
-                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Growth and evolution</h2>
+                  <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Growth and evolution</h2>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.growthAndEvolution}</p>
                 </section>
               )}
 
               {project.highlights && project.highlights.length > 0 && (
                 <section>
-                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Highlights</h2>
+                  <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Highlights</h2>
                   <ul className="space-y-3">
                     {project.highlights.map((highlight, index) => <li key={index} className="flex gap-3">
                         <span className="text-green-500 dark:text-green-500 font-semibold flex-shrink-0">•</span>
@@ -553,7 +553,7 @@ const ProjectModal = ({
 
               {project.toolsUsed && project.toolsUsed.length > 0 && (
                 <section>
-                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Tools used</h2>
+                  <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Tools used</h2>
                   <ul className="space-y-3">
                     {project.toolsUsed.map((tool, index) => {
                       // Check if tool contains a URL pattern
@@ -591,7 +591,7 @@ const ProjectModal = ({
 
               {project.outcomes && project.outcomes.length > 0 && (
                 <section>
-                  <h2 className="text-2xl font-extralight text-gray-900 dark:text-white mb-4 font-serif-display">Outcomes</h2>
+                  <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Outcomes</h2>
                   {project.outcomes.length === 1 ? (
                     (() => {
                       const outcome = project.outcomes[0];
@@ -680,8 +680,11 @@ const AboutPage = ({
         delay: 0.1
       }} className="space-y-12">
           <div>
-            <h1 className="text-4xl sm:text-5xl font-extralight mb-6 font-serif-display" style={{
-              color: darkMode ? "#7bf1a8" : "#13531C"
+            <h1 className="mb-6 leading-tight" style={{
+              color: darkMode ? "#7bf1a8" : "#13531C",
+              fontFamily: "'Instrument Serif', serif",
+              fontWeight: 400,
+              fontSize: 'clamp(2.5rem, 5vw, 5rem)' // Responsive: 40px on small, 80px on large
             }}>{aboutContent.headline}</h1>
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {aboutContent.photo && (
@@ -728,8 +731,9 @@ const AboutPage = ({
           </div>
 
           <div className="my-12">
-            <h2 className="text-2xl font-extralight mb-6 font-serif-display" style={{
-              color: darkMode ? "#7bf1a8" : "#13531C"
+            <h2 className="text-2xl text-gray-900 dark:text-white mb-6" style={{
+              fontFamily: "'Instrument Serif', serif",
+              fontWeight: 400
             }}>Process</h2>
             {/* Mobile/vertical layout SVG */}
             <div className="md:hidden max-w-[192px]">
@@ -750,8 +754,9 @@ const AboutPage = ({
           </div>
 
           <div>
-            <h2 className="text-2xl font-extralight mb-6 font-serif-display" style={{
-              color: darkMode ? "#7bf1a8" : "#13531C"
+            <h2 className="text-2xl text-gray-900 dark:text-white mb-6" style={{
+              fontFamily: "'Instrument Serif', serif",
+              fontWeight: 400
             }}>Skills & Expertise</h2>
             <div className="grid sm:grid-cols-2 gap-6">
               {Object.entries(aboutContent.skills).map(([category, skills]) => <div key={category} className="space-y-3">
@@ -767,9 +772,10 @@ const AboutPage = ({
           </div>
 
           <div>
-            <h2 className="text-2xl font-extralight mb-6 font-serif-display" style={{
-              color: darkMode ? "#7bf1a8" : "#13531C"
-            }}>Let's Connect</h2>
+            <h2 className="text-2xl text-gray-900 dark:text-white mb-6" style={{
+              fontFamily: "'Instrument Serif', serif",
+              fontWeight: 400
+            }}>Let's connect</h2>
             <div className="flex flex-wrap gap-4">
               <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors">
                 <Mail className="w-5 h-5" />
@@ -827,8 +833,11 @@ const HomePage = ({
           <p className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
             Josh Mantooth
           </p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold mb-4 font-serif-display leading-tight" style={{
-          color: darkMode ? "#7bf1a8" : "#13531C"
+          <h1 className="mb-4 leading-tight" style={{
+          color: darkMode ? "#7bf1a8" : "#13531C",
+          fontFamily: "'Instrument Serif', serif",
+          fontWeight: 400,
+          fontSize: 'clamp(2.5rem, 5vw, 5rem)' // Responsive: 40px on small, 80px on large
         }}>{heroContent.title}</h1>
           <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl" style={{
           display: "none"

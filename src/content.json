@@ -17,12 +17,12 @@
       "year": "2025",
       "role": "Design, development",
       "category": "Personal",
-      "overview": "My previous portfolio site was built and managed through Squarespace. Squarespace is a decent no-code solution, but I found making edits to be tedious and unintuitive, and I wanted more control over the structure, content, motion and design details.\n\nI decided to challenge myself to design and build a new portfolio site in a week to test my proficiency with Cursor and other AI tools.",
+      "overview": "My previous portfolio site was built and managed through Squarespace. Squarespace is a trusted no-code solution, but I wanted more control over the structure, content, motion, and design details.\n\nI decided to challenge myself to design and build a new portfolio site in a week to test my proficiency with Cursor and other AI tools.",
       "toolsUsed": [
         "Figma",
-        "Magic path ai",
+        "Magic Path AI",
         "Cursor",
-        "Github https://github.com/MantoothUX/Portfolio-2025",
+        "GitHub https://github.com/MantoothUX/Portfolio-2025",
         "Vercel"
       ],
       "outcomes": [
@@ -42,7 +42,7 @@
       "year": "2025",
       "role": "UX design, prompt engineer",
       "category": "Personal",
-      "overview": "As a kid, one of my biggest feats in academia was my knowledge of all U.S. capitals. When my son became interested in learning states and capitals, I decided to create this game to help him learn. I wanted to create a game that was fun and engaging, but also educational. It took me about 5 hours to build, test, iterate and deploy.",
+      "overview": "As a kid, one of my greatest feats in academia was my knowledge of all U.S. capitals. When my son became interested in learning states and capitals, I decided to create this game to help him learn. I wanted to create a game that was fun and engaging, but also educational. It took me about 5 hours to build, test, iterate and deploy.",
       "externalUrl": "https://us-capitals-game.vercel.app/",
       "outcomes": [
         "My son asks to play the game almost every day",
@@ -62,7 +62,7 @@
         "/projects/variant-level-packages/Prod1_bulk edit_modal.png",
         "/projects/variant-level-packages/All-variant_bulk_column.png",
         "/projects/variant-level-packages/All-variant_bulk_selector.png",
-        "/projects/variant-level-packages/package setings_add.png"
+        "/projects/variant-level-packages/package-settings_add.png"
       ],
       "tags": ["Product design lead", "Cross-team collaboration", "Cross-functional collaboration"],
       "year": "2025",
@@ -78,7 +78,7 @@
         "Designed and drove alignment on a product variant-level package management solution that emphasized ease of setup and scalability"
       ],
       "outcomes": [
-        "The feature was launched in Shopify summer edition 2025. It gained immediate and steady adoption, significantly improving shipping accuracy for thousands of merchants across 1 million+ product variants and counting."
+        "The feature was launched in Shopify Summer Edition 2025. It gained immediate and steady adoption, significantly improving shipping accuracy for thousands of merchants across 1 million+ product variants and counting."
       ]
     },
     {
@@ -136,8 +136,8 @@
       "id": "9",
       "title": "Order printer app",
       "company": "Shopify",
-      "description": "Designed features and the future vision of the Shopify order printer app",
-      "cardDescription": "Designed features and the future vision of the Shopify order printer app",
+      "description": "Designed features and the future vision of the Shopify Order Printer app",
+      "cardDescription": "Designed features and the future vision of the Shopify Order Printer app",
       "image": "/projects/order-printer-vision/OP_Templates.png",
       "modalImage": "/projects/order-printer-vision/picklist visual.gif",
       "galleryImages": [
@@ -146,23 +146,23 @@
         "/projects/order-printer-vision/OP_picklist_printmulti.png",
         "/projects/order-printer-vision/OP_picklist_printpreview.png"
       ],
-      "galleryFooter": "*Most of the work is ongoing and confidential. Additional work samples can be shared in private",
+      "galleryFooter": "*Most of the work is ongoing and confidential. Additional work samples can be shared offline",
       "tags": ["UX/UI Design"],
       "year": "2024-2025",
       "role": "Design lead",
       "category": "Shopify",
-      "overview": "Shopify Order Printer helps merchants customize, create and print important documents in that streamline their fulfillment worflows.\n\nI led design on an initiative to ship new templates, simplify the editing experience and incorporate AI for advanced customization.",
+      "overview": "Shopify Order Printer helps merchants customize, create and print important documents that streamline their fulfillment workflows.\n\nI led design on an initiative to ship new templates, simplify the editing experience and incorporate AI for advanced customization.",
       "challenges": [
         "Order Printer didn't offer baseline templates merchants needed",
         "Templates required coding knowledge to make edits",
         "Shopify merchants were paying for 3rd-party apps that provided more templates and easier editing",
-        "Several high profile Shopify project launches relied on new Order Printer templates"
+        "Several high-profile Shopify project launches relied on new Order Printer templates"
       ],
       "highlights": [
         "Launched a no-code pick list template",
         "Led design on a template refactor to work better with new features",
         "Designed an improved no-code editor experience for all templates",
-        "Designed the future vision of the Order Printer app that encorporates Shopify Sidekick for ai-driven template creation and customization"
+        "Designed the future vision of the Order Printer app that incorporates Shopify Sidekick for AI-driven template creation and customization"
       ]
     },
     {
@@ -181,13 +181,13 @@
       ],
       "tags": ["Product design", "User research"],
       "year": "2021-2023",
-      "role": "Product design, research, user testing",
+      "role": "Product design, user testing",
       "category": "Shopify",
-      "overview": "Shopify's automated emails were limited and required knowledge of code to make edits, which led merchants to pay for 3rd party automated marketing services.",
+      "overview": "Shopify automated email features were limited and required knowledge of code to make edits, which led merchants to pay for 3rd-party automated marketing services.",
       "challenges": [
         "Shopify did not offer customizable marketing email workflows",
         "Editing emails was clunky and required coding experience",
-        "Merchants were paying for 3rd party automated marketing services"
+        "Merchants were paying for 3rd-party automated marketing services"
       ],
       "solutions": [
         "I collaborated with multiple designers and cross-functional teams to design an automated email marketing platform. The platform integrated functionality from two existing apps into a cohesive experience that offered:",
@@ -196,7 +196,7 @@
         "Customizable workflow builder",
         "Metrics and reporting to help merchants monitor and improve their automated emails"
       ],
-      "growthAndEvolution": "After a successful launch, I spent the next year leading the vision, growth and evolution of the product. I established a series of collaborative, cross functional design workshops that streamlined my team's process from concept design to production."
+      "growthAndEvolution": "After a successful launch, I spent the next year leading the vision, growth and evolution of the product. I established a series of collaborative, cross-functional design workshops that streamlined my team's process from concept design to production."
     },
     {
       "id": "10",
@@ -229,7 +229,8 @@
       "tags": ["UX/UI Design", "User research"],
       "year": "2018-2019",
       "role": "Product design, user testing",
-      "category": "Texas by Texas",      "overview": "Texas government online services were dated, poorly designed, scattered, disparate, unintuitive and untrustworthy. I collaborated with a small team at Deloitte Digital to design, build and test a user-friendly government services app. The app centralizes and simplifies the most common government services for Texans. The responsive website and mobile app launched in 2021."
+      "category": "Texas by Texas",      
+      "overview": "Texas government online services were dated, poorly designed, disparate, unintuitive and untrustworthy. I collaborated with a small team at Deloitte Digital to design, build and test a user-friendly government services app. The app centralizes and simplifies the most common government services for Texans. The responsive website and mobile app launched in 2021."
     },
     {
       "id": "5",
@@ -315,12 +316,12 @@
     "headline": "Hi, I'm Josh",
     "photo": "/josh-photo.jpg",
     "bio": [
-      "I'm a staff-level product designer with 10+ years of experience solving complex problems and leading ambitious projects for product orgs of all sizes. I'm passionate about designing stylish, intuitive solutions that work for real people at scale. Over the last year I've been incorporating AI tools into my process, and have become proficient at AI-assisted coding.",
+      "I'm a staff-level product designer with over 10 years experience solving complex problems and leading ambitious design projects for product orgs of all sizes. I'm passionate about designing stylish, intuitive solutions that work for real people at scale. Over the last year I've been incorporating AI tools into my process, and have become proficient at AI-assisted coding.",
       "For the past 4+ years at Shopify, I led teams and designed features that help millions of merchants start, scale, and market their businesses.",
       "Before UX design, I spent 7 years at world-class advertising agencies managing teams and clients through creative campaigns from ideation to launch. Check out my resume for the full story.",
       "When I'm not working, you'll find me cooking, playing ice hockey, running, catching live music, or outdoors with my family."
     ],
-    "resume": "/JM_resume_general_11.6.2025.pdf",
+    "resume": "/JoshMantooth_Resume_2025.pdf",
     "skills": {
       "Design": ["Collaborative design", "Rapid prototyping", "UI design", "Copywriting", "Critique", "Leadership and mentorship", "Stakeholder alignment"],
       "Tools": ["Figma", "FigJam", "Framer", "Cursor", "Claude", "ChatGPT", "Midjourney"],
