@@ -211,12 +211,12 @@ const ProjectCard = ({
           {!isDisabled && <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />}
         </div>
         <div className="p-4 flex flex-col flex-grow">
-          <h3 className={cn("text-base font-semibold line-clamp-1 mb-2 transition-colors", isDisabled ? "text-gray-400 dark:text-gray-500" : "text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300")}>
+          <h3 className={cn("text-base font-semibold line-clamp-1 mb-1 transition-colors", isDisabled ? "text-gray-400 dark:text-gray-500" : "text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300")}>
             {project.title}
           </h3>
-          <p className={cn("text-xs line-clamp-2 min-h-[2.5rem] flex items-start", isDisabled ? "text-gray-400 dark:text-gray-500" : "text-gray-700 dark:text-gray-300")}>{project.cardDescription || project.description}</p>
+          <p className={cn("text-sm line-clamp-2 min-h-[2.5rem] flex items-start", isDisabled ? "text-gray-400 dark:text-gray-500" : "text-gray-700 dark:text-gray-300")}>{project.cardDescription || project.description}</p>
           {project.year && (
-            <div className="flex flex-wrap gap-1.5 pt-2 mt-auto">
+            <div className="flex flex-wrap gap-1.5 pt-4 mt-auto">
               <span className={cn("px-2 py-0.5 text-xs font-semibold rounded-full", isDisabled ? "text-gray-400 dark:text-gray-600 bg-gray-50 dark:bg-gray-900" : "text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800")}>
                 {project.year}
               </span>
@@ -795,6 +795,77 @@ const AboutPage = ({
       </div>
     </motion.div>;
 };
+const TypingFooter = ({ darkMode }: { darkMode: boolean }) => {
+  const fullText = "Psst! This is a high-level overview of my work. Many projects and details can't be shared publicly due to NDAs. I'm happy to set up time to walk through process, strategy and detailed designs.";
+  const [displayedText, setDisplayedText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    // Initial cursor blink for 1.5 seconds before typing starts
+    if (currentIndex === 0 && displayedText === "") {
+      timer = setTimeout(() => {
+        setCurrentIndex(1);
+        setDisplayedText(fullText[0]);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+
+    // After typing completes, show cursor blinking for 5 seconds then reset
+    if (currentIndex === fullText.length) {
+      timer = setTimeout(() => {
+        // Reset everything
+        setDisplayedText("");
+        setCurrentIndex(0);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+
+    // Type out characters
+    if (currentIndex > 0 && currentIndex < fullText.length) {
+      // Add 1.5 second pause after typing "Psst!" (5 characters)
+      // Add 0.5 second pause before typing "Many projects..." (after "work. ")
+      // Add 1 second pause before typing "I'm happy..." (after "NDAs. ")
+      const pauseAfterPsst = currentIndex === 5;
+      const pauseBeforeManyProjects = fullText[currentIndex] === 'M' && fullText.slice(0, currentIndex).endsWith("work. ");
+      const pauseBeforeImHappy = fullText[currentIndex] === 'I' && fullText.slice(0, currentIndex).endsWith("NDAs. ");
+      const delay = pauseAfterPsst ? 1500 : pauseBeforeManyProjects ? 500 : pauseBeforeImHappy ? 1000 : 50;
+      timer = setTimeout(() => {
+        setDisplayedText(fullText.slice(0, currentIndex + 1));
+        setCurrentIndex(currentIndex + 1);
+      }, delay);
+      return () => clearTimeout(timer);
+    }
+  }, [currentIndex, displayedText, fullText]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+      className="mt-12"
+    >
+      <p
+        style={{
+          fontFamily: "'Instrument Serif', serif",
+          fontSize: 'clamp(1rem, 2vw, 1.5rem)', // Responsive: 16px on small, 24px on large
+          color: darkMode ? "#7bf1a8" : "#13531C",
+          lineHeight: '1.5',
+          minHeight: '60px' // Prevent layout shift
+        }}
+      >
+        {displayedText}
+        <span 
+          style={{
+            animation: 'cursorBlink 0.8s step-end infinite'
+          }}
+        >|</span>
+      </p>
+    </motion.div>
+  );
+};
+
 const HomePage = ({
   onProjectClick,
   darkMode
@@ -867,6 +938,9 @@ const HomePage = ({
             {filteredProjects.map(project => <ProjectCard key={project.id} project={project} onClick={() => onProjectClick(project)} />)}
           </motion.div>
         </AnimatePresence>
+
+        {/* Typing animation footer */}
+        <TypingFooter darkMode={darkMode} />
       </div>
     </motion.div>;
 };

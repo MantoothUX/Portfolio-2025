@@ -207,3 +207,12 @@ img.broken-image-fallback {
     opacity: 1;
   }
 }
+
+@keyframes cursorBlink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
