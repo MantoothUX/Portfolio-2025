@@ -58,11 +58,12 @@
       "image": "/projects/variant-level-packages/variant-level-package-assignment-hero.png",
       "modalImage": "/projects/variant-level-packages/Variant-level package assignment.gif",
       "galleryImages": [
+        "/projects/variant-level-packages/Variant-level package assignment.gif",
+        "/projects/variant-level-packages/package-settings_add.png",
         "/projects/variant-level-packages/Prod1_bulk edit.png",
         "/projects/variant-level-packages/Prod1_bulk edit_modal.png",
         "/projects/variant-level-packages/All-variant_bulk_column.png",
-        "/projects/variant-level-packages/All-variant_bulk_selector.png",
-        "/projects/variant-level-packages/package-settings_add.png"
+        "/projects/variant-level-packages/All-variant_bulk_selector.png"
       ],
       "tags": ["Product design lead", "Cross-team collaboration", "Cross-functional collaboration"],
       "year": "2025",
