@@ -147,20 +147,20 @@ const Navigation = ({
       damping: 20
     }} className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-green-200 dark:border-green-900/50 rounded-full shadow-lg shadow-green-500/10 dark:shadow-green-500/20">
         <div className="flex items-center gap-2 px-6 py-3">
-          <Link to="/work" className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isWork ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}>
+          <Link to="/work" className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isWork ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')} style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}>
             <Briefcase className="w-4 h-4" style={{
             display: "none"
           }} />
             Work
           </Link>
-          <Link to="/about" className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isAbout ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}>
+          <Link to="/about" className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isAbout ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')} style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}>
             <User className="w-4 h-4" style={{
             display: "none"
           }} />
             About
           </Link>
           <div className="w-px h-6 bg-green-200 dark:bg-green-900/50 mx-1" />
-          <button onClick={onToggleDarkMode} className="p-2 rounded-full text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" aria-label="Toggle dark mode">
+          <button onClick={onToggleDarkMode} className="p-2 rounded-full text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" style={{ fontFamily: "'balto', sans-serif" }} aria-label="Toggle dark mode">
             {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
         </div>
@@ -211,17 +211,10 @@ const ProjectCard = ({
           {!isDisabled && <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />}
         </div>
         <div className="p-4 flex flex-col flex-grow">
-          <h3 className={cn("text-base font-semibold line-clamp-1 mb-1 transition-colors", isDisabled ? "text-gray-400 dark:text-gray-500" : "text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300")}>
+          <h3 className={cn("text-base font-semibold line-clamp-1 mb-1 transition-colors", isDisabled ? "text-gray-400 dark:text-gray-500" : "text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300")} style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '18px' }}>
             {project.title}
           </h3>
-          <p className={cn("text-sm line-clamp-2 min-h-[2.5rem] flex items-start", isDisabled ? "text-gray-400 dark:text-gray-500" : "text-gray-700 dark:text-gray-300")}>{project.cardDescription || project.description}</p>
-          {project.year && (
-            <div className="flex flex-wrap gap-1.5 pt-4 mt-auto">
-              <span className={cn("px-2 py-0.5 text-xs font-semibold rounded-full", isDisabled ? "text-gray-400 dark:text-gray-600 bg-gray-50 dark:bg-gray-900" : "text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800")}>
-                {project.year}
-              </span>
-            </div>
-          )}
+          <p className={cn("text-sm line-clamp-2 min-h-[2.5rem] flex items-start", isDisabled ? "text-gray-400 dark:text-gray-500" : "text-gray-700 dark:text-gray-300")} style={{ fontFamily: "'balto', sans-serif", fontSize: '16px' }}>{project.cardDescription || project.description}</p>
         </div>
       </div>
     </motion.div>;
@@ -349,7 +342,7 @@ const ImageGallery = ({
       </div>
       {footer && (
         <div className="mt-4 text-center">
-          <p className="text-sm text-gray-500 dark:text-gray-400 italic">{footer}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 italic" style={{ fontFamily: "'balto', sans-serif" }}>{footer}</p>
         </div>
       )}
     </div>;
@@ -405,12 +398,12 @@ const ProjectModal = ({
     }} className="relative w-full max-w-6xl max-h-[90vh] bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
         {/* Header with close button */}
         <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-zinc-800">
-          <div className="flex items-center gap-3 text-sm text-green-600 dark:text-green-400">
+          <div className="flex items-center gap-3 text-sm text-green-600 dark:text-green-400" style={{ fontFamily: "'balto', sans-serif" }}>
             <span>{project.company}</span>
             <span>•</span>
             <span>{project.role}</span>
           </div>
-          <button onClick={onClose} className="flex items-center justify-center w-10 h-10 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors" aria-label="Close modal">
+          <button onClick={onClose} className="flex items-center justify-center w-10 h-10 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors" style={{ fontFamily: "'balto', sans-serif" }} aria-label="Close modal">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -427,12 +420,12 @@ const ProjectModal = ({
           delay: 0.1
         }}>
             <div className="max-w-4xl mb-6">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white mb-4 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 dark:text-white mb-4 leading-tight" style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}>
                 {project.title}
               </h1>
-              <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-3">{project.description}</p>
+              <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 mb-3" style={{ fontFamily: "'balto', sans-serif", fontSize: 'clamp(20px, 2vw, 22px)' }}>{project.description}</p>
               {project.year && (
-                <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800">
+                <span className="inline-block px-4 py-2 rounded-full text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800" style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}>
                   {project.year}
                 </span>
               )}
@@ -457,7 +450,7 @@ const ProjectModal = ({
                 <section>
                   <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Overview</h2>
                   {project.overview.includes('\n-') || project.overview.startsWith('-') ? (
-                    <div className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    <div className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
                       {project.overview.split('\n').map((line, index) => {
                         if (line.trim().startsWith('-')) {
                           const bulletText = line.trim().substring(1).trim();
@@ -474,7 +467,7 @@ const ProjectModal = ({
                       })}
                     </div>
                   ) : (
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">{project.overview}</p>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>{project.overview}</p>
                   )}
                   {project.externalUrl && (
                     <a 
@@ -482,6 +475,7 @@ const ProjectModal = ({
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors font-semibold"
+                      style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}
                     >
                       Play the game
                       <ExternalLink className="w-4 h-4" />
@@ -494,9 +488,9 @@ const ProjectModal = ({
                 <section>
                   <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Challenges</h2>
                   {project.challenges.length === 1 ? (
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.challenges[0]}</p>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>{project.challenges[0]}</p>
                   ) : (
-                    <ul className="space-y-3">
+                    <ul className="space-y-3" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
                       {project.challenges.map((challenge, index) => <li key={index} className="flex gap-3">
                           <span className="text-green-500 dark:text-green-500 font-semibold flex-shrink-0">•</span>
                           <span className="text-gray-700 dark:text-gray-300">{challenge}</span>
@@ -510,9 +504,9 @@ const ProjectModal = ({
                 <section>
                   <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Solution</h2>
                   {project.solutions.length === 1 ? (
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.solutions[0]}</p>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>{project.solutions[0]}</p>
                   ) : project.id === "2" ? (
-                    <div>
+                    <div style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
                       <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">{project.solutions[0]}</p>
                       <ul className="space-y-3">
                         {project.solutions.slice(1).map((solution, index) => <li key={index} className="flex gap-3">
@@ -522,7 +516,7 @@ const ProjectModal = ({
                       </ul>
                     </div>
                   ) : (
-                    <ul className="space-y-3">
+                    <ul className="space-y-3" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
                       {project.solutions.map((solution, index) => <li key={index} className="flex gap-3">
                           <span className="text-green-500 dark:text-green-500 font-semibold flex-shrink-0">•</span>
                           <span className="text-gray-700 dark:text-gray-300">{solution}</span>
@@ -535,14 +529,14 @@ const ProjectModal = ({
               {project.growthAndEvolution && (
                 <section>
                   <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Growth and evolution</h2>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{project.growthAndEvolution}</p>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>{project.growthAndEvolution}</p>
                 </section>
               )}
 
               {project.highlights && project.highlights.length > 0 && (
                 <section>
                   <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Highlights</h2>
-                  <ul className="space-y-3">
+                  <ul className="space-y-3" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
                     {project.highlights.map((highlight, index) => <li key={index} className="flex gap-3">
                         <span className="text-green-500 dark:text-green-500 font-semibold flex-shrink-0">•</span>
                         <span className="text-gray-700 dark:text-gray-300">{highlight}</span>
@@ -554,7 +548,7 @@ const ProjectModal = ({
               {project.toolsUsed && project.toolsUsed.length > 0 && (
                 <section>
                   <h2 className="text-2xl text-gray-900 dark:text-white mb-4" style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400 }}>Tools used</h2>
-                  <ul className="space-y-3">
+                  <ul className="space-y-3" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
                     {project.toolsUsed.map((tool, index) => {
                       // Check if tool contains a URL pattern
                       const urlMatch = tool.match(/https?:\/\/[^\s]+/);
@@ -570,7 +564,7 @@ const ProjectModal = ({
                             <span className="text-green-500 dark:text-green-500 font-semibold flex-shrink-0">•</span>
                             <span className="text-gray-700 dark:text-gray-300">
                               {beforeUrl && beforeUrl.includes(' ') && <span>{beforeUrl} </span>}
-                              <a href={url} target="_blank" rel="noopener noreferrer" className="text-[#13531C] dark:text-green-400 hover:underline">
+                              <a href={url} target="_blank" rel="noopener noreferrer" className="text-[#13531C] dark:text-green-400 hover:underline" style={{ fontFamily: "'balto', sans-serif" }}>
                                 {linkText}
                               </a>
                               {afterUrl && <span> {afterUrl}</span>}
@@ -600,12 +594,12 @@ const ProjectModal = ({
                         const quote = attributionMatch[1].trim();
                         const attribution = attributionMatch[2].trim();
                         return (
-                          <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                          <p className="text-gray-700 dark:text-gray-300 leading-relaxed" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
                             {quote} - <span className="font-normal italic">{attribution}</span>
                           </p>
                         );
                       }
-                      return <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{outcome}</p>;
+                      return <p className="text-gray-700 dark:text-gray-300 leading-relaxed" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>{outcome}</p>;
                     })()
                   ) : (
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -616,7 +610,7 @@ const ProjectModal = ({
                           const attribution = attributionMatch[2].trim();
                           return (
                             <div key={index} className="p-6 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700" style={{ borderRadius: '20px' }}>
-                              <p className="text-gray-900 dark:text-white font-semibold">
+                              <p className="text-gray-900 dark:text-white font-semibold" style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}>
                                 {quote} - <span className="font-normal italic">{attribution}</span>
                               </p>
                             </div>
@@ -624,7 +618,7 @@ const ProjectModal = ({
                         }
                         return (
                           <div key={index} className="p-6 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700" style={{ borderRadius: '20px' }}>
-                            <p className="text-gray-900 dark:text-white font-semibold">{outcome}</p>
+                            <p className="text-gray-900 dark:text-white font-semibold" style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}>{outcome}</p>
                           </div>
                         );
                       })}
@@ -700,7 +694,7 @@ const AboutPage = ({
                   />
                 </div>
               )}
-              <div className="flex-1 space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+              <div className="flex-1 space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
                 {aboutContent.bio.map((paragraph, index) => {
                   // Check if paragraph contains "resume" and we have a resume URL
                   if (paragraph.toLowerCase().includes("resume") && aboutContent.resume) {
@@ -715,6 +709,7 @@ const AboutPage = ({
                               target="_blank" 
                               rel="noopener noreferrer"
                               className="text-[#13531C] dark:text-green-400 hover:underline font-semibold"
+                              style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}
                             >
                               {parts[1]}
                             </a>
@@ -760,9 +755,9 @@ const AboutPage = ({
             }}>Skills & Expertise</h2>
             <div className="grid sm:grid-cols-2 gap-6">
               {Object.entries(aboutContent.skills).map(([category, skills]) => <div key={category} className="space-y-3">
-                  <h3 className="font-semibold text-gray-900 dark:text-white">{category}</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white" style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}>{category}</h3>
                   <ul className="space-y-2">
-                    {skills.map(skill => <li key={skill} className="text-gray-700 dark:text-gray-300 text-base leading-relaxed flex items-center gap-2">
+                    {skills.map(skill => <li key={skill} className="text-gray-700 dark:text-gray-300 text-base leading-relaxed flex items-center gap-2" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
                         <span className="w-1.5 h-1.5 rounded-full bg-green-500 dark:bg-green-500" />
                         {skill}
                       </li>)}
@@ -777,15 +772,15 @@ const AboutPage = ({
               fontWeight: 400
             }}>Let's connect</h2>
             <div className="flex flex-wrap gap-4">
-              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors">
+              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors font-semibold" style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}>
                 <Mail className="w-5 h-5" />
                 Email
               </a>
-              <a href={contactInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+              <a href={contactInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors" style={{ fontFamily: "'balto', sans-serif" }}>
                 <Linkedin className="w-5 h-5" />
                 LinkedIn
               </a>
-              <a href={contactInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+              <a href={contactInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-zinc-700 text-gray-900 dark:text-white rounded-full hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors" style={{ fontFamily: "'balto', sans-serif" }}>
                 <Github className="w-5 h-5" />
                 GitHub
               </a>
@@ -796,7 +791,7 @@ const AboutPage = ({
     </motion.div>;
 };
 const TypingFooter = ({ darkMode }: { darkMode: boolean }) => {
-  const fullText = "Psst! This is a high-level overview of my work. Many projects and details can't be shared publicly due to NDAs. I'm happy to set up time to walk through process, strategy and detailed designs.";
+  const fullText = "Here are curated snippets of my work. Many details are private due to NDAs. Full case studies can be shared upon request.";
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -824,13 +819,10 @@ const TypingFooter = ({ darkMode }: { darkMode: boolean }) => {
 
     // Type out characters
     if (currentIndex > 0 && currentIndex < fullText.length) {
-      // Add 1.5 second pause after typing "Psst!" (5 characters)
-      // Add 0.5 second pause before typing "Many projects..." (after "work. ")
-      // Add 1 second pause before typing "I'm happy..." (after "NDAs. ")
-      const pauseAfterPsst = currentIndex === 5;
-      const pauseBeforeManyProjects = fullText[currentIndex] === 'M' && fullText.slice(0, currentIndex).endsWith("work. ");
-      const pauseBeforeImHappy = fullText[currentIndex] === 'I' && fullText.slice(0, currentIndex).endsWith("NDAs. ");
-      const delay = pauseAfterPsst ? 1500 : pauseBeforeManyProjects ? 500 : pauseBeforeImHappy ? 1000 : 50;
+      // Check if the character that was just typed is a period
+      const justTypedPeriod = fullText[currentIndex - 1] === '.';
+      // Pause briefly after each period (500ms), otherwise normal typing speed (50ms)
+      const delay = justTypedPeriod ? 500 : 50;
       timer = setTimeout(() => {
         setDisplayedText(fullText.slice(0, currentIndex + 1));
         setCurrentIndex(currentIndex + 1);
@@ -901,21 +893,25 @@ const HomePage = ({
       }} transition={{
         delay: 0.1
       }} className="mb-12">
-          <p className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
-            Josh Mantooth
-          </p>
           <h1 className="mb-4 leading-tight" style={{
           color: darkMode ? "#7bf1a8" : "#13531C",
           fontFamily: "'Instrument Serif', serif",
           fontWeight: 400,
           fontSize: 'clamp(2.5rem, 5vw, 5rem)' // Responsive: 40px on small, 80px on large
         }}>{heroContent.title}</h1>
-          <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl" style={{
-          display: "none"
-        }}>
-            I help companies build products that users love through research-driven design and thoughtful interactions.
-          </p>
+          {heroContent.subtitle && (
+            <p className="text-3xl text-gray-700 dark:text-gray-300 max-w-3xl" style={{
+              fontFamily: "'balto', sans-serif",
+              fontWeight: 300,
+              fontSize: '32px'
+            }}>
+              {heroContent.subtitle}
+            </p>
+          )}
         </motion.div>
+
+        {/* Typing animation footer */}
+        <TypingFooter darkMode={darkMode} />
 
         <motion.div initial={{
         y: 20,
@@ -927,7 +923,7 @@ const HomePage = ({
         delay: 0.2
       }} className="mb-8">
           <div className="flex flex-wrap gap-2">
-            {categories.map(category => <button key={category} onClick={() => setSelectedCategory(category)} className={cn('px-4 py-2 rounded-full text-sm font-semibold transition-all', selectedCategory === category ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')}>
+            {categories.map(category => <button key={category} onClick={() => setSelectedCategory(category)} className={cn('px-4 py-2 rounded-full text-sm font-semibold transition-all', selectedCategory === category ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')} style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}>
                 {category === 'all' ? 'All' : category}
               </button>)}
           </div>
@@ -938,9 +934,6 @@ const HomePage = ({
             {filteredProjects.map(project => <ProjectCard key={project.id} project={project} onClick={() => onProjectClick(project)} />)}
           </motion.div>
         </AnimatePresence>
-
-        {/* Typing animation footer */}
-        <TypingFooter darkMode={darkMode} />
       </div>
     </motion.div>;
 };
