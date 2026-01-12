@@ -367,7 +367,7 @@ const PrototypeViewer = ({ slug, prototype, darkMode, onToggleDarkMode }: { slug
               className="px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors"
               style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}
             >
-              Back to Prototypes
+              ← All prototypes
             </button>
           </div>
         </div>

@@ -38,6 +38,7 @@ const Points = ({
           count={count}
           array={positions.current}
           itemSize={3}
+          args={[positions.current, 3]}
         />
       </bufferGeometry>
       <pointsMaterial

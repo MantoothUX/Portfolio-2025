@@ -7,7 +7,7 @@ interface LoginScreenProps {
 
 export function LoginScreen({ onLogin }: LoginScreenProps) {
   return (
-    <div className="w-[320px] h-[480px] bg-black text-white flex items-center justify-center">
+    <div className="w-[320px] h-[480px] bg-black text-white flex items-center justify-center rounded-xl" style={{ borderRadius: '0.75rem' }}>
       <div className="px-8 text-center">
         <div className="mb-8 flex justify-center">
           <div className="w-20 h-20 rounded-full bg-[#1DB954] flex items-center justify-center shadow-lg shadow-[#1DB954]/30">

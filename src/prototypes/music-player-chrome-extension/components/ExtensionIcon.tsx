@@ -91,7 +91,7 @@ export function ExtensionIcon({ isPlaying, isLoggedIn, onClick, currentTrack, cu
             showHover ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
         >
-          <div className="bg-[#282828] rounded-xl shadow-2xl border border-white/10 overflow-hidden min-w-[280px]">
+          <div className="bg-[#282828] rounded-xl shadow-2xl border border-white/10 overflow-hidden min-w-[280px]" style={{ borderRadius: '0.75rem' }}>
             <div className="flex items-center gap-3 p-3">
               {/* Album Art */}
               <div className="w-12 h-12 rounded overflow-hidden flex-shrink-0 bg-gradient-to-br from-[#1DB954] to-[#1aa34a]">

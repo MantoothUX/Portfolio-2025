@@ -3,7 +3,7 @@ import { SpotifyLogo } from './SpotifyLogo';
 
 export function ConfirmationScreen() {
   return (
-    <div className="w-[320px] h-[480px] bg-black text-white flex items-center justify-center">
+    <div className="w-[320px] h-[480px] bg-black text-white flex items-center justify-center rounded-xl" style={{ borderRadius: '0.75rem' }}>
       <div className="px-8 text-center">
         {/* Animated Checkmark Circle */}
         <motion.div

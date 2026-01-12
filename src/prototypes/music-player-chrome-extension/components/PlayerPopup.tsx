@@ -70,7 +70,7 @@ export function PlayerPopup({
 
   if (showConfirmation) {
     return (
-      <div className="shadow-2xl rounded-xl overflow-hidden bg-black">
+      <div className="shadow-2xl rounded-xl overflow-hidden bg-black" style={{ borderRadius: '0.75rem' }}>
         <ConfirmationScreen />
       </div>
     );
@@ -78,14 +78,14 @@ export function PlayerPopup({
 
   if (!isLoggedIn) {
     return (
-      <div className="shadow-2xl rounded-xl overflow-hidden bg-black">
+      <div className="shadow-2xl rounded-xl overflow-hidden bg-black" style={{ borderRadius: '0.75rem' }}>
         <LoginScreen onLogin={onLogin} />
       </div>
     );
   }
 
   return (
-    <div className="w-[320px] h-[500px] bg-black text-white overflow-hidden shadow-2xl rounded-xl">
+    <div className="w-[320px] h-[500px] bg-black text-white overflow-hidden shadow-2xl rounded-xl" style={{ borderRadius: '0.75rem' }}>
       <div className="flex flex-col h-full">
         {/* Header */}
         <div className="px-4 py-3 bg-white/5 backdrop-blur-sm border-b border-white/10 flex items-center justify-between relative z-10">
