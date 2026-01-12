@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Briefcase, User, Mail, Linkedin, Github, Moon, Sun, X, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Briefcase, User, Mail, Linkedin, Github, Moon, Sun, X, ExternalLink, ChevronLeft, ChevronRight, Code } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 import contentData from '../../content.json';
@@ -25,6 +25,7 @@ type Project = {
   toolsUsed?: string[]; // Optional: tools used section with bullet points (can contain HTML links)
   growthAndEvolution?: string; // Optional: growth and evolution section text
   externalUrl?: string; // Optional: external link URL (e.g., live site, demo)
+  prototypeUrl?: string; // Optional: URL for interactive prototype to embed in iframe
   galleryImages?: string[]; // Optional: array of image URLs for gallery/carousel
   galleryFooter?: string; // Optional: footer text below image gallery
   hidden?: boolean; // Optional: hide project from display
@@ -133,6 +134,7 @@ const Navigation = ({
   const location = useLocation();
   const isWork = location.pathname === '/' || location.pathname === '/work';
   const isAbout = location.pathname === '/about';
+  const isPrototypes = location.pathname.startsWith('/prototypes');
 
   return <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
       <motion.div initial={{
@@ -158,6 +160,12 @@ const Navigation = ({
             display: "none"
           }} />
             About
+          </Link>
+          <Link to="/prototypes" className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isPrototypes ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')} style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}>
+            <Code className="w-4 h-4" style={{
+            display: "none"
+          }} />
+            Prototypes
           </Link>
           <div className="w-px h-6 bg-green-200 dark:bg-green-900/50 mx-1" />
           <button onClick={onToggleDarkMode} className="p-2 rounded-full text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" style={{ fontFamily: "'balto', sans-serif" }} aria-label="Toggle dark mode">
@@ -348,6 +356,83 @@ const ImageGallery = ({
     </div>;
 };
 
+const PrototypeEmbed = ({
+  url,
+  title
+}: {
+  url: string;
+  title: string;
+}) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  
+  // Handle relative URLs (prototypes hosted on same site)
+  // If URL starts with /prototypes/, it's a relative path to a prototype page
+  // Otherwise, treat as external URL or direct iframe src
+  const iframeSrc = url.startsWith('/prototypes/') 
+    ? `${url}/index.html` 
+    : url;
+
+  return (
+    <div className="w-full mb-12">
+      <div className="relative w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-800 bg-gray-100 dark:bg-zinc-900" style={{ minHeight: '600px', maxHeight: '80vh' }}>
+        {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center z-10 bg-gray-100 dark:bg-zinc-900">
+            <div className="w-8 h-8 border-2 border-gray-300 dark:border-gray-600 border-t-gray-600 dark:border-t-gray-400 rounded-full animate-spin" />
+          </div>
+        )}
+        {hasError ? (
+          <div className="absolute inset-0 flex flex-col items-center justify-center z-10 bg-gray-100 dark:bg-zinc-900 p-8">
+            <p className="text-gray-600 dark:text-gray-400 mb-4" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
+              Unable to load prototype
+            </p>
+            <a 
+              href={url.startsWith('/') ? url : iframeSrc} 
+              target={url.startsWith('/') ? '_self' : '_blank'}
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors font-semibold"
+              style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}
+            >
+              {url.startsWith('/') ? 'View prototype page' : 'Open in new tab'}
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
+        ) : (
+          <iframe
+            src={iframeSrc}
+            className="w-full h-full border-0"
+            style={{ minHeight: '600px', maxHeight: '80vh' }}
+            title={`${title} prototype`}
+            allow="fullscreen"
+            loading="lazy"
+            onLoad={() => setIsLoading(false)}
+            onError={() => {
+              setIsLoading(false);
+              setHasError(true);
+            }}
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+          />
+        )}
+      </div>
+      <div className="mt-4 flex items-center justify-between">
+        <p className="text-sm text-gray-500 dark:text-gray-400 italic" style={{ fontFamily: "'balto', sans-serif" }}>
+          Interactive prototype - Click to interact
+        </p>
+        <a 
+          href={url.startsWith('/') ? url : iframeSrc} 
+          target={url.startsWith('/') ? '_self' : '_blank'}
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm text-[#13531C] dark:text-green-400 hover:underline font-semibold"
+          style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}
+        >
+          {url.startsWith('/') ? 'View prototype page' : 'Open in new tab'}
+          <ExternalLink className="w-4 h-4" />
+        </a>
+      </div>
+    </div>
+  );
+};
+
 const ProjectModal = ({
   project,
   onClose
@@ -430,6 +515,13 @@ const ProjectModal = ({
                 </span>
               )}
             </div>
+
+            {/* Prototype embed - show right after title/description if prototypeUrl exists */}
+            {project.prototypeUrl && (
+              <div className="mb-12">
+                <PrototypeEmbed url={project.prototypeUrl} title={project.title} />
+              </div>
+            )}
 
             {/* Image carousel - show right after title/year if galleryImages exist */}
             {project.galleryImages && project.galleryImages.length > 0 && (

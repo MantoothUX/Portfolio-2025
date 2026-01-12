@@ -50,6 +50,25 @@
       ]
     },
     {
+      "id": "15",
+      "title": "Music Player Chrome Extension",
+      "company": "Personal",
+      "description": "Interactive prototype of a Chrome extension music player interface",
+      "cardDescription": "Interactive prototype of a Chrome extension music player",
+      "image": "/projects/coming-soon/Coming-soon.png",
+      "tags": ["UX/UI Design", "Prototyping", "React"],
+      "year": "2025",
+      "role": "Design, development",
+      "category": "Personal",
+      "overview": "I designed and built an interactive prototype of a Chrome extension music player to explore how music controls could be seamlessly integrated into the browser experience. The prototype features a fully functional player interface with play/pause controls, track navigation, volume control, and a beautiful liquid equalizer animation. The design simulates how the extension would appear when activated from the browser toolbar, complete with a realistic browser chrome interface.\n\nThe prototype demonstrates key interaction patterns including keyboard shortcuts for media control, smooth animations, and an intuitive login flow. Built with React and TypeScript, this project showcases my ability to rapidly prototype complex UI interactions and bring design concepts to life through code.",
+      "toolsUsed": [
+        "Figma Make",
+        "Cursor",
+        "Vercel"
+      ],
+      "prototypeUrl": "/prototypes/music-player-chrome-extension"
+    },
+    {
       "id": "3",
       "title": "Shopify package management",
       "company": "Shopify",
@@ -336,6 +355,6 @@
   },
   "hero": {
     "title": "Hi, I'm Josh",
-    "subtitle": "A product designer who solves complex problems with delightful, intuitive experiences"
+    "subtitle": "A product designer who solves complex problems with delightful, intuitive experiences. I'm passionate about designing experiences that go beyond screens into real life."
   }
 }
