@@ -9,6 +9,7 @@ import SpinningGlobe from './SpinningGlobe';
 // Lazy load prototype components
 const DoorHandleCheckin = lazy(() => import('../prototypes/door-handle-checkin/DoorHandleCheckin'));
 const MusicPlayerChromeExtension = lazy(() => import('../prototypes/music-player-chrome-extension/App'));
+const OrderPrinter = lazy(() => import('../prototypes/order-printer/OrderPrinter'));
 
 interface PrototypeItem {
   id: string;
@@ -267,7 +268,7 @@ export default function PrototypesPage() {
                 fontWeight: 400,
                 fontSize: 'clamp(2.5rem, 5vw, 5rem)' // Responsive: 40px on small, 80px on large
               }}>
-                MantoothUX prototypes
+                Prototypes
               </h1>
             </motion.div>
 
@@ -347,7 +348,8 @@ const PrototypeViewer = ({ slug, prototype, darkMode, onToggleDarkMode }: { slug
         return DoorHandleCheckin;
       case 'music-player-chrome-extension':
         return MusicPlayerChromeExtension;
-      // Add more cases as we migrate prototypes
+      case 'order-printer':
+        return OrderPrinter;
       default:
         return null;
     }
