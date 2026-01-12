@@ -1,10 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense, useMemo } from 'react';
 import { useNavigate, useParams, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock, Folder, FileText, Moon, Sun, Briefcase, User, Code } from 'lucide-react';
 import prototypesData from '../content/prototypes.json';
 import { cn } from '../lib/utils';
 import SpinningGlobe from './SpinningGlobe';
+
+// Lazy load prototype components
+const DoorHandleCheckin = lazy(() => import('../prototypes/door-handle-checkin/DoorHandleCheckin'));
+const MusicPlayerChromeExtension = lazy(() => import('../prototypes/music-player-chrome-extension/App'));
 
 interface PrototypeItem {
   id: string;
@@ -193,13 +197,13 @@ export default function PrototypesPage() {
       );
     }
 
-    return <PrototypeViewer slug={slug} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />;
+    return <PrototypeViewer slug={slug} prototype={prototype} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />;
   }
 
   // Landing page
   return (
     <>
-      <div className="min-h-screen transition-colors duration-300 relative">
+      <motion.div exit={{ opacity: 0 }} className="min-h-screen pb-24 transition-colors duration-300 relative">
         {/* Spinning Globe Background */}
         <SpinningGlobe darkMode={darkMode} />
         
@@ -249,26 +253,31 @@ export default function PrototypesPage() {
           </motion.div>
         </nav>
 
-        <div className="relative z-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-12"
-          >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 dark:text-white mb-4 drop-shadow-lg" style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}>
-              Prototypes
-            </h1>
-          </motion.div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10" style={{ isolation: 'isolate' }}>
+          <div className="max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-12"
+            >
+              <h1 className="mb-4 leading-tight" style={{
+                color: darkMode ? "#7bf1a8" : "#13531C",
+                fontFamily: "'Instrument Serif', serif",
+                fontWeight: 400,
+                fontSize: 'clamp(2.5rem, 5vw, 5rem)' // Responsive: 40px on small, 80px on large
+              }}>
+                MantoothUX prototypes
+              </h1>
+            </motion.div>
 
-          {/* Projects List Container */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-white/90 dark:bg-gray-900/80 backdrop-blur-md rounded-xl md:rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-4 sm:p-6 md:p-8 shadow-2xl"
-          >
+            {/* Projects List Container */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="bg-white/90 dark:bg-gray-900/80 backdrop-blur-md rounded-xl md:rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-4 sm:p-6 md:p-8 shadow-2xl"
+            >
             <div className="space-y-4 sm:space-y-6">
               {data.categories.map((category, categoryIndex) => (
                 <motion.div
@@ -309,9 +318,9 @@ export default function PrototypesPage() {
               ))}
             </div>
           </motion.div>
+          </div>
         </div>
-        </div>
-      </div>
+      </motion.div>
 
       <PasswordModal
         isOpen={passwordModal.isOpen}
@@ -326,87 +335,32 @@ export default function PrototypesPage() {
 const PrototypeViewer = ({ slug, prototype, darkMode, onToggleDarkMode }: { slug: string; prototype: PrototypeItem; darkMode: boolean; onToggleDarkMode: () => void }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
 
   const isPrototypes = location.pathname.startsWith('/prototypes');
   const isWork = location.pathname === '/' || location.pathname === '/work';
   const isAbout = location.pathname === '/about';
 
-  // Prototypes should be built as static HTML files and placed in public/prototypes/{slug}/index.html
-  // For React prototypes, they need to be built and the dist files copied to public/prototypes/{slug}/
-  const iframeSrc = `/prototypes/${slug}/index.html`;
+  // Dynamically load the prototype component based on slug
+  const PrototypeComponent = useMemo(() => {
+    switch (slug) {
+      case 'door-handle-checkin':
+        return DoorHandleCheckin;
+      case 'music-player-chrome-extension':
+        return MusicPlayerChromeExtension;
+      // Add more cases as we migrate prototypes
+      default:
+        return null;
+    }
+  }, [slug]);
 
-  return (
-    <div className="min-h-screen transition-colors duration-300 relative">
-      {/* Spinning Globe Background */}
-      <SpinningGlobe darkMode={darkMode} />
-      
-      {/* Navigation */}
-      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-green-200 dark:border-green-900/50 rounded-full shadow-lg shadow-green-500/10 dark:shadow-green-500/20"
-        >
-          <div className="flex items-center gap-2 px-6 py-3">
-            <Link
-              to="/work"
-              className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isWork ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}
-              style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}
-            >
-              <Briefcase className="w-4 h-4" style={{ display: "none" }} />
-              Work
-            </Link>
-            <Link
-              to="/about"
-              className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isAbout ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}
-              style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}
-            >
-              <User className="w-4 h-4" style={{ display: "none" }} />
-              About
-            </Link>
-            <Link
-              to="/prototypes"
-              className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isPrototypes ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}
-              style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}
-            >
-              <Code className="w-4 h-4" style={{ display: "none" }} />
-              Prototypes
-            </Link>
-            <div className="w-px h-6 bg-green-200 dark:bg-green-900/50 mx-1" />
-            <button
-              onClick={onToggleDarkMode}
-              className="p-2 rounded-full text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors"
-              style={{ fontFamily: "'balto', sans-serif" }}
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
-          </div>
-        </motion.div>
-      </nav>
-
-      <div className="sticky top-0 z-10 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-sm border-b border-gray-200 dark:border-zinc-800 px-6 py-4">
-        <button
-          onClick={() => navigate('/prototypes')}
-          className="text-green-600 dark:text-green-400 hover:underline"
-          style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}
-        >
-          ← Back to Prototypes
-        </button>
-      </div>
-      <div className="relative w-full" style={{ minHeight: 'calc(100vh - 80px)' }}>
-        {isLoading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-zinc-900 z-10">
-            <div className="w-8 h-8 border-2 border-gray-300 dark:border-gray-600 border-t-gray-600 dark:border-t-gray-400 rounded-full animate-spin" />
-          </div>
-        )}
-        {hasError ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-100 dark:bg-zinc-900 z-10 p-8">
+  if (!PrototypeComponent) {
+    return (
+      <div className="min-h-screen transition-colors duration-300 relative">
+        <SpinningGlobe darkMode={darkMode} />
+        <div className="relative z-10 flex items-center justify-center min-h-screen">
+          <div className="text-center p-8">
             <p className="text-gray-600 dark:text-gray-400 mb-4" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
-              Prototype not found. Please ensure the prototype files are in <code className="bg-gray-200 dark:bg-zinc-800 px-2 py-1 rounded">public/prototypes/{slug}/</code>
+              Prototype "{slug}" is not yet migrated. Coming soon!
             </p>
             <button
               onClick={() => navigate('/prototypes')}
@@ -416,20 +370,35 @@ const PrototypeViewer = ({ slug, prototype, darkMode, onToggleDarkMode }: { slug
               Back to Prototypes
             </button>
           </div>
-        ) : (
-          <iframe
-            src={iframeSrc}
-            className="w-full h-full border-0"
-            style={{ minHeight: 'calc(100vh - 80px)' }}
-            title={`${slug} prototype`}
-            onLoad={() => setIsLoading(false)}
-            onError={() => {
-              setIsLoading(false);
-              setHasError(true);
-            }}
-            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
-          />
-        )}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen transition-colors duration-300 relative">
+      {/* Spinning Globe Background */}
+      <SpinningGlobe darkMode={darkMode} />
+
+      <div className="sticky top-0 z-10 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-sm border-b border-gray-200 dark:border-zinc-800 px-6 py-4">
+        <button
+          onClick={() => navigate('/prototypes')}
+          className="text-green-600 dark:text-green-400 hover:underline"
+          style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}
+        >
+          ← All prototypes
+        </button>
+      </div>
+      
+      {/* Render the prototype component with Suspense for lazy loading */}
+      <div className="relative z-10">
+        <Suspense fallback={
+          <div className="flex items-center justify-center min-h-[calc(100vh-80px)]">
+            <div className="w-8 h-8 border-2 border-gray-300 dark:border-gray-600 border-t-gray-600 dark:border-t-gray-400 rounded-full animate-spin" />
+          </div>
+        }>
+          <PrototypeComponent />
+        </Suspense>
       </div>
     </div>
   );
