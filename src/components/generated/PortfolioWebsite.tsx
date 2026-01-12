@@ -883,7 +883,7 @@ const AboutPage = ({
     </motion.div>;
 };
 const TypingFooter = ({ darkMode }: { darkMode: boolean }) => {
-  const fullText = "Here are curated snippets of my work. Many details are private due to NDAs. Full case studies can be shared upon request.";
+  const fullText = "This is a curated list of work highlights. Many details are private due to NDAs. Full case studies can be shared upon request.";
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
