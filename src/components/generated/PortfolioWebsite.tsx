@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 import contentData from '../../content.json';
 import { useDarkMode } from '../../contexts/DarkModeContext';
+import { useIsMobile } from '../../hooks/use-mobile';
 
 type Project = {
   id: string;
@@ -229,6 +230,159 @@ const ProjectCard = ({
     </motion.div>;
 };
 
+const SingleImageDisplay = ({
+  image,
+  alt
+}: {
+  image: string;
+  alt: string;
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (isExpanded) {
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setIsExpanded(false);
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+      
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+        document.body.style.overflow = 'unset';
+      };
+    }
+  }, [isExpanded]);
+
+  return (
+    <>
+      <div className={cn("w-full max-w-full sm:max-w-2xl md:max-w-4xl rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800", isMobile && "cursor-pointer")} onClick={() => isMobile && setIsExpanded(true)}>
+        <img src={image} alt={alt} className="w-full h-auto" />
+      </div>
+      <AnimatePresence>
+        {isExpanded && (
+          <ExpandedImageModal
+            images={[image]}
+            initialIndex={0}
+            onClose={() => setIsExpanded(false)}
+          />
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+const ExpandedImageModal = ({
+  images,
+  initialIndex,
+  onClose
+}: {
+  images: string[];
+  initialIndex: number;
+  onClose: () => void;
+}) => {
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'ArrowLeft') {
+        setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+      } else if (e.key === 'ArrowRight') {
+        setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [images.length, onClose]);
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-sm flex items-center justify-center"
+      onClick={onClose}
+    >
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 z-30 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+        aria-label="Close"
+      >
+        <X className="w-6 h-6" />
+      </button>
+
+      {/* Navigation arrows - only show if multiple images */}
+      {images.length > 1 && (
+        <>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goToPrevious();
+            }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goToNext();
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+            aria-label="Next image"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </>
+      )}
+
+      {/* Image */}
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="relative w-full h-full flex items-center justify-center p-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img
+          src={images[currentIndex]}
+          alt={`Expanded image ${currentIndex + 1}`}
+          className="max-w-full max-h-full object-contain"
+        />
+      </motion.div>
+
+      {/* Image counter - only show if multiple images */}
+      {images.length > 1 && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm">
+          {currentIndex + 1} / {images.length}
+        </div>
+      )}
+    </motion.div>
+  );
+};
+
 const ImageGallery = ({
   images,
   footer
@@ -239,6 +393,8 @@ const ImageGallery = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [isPreloading, setIsPreloading] = useState(true);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const isMobile = useIsMobile();
 
   // Preload all images when component mounts
   useEffect(() => {
@@ -286,75 +442,88 @@ const ImageGallery = ({
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
-  return <div className="w-full max-w-full sm:max-w-2xl md:max-w-4xl mb-12">
-      <div className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-800 bg-gray-100 dark:bg-zinc-900">
-        {images.length > 1 && (
-          <>
-            <button onClick={goToPrevious} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Previous image">
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Next image">
-              <ChevronRight className="w-6 h-6" />
-            </button>
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-              {images.map((_, index) => <button key={index} onClick={() => setCurrentIndex(index)} className={cn('w-2 h-2 rounded-full transition-all', index === currentIndex ? 'bg-white w-6' : 'bg-white/50')} aria-label={`Go to image ${index + 1}`} />)}
+  return (
+    <>
+      <div className="w-full max-w-full sm:max-w-2xl md:max-w-4xl mb-12">
+        <div className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-800 bg-gray-100 dark:bg-zinc-900">
+          {images.length > 1 && !isMobile && (
+            <>
+              <button onClick={goToPrevious} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Previous image">
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Next image">
+                <ChevronRight className="w-6 h-6" />
+              </button>
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+                {images.map((_, index) => <button key={index} onClick={() => setCurrentIndex(index)} className={cn('w-2 h-2 rounded-full transition-all', index === currentIndex ? 'bg-white w-6' : 'bg-white/50')} aria-label={`Go to image ${index + 1}`} />)}
+              </div>
+            </>
+          )}
+          {/* Crossfade transition - all images preloaded and stacked */}
+          <div className={cn("relative w-full", isMobile && "cursor-pointer")} onClick={() => isMobile && setExpandedIndex(currentIndex)}>
+            {images.map((src, index) => {
+              const isActive = index === currentIndex;
+              const isLoaded = loadedImages.has(src);
+              
+              // Render all loaded images, or the active one if not yet loaded
+              if (!isLoaded && !isActive) {
+                return null;
+              }
+              
+              return (
+                <motion.img
+                  key={src}
+                  src={src}
+                  alt={`Gallery image ${index + 1}`}
+                  className={cn("w-full h-auto", isActive ? "relative block" : "absolute top-0 left-0 w-full h-auto")}
+                  style={{
+                    pointerEvents: 'none',
+                  }}
+                  initial={false}
+                  animate={{
+                    opacity: isActive && isLoaded ? 1 : 0,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    ease: "easeInOut"
+                  }}
+                  onLoad={() => {
+                    if (!loadedImages.has(src)) {
+                      setLoadedImages((prev) => {
+                        const next = new Set(prev);
+                        next.add(src);
+                        return next;
+                      });
+                    }
+                  }}
+                />
+              );
+            })}
+          </div>
+          {/* Loading indicator */}
+          {(isPreloading || !loadedImages.has(images[currentIndex])) && (
+            <div className="absolute inset-0 flex items-center justify-center z-0 bg-gray-100 dark:bg-zinc-900">
+              <div className="w-8 h-8 border-2 border-gray-300 dark:border-gray-600 border-t-gray-600 dark:border-t-gray-400 rounded-full animate-spin" />
             </div>
-          </>
-        )}
-        {/* Crossfade transition - all images preloaded and stacked */}
-        <div className="relative w-full">
-          {images.map((src, index) => {
-            const isActive = index === currentIndex;
-            const isLoaded = loadedImages.has(src);
-            
-            // Render all loaded images, or the active one if not yet loaded
-            if (!isLoaded && !isActive) {
-              return null;
-            }
-            
-            return (
-              <motion.img
-                key={src}
-                src={src}
-                alt={`Gallery image ${index + 1}`}
-                className={cn("w-full h-auto", isActive ? "relative block" : "absolute top-0 left-0 w-full h-auto")}
-                style={{
-                  pointerEvents: 'none',
-                }}
-                initial={false}
-                animate={{
-                  opacity: isActive && isLoaded ? 1 : 0,
-                }}
-                transition={{
-                  duration: 0.5,
-                  ease: "easeInOut"
-                }}
-                onLoad={() => {
-                  if (!loadedImages.has(src)) {
-                    setLoadedImages((prev) => {
-                      const next = new Set(prev);
-                      next.add(src);
-                      return next;
-                    });
-                  }
-                }}
-              />
-            );
-          })}
+          )}
         </div>
-        {/* Loading indicator */}
-        {(isPreloading || !loadedImages.has(images[currentIndex])) && (
-          <div className="absolute inset-0 flex items-center justify-center z-0 bg-gray-100 dark:bg-zinc-900">
-            <div className="w-8 h-8 border-2 border-gray-300 dark:border-gray-600 border-t-gray-600 dark:border-t-gray-400 rounded-full animate-spin" />
+        {footer && (
+          <div className="mt-4 text-center">
+            <p className="text-sm text-gray-500 dark:text-gray-400 italic" style={{ fontFamily: "'balto', sans-serif" }}>{footer}</p>
           </div>
         )}
       </div>
-      {footer && (
-        <div className="mt-4 text-center">
-          <p className="text-sm text-gray-500 dark:text-gray-400 italic" style={{ fontFamily: "'balto', sans-serif" }}>{footer}</p>
-        </div>
-      )}
-    </div>;
+      <AnimatePresence>
+        {expandedIndex !== null && (
+          <ExpandedImageModal
+            images={images}
+            initialIndex={expandedIndex}
+            onClose={() => setExpandedIndex(null)}
+          />
+        )}
+      </AnimatePresence>
+    </>
+  );
 };
 
 const PrototypeEmbed = ({
@@ -557,9 +726,7 @@ const ProjectModal = ({
 
             {/* Hero image - show modalImage if available and no galleryImages */}
             {project.modalImage && (!project.galleryImages || project.galleryImages.length === 0) && (
-              <div className="w-full max-w-full sm:max-w-2xl md:max-w-4xl rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800">
-                <img src={project.modalImage} alt={project.title} className="w-full h-auto" />
-              </div>
+              <SingleImageDisplay image={project.modalImage} alt={project.title} />
             )}
 
             <div className="max-w-4xl space-y-12">
