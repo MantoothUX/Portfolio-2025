@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useLayoutEffect, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Briefcase, User, Code, Moon, Sun } from 'lucide-react';
@@ -17,8 +17,21 @@ export const Navigation = () => {
   const currentIndicatorRef = useRef({ width: 0, x: 0 });
   const [initialIndicator, setInitialIndicator] = useState<{ width: number; x: number } | null>(null);
   const isFirstMountRef = useRef(true);
+  const retryCountRef = useRef(0);
 
-  useEffect(() => {
+  // Validation function to ensure positions are valid
+  const isValidPosition = (x: number, width: number, containerWidth: number): boolean => {
+    return (
+      x >= 0 &&
+      width > 0 &&
+      x + width <= containerWidth + 10 && // Allow small margin for rounding
+      width < containerWidth * 2 // Width shouldn't exceed container by more than 2x
+    );
+  };
+
+  useLayoutEffect(() => {
+    retryCountRef.current = 0; // Reset retry count on route change
+    
     const updateIndicator = () => {
       if (!navRef.current) return;
       
@@ -39,8 +52,28 @@ export const Navigation = () => {
       if (activeLink && currentActive) {
         const containerRect = navRef.current.getBoundingClientRect();
         const linkRect = activeLink.getBoundingClientRect();
+        const containerWidth = containerRect.width;
         const newX = linkRect.left - containerRect.left;
         const newWidth = linkRect.width;
+
+        // Validate the calculated position
+        if (!isValidPosition(newX, newWidth, containerWidth)) {
+          // If position is invalid, wait for next frame and retry (max 3 retries)
+          if (retryCountRef.current < 3) {
+            retryCountRef.current++;
+            requestAnimationFrame(() => {
+              updateIndicator();
+            });
+          } else {
+            // After max retries, use the position anyway to prevent getting stuck
+            // This is a fallback for edge cases
+            console.warn('Navigation indicator: Invalid position after retries, using fallback');
+          }
+          return;
+        }
+
+        // Reset retry count on successful update
+        retryCountRef.current = 0;
 
         // On first mount, set position immediately without animation
         if (isFirstMountRef.current) {
@@ -53,8 +86,21 @@ export const Navigation = () => {
         }
 
         // If switching nav items, animate from previous position
-        if (prevActiveRef.current && prevActiveRef.current !== currentActive && currentIndicatorRef.current.width > 0) {
+        // Only set initialIndicator if previous position was valid
+        if (
+          prevActiveRef.current && 
+          prevActiveRef.current !== currentActive && 
+          currentIndicatorRef.current.width > 0 &&
+          isValidPosition(
+            currentIndicatorRef.current.x, 
+            currentIndicatorRef.current.width, 
+            containerWidth
+          )
+        ) {
           setInitialIndicator({ ...currentIndicatorRef.current });
+        } else {
+          // If previous position was invalid, don't animate from it
+          setInitialIndicator(null);
         }
 
         setActiveIndicator({ width: newWidth, x: newX });
@@ -63,9 +109,47 @@ export const Navigation = () => {
       }
     };
 
-    updateIndicator();
-    window.addEventListener('resize', updateIndicator);
-    return () => window.removeEventListener('resize', updateIndicator);
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      updateIndicator();
+    });
+  }, [isWork, isAbout, isPrototypes]);
+
+  // Handle resize separately with useEffect (not useLayoutEffect)
+  useEffect(() => {
+    const handleResize = () => {
+      if (!navRef.current) return;
+      
+      let currentActive: string | null = null;
+      let activeLink: HTMLElement | null = null;
+      
+      if (isWork) {
+        currentActive = 'work';
+        activeLink = navRef.current.querySelector('[data-nav="work"]') as HTMLElement;
+      } else if (isAbout) {
+        currentActive = 'about';
+        activeLink = navRef.current.querySelector('[data-nav="about"]') as HTMLElement;
+      } else if (isPrototypes) {
+        currentActive = 'prototypes';
+        activeLink = navRef.current.querySelector('[data-nav="prototypes"]') as HTMLElement;
+      }
+
+      if (activeLink && currentActive) {
+        const containerRect = navRef.current.getBoundingClientRect();
+        const linkRect = activeLink.getBoundingClientRect();
+        const containerWidth = containerRect.width;
+        const newX = linkRect.left - containerRect.left;
+        const newWidth = linkRect.width;
+
+        if (isValidPosition(newX, newWidth, containerWidth)) {
+          setActiveIndicator({ width: newWidth, x: newX });
+          currentIndicatorRef.current = { width: newWidth, x: newX };
+        }
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [isWork, isAbout, isPrototypes]);
 
   return (
