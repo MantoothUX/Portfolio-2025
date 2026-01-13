@@ -1,7 +1,7 @@
 import { useState, useEffect, lazy, Suspense, useMemo } from 'react';
 import { useNavigate, useParams, Link, useLocation, useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Lock, Folder, FileText, Moon, Sun, Briefcase, User, Code, ExternalLink } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Lock, Folder, FileText, ExternalLink } from 'lucide-react';
 import prototypesData from '../content/prototypes.json';
 import { cn } from '../lib/utils';
 import SpinningGlobe from './SpinningGlobe';
@@ -190,55 +190,18 @@ export default function PrototypesPage() {
   // Landing page
   return (
     <>
-      <motion.div exit={{ opacity: 0 }} className="min-h-screen pb-24 transition-colors duration-300 relative">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{
+          duration: 0.4,
+          ease: [0.25, 0.1, 0.25, 1]
+        }}
+        className="min-h-screen pb-24 transition-colors duration-300 relative"
+      >
         {/* Spinning Globe Background */}
         <SpinningGlobe darkMode={darkMode} />
-        
-        {/* Navigation */}
-        <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border border-green-200 dark:border-green-900/50 rounded-full shadow-lg shadow-green-500/10 dark:shadow-green-500/20"
-          >
-            <div className="flex items-center gap-2 px-6 py-3">
-              <Link
-                to="/work"
-                className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isWork ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}
-                style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}
-              >
-                <Briefcase className="w-4 h-4" style={{ display: "none" }} />
-                Work
-              </Link>
-              <Link
-                to="/about"
-                className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isAbout ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}
-                style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}
-              >
-                <User className="w-4 h-4" style={{ display: "none" }} />
-                About
-              </Link>
-              <Link
-                to="/prototypes"
-                className={cn('flex items-center gap-2 px-4 py-2 text-sm font-semibold transition-all rounded-full', isPrototypes ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 shadow-md' : 'text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30')}
-                style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}
-              >
-                <Code className="w-4 h-4" style={{ display: "none" }} />
-                Prototypes
-              </Link>
-              <div className="w-px h-6 bg-green-200 dark:bg-green-900/50 mx-1" />
-              <button
-                onClick={toggleDarkMode}
-                className="p-2 rounded-full text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors"
-                style={{ fontFamily: "'balto', sans-serif" }}
-                aria-label="Toggle dark mode"
-              >
-                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
-            </div>
-          </motion.div>
-        </nav>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10" style={{ isolation: 'isolate' }}>
           <div className="max-w-3xl">
