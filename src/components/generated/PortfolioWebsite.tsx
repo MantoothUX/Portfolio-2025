@@ -4,6 +4,7 @@ import { ArrowLeft, Briefcase, User, Mail, Linkedin, Github, Moon, Sun, X, Exter
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 import contentData from '../../content.json';
+import { useDarkMode } from '../../contexts/DarkModeContext';
 
 type Project = {
   id: string;
@@ -1068,17 +1069,9 @@ const HomePage = ({
 // @component: PortfolioWebsite
 export const PortfolioWebsite = (props: PortfolioWebsiteProps) => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [darkMode, setDarkMode] = useState(false);
+  const { darkMode, toggleDarkMode } = useDarkMode();
   const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
 
   // Scroll to top when route changes
   useEffect(() => {
@@ -1119,9 +1112,6 @@ export const PortfolioWebsite = (props: PortfolioWebsiteProps) => {
     }
   };
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
 
   // @return
   return <div className={cn('min-h-screen bg-white dark:bg-zinc-950 transition-colors duration-300 relative', props.className)}>

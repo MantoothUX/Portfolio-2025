@@ -1,15 +1,7 @@
 import { StrictMode } from 'react';
-// Force light mode by removing dark class and preventing it from being added
+// Set default to light mode on initial load
+// DarkModeProvider will then read from localStorage and apply user preference
 document.documentElement.classList.remove('dark');
-
-// Override the system preference detection
-const forceLightMode = () => {
-  // Always set dark mode to false regardless of localStorage or system preference
-  document.documentElement.classList.toggle(
-    'dark',
-    false // Force to false instead of checking localStorage or system preference
-  );
-};
 
 const addBrokenImageHandler = () => {
   document.addEventListener(
@@ -37,15 +29,7 @@ const addBrokenImageHandler = () => {
 }
 
 // Run immediately
-forceLightMode();
 addBrokenImageHandler();
-
-// Also run when the DOM is loaded to ensure it applies
-document.addEventListener('DOMContentLoaded', forceLightMode);
-
-// Override system preference changes
-const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-mediaQuery.addEventListener('change', forceLightMode);
 
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';

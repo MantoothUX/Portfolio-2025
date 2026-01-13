@@ -5,6 +5,7 @@ import { Lock, Folder, FileText, Moon, Sun, Briefcase, User, Code, ExternalLink 
 import prototypesData from '../content/prototypes.json';
 import { cn } from '../lib/utils';
 import SpinningGlobe from './SpinningGlobe';
+import { useDarkMode } from '../contexts/DarkModeContext';
 
 // Lazy load prototype components
 const DoorHandleCheckin = lazy(() => import('../prototypes/door-handle-checkin/DoorHandleCheckin'));
@@ -128,33 +129,11 @@ export default function PrototypesPage() {
     slug: ''
   });
   const [authenticatedPrototypes, setAuthenticatedPrototypes] = useState<Set<string>>(new Set());
-  const [darkMode, setDarkMode] = useState(false);
+  const { darkMode, toggleDarkMode } = useDarkMode();
   
   const isPrototypes = location.pathname.startsWith('/prototypes');
   const isWork = location.pathname === '/' || location.pathname === '/work';
   const isAbout = location.pathname === '/about';
-
-  useEffect(() => {
-    // Check for saved dark mode preference or system preference
-    const saved = localStorage.getItem('darkMode');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const shouldBeDark = saved ? saved === 'true' : prefersDark;
-    setDarkMode(shouldBeDark);
-  }, []);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('darkMode', 'true');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('darkMode', 'false');
-    }
-  }, [darkMode]);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
 
   const handlePrototypeClick = (item: PrototypeItem) => {
     // Handle external links
