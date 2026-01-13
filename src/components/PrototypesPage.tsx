@@ -1,7 +1,7 @@
 import { useState, useEffect, lazy, Suspense, useMemo } from 'react';
-import { useNavigate, useParams, Link, useLocation } from 'react-router-dom';
+import { useNavigate, useParams, Link, useLocation, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Lock, Folder, FileText, Moon, Sun, Briefcase, User, Code } from 'lucide-react';
+import { Lock, Folder, FileText, Moon, Sun, Briefcase, User, Code, ExternalLink } from 'lucide-react';
 import prototypesData from '../content/prototypes.json';
 import { cn } from '../lib/utils';
 import SpinningGlobe from './SpinningGlobe';
@@ -9,7 +9,6 @@ import SpinningGlobe from './SpinningGlobe';
 // Lazy load prototype components
 const DoorHandleCheckin = lazy(() => import('../prototypes/door-handle-checkin/DoorHandleCheckin'));
 const MusicPlayerChromeExtension = lazy(() => import('../prototypes/music-player-chrome-extension/App'));
-const OrderPrinter = lazy(() => import('../prototypes/order-printer/OrderPrinter'));
 
 interface PrototypeItem {
   id: string;
@@ -17,6 +16,7 @@ interface PrototypeItem {
   slug: string;
   iterations: number;
   password?: string | null;
+  externalUrl?: string;
 }
 
 interface PrototypeCategory {
@@ -119,7 +119,8 @@ const PasswordModal = ({
 export default function PrototypesPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { slug } = useParams<{ slug: string }>();
+  const { slug } = useParams<{ slug?: string }>();
+  const effectiveSlug = slug;
   const data = prototypesData as PrototypesData;
   const [passwordModal, setPasswordModal] = useState<{ isOpen: boolean; password: string; slug: string }>({
     isOpen: false,
@@ -156,6 +157,12 @@ export default function PrototypesPage() {
   };
 
   const handlePrototypeClick = (item: PrototypeItem) => {
+    // Handle external links
+    if (item.externalUrl) {
+      window.open(item.externalUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    
     if (item.password && !authenticatedPrototypes.has(item.slug)) {
       setPasswordModal({ isOpen: true, password: item.password, slug: item.slug });
     } else {
@@ -170,9 +177,9 @@ export default function PrototypesPage() {
   };
 
   // If slug is provided, show individual prototype viewer
-  if (slug) {
+  if (effectiveSlug) {
     const allItems = data.categories.flatMap((cat) => cat.items);
-    const prototype = allItems.find((item) => item.slug === slug);
+    const prototype = allItems.find((item) => item.slug === effectiveSlug);
     
     if (!prototype) {
       return (
@@ -185,7 +192,7 @@ export default function PrototypesPage() {
     }
 
     // Check if password is required and not authenticated
-    if (prototype.password && !authenticatedPrototypes.has(slug)) {
+    if (prototype.password && !authenticatedPrototypes.has(effectiveSlug)) {
       return (
         <>
           <PasswordModal
@@ -198,7 +205,7 @@ export default function PrototypesPage() {
       );
     }
 
-    return <PrototypeViewer slug={slug} prototype={prototype} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />;
+    return <PrototypeViewer slug={effectiveSlug} prototype={prototype} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />;
   }
 
   // Landing page
@@ -303,9 +310,13 @@ export default function PrototypesPage() {
                         whileHover={{ x: 4 }}
                       >
                         <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-500 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors flex-shrink-0" />
-                        <span className="text-gray-700 dark:text-gray-200 flex-1 text-sm sm:text-base" style={{ fontFamily: "'balto', sans-serif" }}>
+                        <span className="text-gray-700 dark:text-gray-200 flex-1 text-sm sm:text-base flex items-center gap-2" style={{ fontFamily: "'balto', sans-serif" }}>
                           {item.title}
+                          {item.slug === "order-printer" && (
+                            <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />
+                          )}
                         </span>
+                        {item.externalUrl && <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />}
                         {item.password && (
                           <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />
                         )}
@@ -336,10 +347,14 @@ export default function PrototypesPage() {
 const PrototypeViewer = ({ slug, prototype, darkMode, onToggleDarkMode }: { slug: string; prototype: PrototypeItem; darkMode: boolean; onToggleDarkMode: () => void }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchParams] = useSearchParams();
 
   const isPrototypes = location.pathname.startsWith('/prototypes');
   const isWork = location.pathname === '/' || location.pathname === '/work';
   const isAbout = location.pathname === '/about';
+  
+  // Get iteration from URL query params or default to v1
+  const currentIteration = searchParams.get("iteration") || "v1";
 
   // Dynamically load the prototype component based on slug
   const PrototypeComponent = useMemo(() => {
@@ -348,8 +363,6 @@ const PrototypeViewer = ({ slug, prototype, darkMode, onToggleDarkMode }: { slug
         return DoorHandleCheckin;
       case 'music-player-chrome-extension':
         return MusicPlayerChromeExtension;
-      case 'order-printer':
-        return OrderPrinter;
       default:
         return null;
     }
@@ -377,6 +390,7 @@ const PrototypeViewer = ({ slug, prototype, darkMode, onToggleDarkMode }: { slug
     );
   }
 
+  // For prototypes, use standard layout
   return (
     <div className="min-h-screen transition-colors duration-300 relative">
       {/* Spinning Globe Background */}

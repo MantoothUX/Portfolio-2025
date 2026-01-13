@@ -99,6 +99,8 @@ For optimized image/video hosting:
    VITE_CLOUDINARY_CLOUD_NAME=your-cloud-name
    VITE_CLOUDINARY_API_KEY=your-api-key
    ```
+   
+   **Note**: `.env.local` is already in `.gitignore` - never commit actual credentials!
 
 5. **Use the `OptimizedImage` component**:
 

@@ -27,7 +27,8 @@
           "title": "Order Printer",
           "slug": "order-printer",
           "iterations": 3,
-          "password": null
+          "password": null,
+          "externalUrl": "https://shopproto.vercel.app/flow/order-printer/v1"
         }
       ]
     }

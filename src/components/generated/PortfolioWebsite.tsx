@@ -366,6 +366,9 @@ const PrototypeEmbed = ({
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   
+  // Check if this is a React component prototype (music player) - show link only, no iframe
+  const isReactComponent = url === '/prototypes/music-player-chrome-extension';
+  
   // Handle relative URLs (prototypes hosted on same site)
   // If URL starts with /prototypes/, it's a relative path to a prototype page
   // Otherwise, treat as external URL or direct iframe src
@@ -373,6 +376,27 @@ const PrototypeEmbed = ({
     ? `${url}/index.html` 
     : url;
 
+  // For React component prototypes, just show a link (images will be shown via galleryImages)
+  if (isReactComponent) {
+    return (
+      <div className="w-full mb-12">
+        <div className="flex items-center justify-end">
+          <a 
+            href={url} 
+            target="_self"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors font-semibold"
+            style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}
+          >
+            View interactive prototype
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  // Render iframe for other prototypes
   return (
     <div className="w-full mb-12">
       <div className="relative w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-800 bg-gray-100 dark:bg-zinc-900" style={{ minHeight: '600px', maxHeight: '80vh' }}>
@@ -554,6 +578,15 @@ const ProjectModal = ({
                           );
                         } else if (line.trim()) {
                           return <p key={index} className="mb-3">{line.trim()}</p>;
+                        }
+                        return null;
+                      })}
+                    </div>
+                  ) : project.overview.includes('\n') ? (
+                    <div className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
+                      {project.overview.split('\n').map((line, index) => {
+                        if (line.trim()) {
+                          return <p key={index} className={index > 0 ? "mt-4" : ""}>{line.trim()}</p>;
                         }
                         return null;
                       })}
@@ -766,12 +799,14 @@ const AboutPage = ({
         delay: 0.1
       }} className="space-y-12">
           <div>
-            <h1 className="mb-6 leading-tight" style={{
-              color: darkMode ? "#7bf1a8" : "#13531C",
-              fontFamily: "'Instrument Serif', serif",
-              fontWeight: 400,
-              fontSize: 'clamp(2.5rem, 5vw, 5rem)' // Responsive: 40px on small, 80px on large
-            }}>{aboutContent.headline}</h1>
+            {aboutContent.headline && (
+              <h1 className="mb-6 leading-tight" style={{
+                color: darkMode ? "#7bf1a8" : "#13531C",
+                fontFamily: "'Instrument Serif', serif",
+                fontWeight: 400,
+                fontSize: 'clamp(2.5rem, 5vw, 5rem)' // Responsive: 40px on small, 80px on large
+              }}>{aboutContent.headline}</h1>
+            )}
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {aboutContent.photo && (
                 <div className="flex-shrink-0">
@@ -883,7 +918,7 @@ const AboutPage = ({
     </motion.div>;
 };
 const TypingFooter = ({ darkMode }: { darkMode: boolean }) => {
-  const fullText = "This is a curated list of work highlights. Many details are private due to NDAs. Full case studies can be shared upon request.";
+  const fullText = "This is a curated list of work highlights. Full case studies can be shared upon request.";
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
