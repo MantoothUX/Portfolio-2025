@@ -1,0 +1,27 @@
+/* Polaris Web Components style overrides to match Figma designs exactly */
+
+/* Custom CSS variables for Figma design tokens */
+:root {
+  /* These will be populated from Figma via design-tokens.ts */
+  --figma-primary: var(--p-color-bg-surface-selected, #008060);
+  --figma-text: var(--p-color-text, #202223);
+  --figma-spacing-md: var(--p-space-4, 1rem);
+}
+
+/* Override Polaris component styles when needed for 1:1 Figma matching */
+s-button {
+  /* Add custom overrides here */
+}
+
+s-text-field {
+  /* Add custom overrides here */
+}
+
+s-page {
+  /* Add custom overrides here */
+}
+
+/* Utility classes for Figma-specific styling */
+.figma-exact-match {
+  /* Use this class when you need pixel-perfect matching */
+}

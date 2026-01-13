@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Container, Theme } from './settings/types';
 import { PortfolioWebsite } from './components/generated/PortfolioWebsite';
+import PrototypesPage from './components/PrototypesPage';
 let theme: Theme = 'light';
 // only use 'centered' container for standalone components, never for full page apps or websites.
 let container: Container = 'none';
@@ -21,6 +22,8 @@ function App() {
         <Route path="/" element={<Navigate to="/work" replace />} />
         <Route path="/work" element={<PortfolioWebsite />} />
         <Route path="/about" element={<PortfolioWebsite />} />
+        <Route path="/prototypes" element={<PrototypesPage />} />
+        <Route path="/prototypes/:slug" element={<PrototypesPage />} />
       </Routes>
     );
   }, []);

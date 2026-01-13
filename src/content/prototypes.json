@@ -1,0 +1,36 @@
+{
+  "categories": [
+    {
+      "name": "Design & Motion Experiments",
+      "items": [
+        {
+          "id": "door-handle-checkin",
+          "title": "Door Handle Check-in",
+          "slug": "door-handle-checkin",
+          "iterations": 1,
+          "password": null
+        },
+        {
+          "id": "music-player-chrome-extension",
+          "title": "Music Player Chrome Extension",
+          "slug": "music-player-chrome-extension",
+          "iterations": 1,
+          "password": null
+        }
+      ]
+    },
+    {
+      "name": "Shopify projects",
+      "items": [
+        {
+          "id": "order-printer",
+          "title": "Order Printer",
+          "slug": "order-printer",
+          "iterations": 3,
+          "password": null,
+          "externalUrl": "https://shopproto.vercel.app/flow/order-printer/v1"
+        }
+      ]
+    }
+  ]
+}

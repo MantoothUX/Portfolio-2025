@@ -50,6 +50,26 @@
       ]
     },
     {
+      "id": "15",
+      "title": "Music Player Chrome Extension",
+      "company": "Personal",
+      "description": "Interactive prototype of a Chrome extension music player",
+      "cardDescription": "Interactive prototype of a Chrome extension music player",
+      "image": "/projects/coming-soon/Coming-soon.png",
+      "tags": ["UX/UI Design", "Prototyping", "React"],
+      "year": "2025",
+      "role": "Design, development",
+      "category": "Personal",
+      "overview": "I designed and built a Spotify Chrome extension prototype. The goal is to enable seamless cross-device switching for non-app Spotify users via authed Chrome sessions. Built with React and TypeScript, this project showcases my ability to rapidly prototype complex UI interactions and bring design concepts to life through code.\n\nDid I concept and build this in 20 minutes during an on-site design challenge? ...Well, yes. But I really liked the outcome.",
+      "toolsUsed": [
+        "Figma Make",
+        "Cursor",
+        "Vercel"
+      ],
+      "prototypeUrl": "/prototypes/music-player-chrome-extension",
+      "hidden": true
+    },
+    {
       "id": "3",
       "title": "Shopify package management",
       "company": "Shopify",
@@ -314,7 +334,7 @@
     }
   ],
   "about": {
-    "headline": "Hi, I'm Josh",
+    "headline": "",
     "photo": "/josh-photo.jpg",
     "bio": [
       "I'm a staff-level product designer with over 10 years experience solving complex problems and leading ambitious design projects for product orgs of all sizes. I'm passionate about designing stylish, intuitive solutions that work for real people at scale. Over the last year I've been incorporating AI tools into my process, and have become proficient at AI-assisted coding.",
@@ -335,7 +355,7 @@
     "github": "https://github.com/mantoothux"
   },
   "hero": {
-    "title": "Staff product designer solving complex problems with delightful experiences",
-    "subtitle": "Optional subtitle (currently hidden)"
+    "title": "Hi, I'm Josh",
+    "subtitle": "A product designer who solves complex problems with delightful, intuitive experiences."
   }
 }
