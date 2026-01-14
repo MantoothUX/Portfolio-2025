@@ -11,6 +11,12 @@ export const Navigation = () => {
   const isWork = location.pathname === '/' || location.pathname === '/work';
   const isAbout = location.pathname === '/about';
   const isPrototypes = location.pathname.startsWith('/prototypes');
+  
+  // Check if we're on a prototype detail page (e.g., /prototypes/door-handle-checkin)
+  // Hide navigation on prototype child pages, only show on /prototypes listing page
+  const pathSegments = location.pathname.split('/').filter(Boolean);
+  const isPrototypeDetailPage = pathSegments[0] === 'prototypes' && pathSegments.length > 1;
+  
   const navRef = useRef<HTMLDivElement>(null);
   const [activeIndicator, setActiveIndicator] = useState({ width: 0, x: 0 });
   const prevActiveRef = useRef<string | null>(null);
@@ -151,6 +157,12 @@ export const Navigation = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [isWork, isAbout, isPrototypes]);
+
+  // Don't render navigation on prototype detail pages (e.g., /prototypes/door-handle-checkin)
+  // Only show on /prototypes listing page
+  if (isPrototypeDetailPage) {
+    return null;
+  }
 
   return (
     <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
