@@ -1,59 +1,69 @@
 import { useState } from 'react';
+import { generateCloudflareImageUrl } from '../lib/cloudflare';
 
 interface OptimizedImageProps {
   src: string;
   alt: string;
-  className?: string;
+  className?: string; // applied to <img>
+  containerClassName?: string; // applied to wrapper <div>
   width?: number;
   height?: number;
   loading?: 'lazy' | 'eager';
-  cloudinaryPublicId?: string; // If using Cloudinary, provide public ID
+  cloudflareImageId?: string; // Cloudflare Images ID
+  cloudflareR2Url?: string; // R2 URL for videos/large files
+  accountHash?: string; // Account hash for Cloudflare Images (optional, can come from env)
+  style?: React.CSSProperties; // applied to <img>
 }
 
 /**
- * OptimizedImage component that supports Cloudinary optimization
- * If cloudinaryPublicId is provided, uses Cloudinary URL with transformations
- * Otherwise, uses the src URL directly
+ * OptimizedImage component that supports Cloudflare Images and R2
+ * Priority: cloudflareR2Url > cloudflareImageId > local src
  */
 export default function OptimizedImage({
   src,
   alt,
   className = '',
+  containerClassName = '',
   width,
   height,
   loading = 'lazy',
-  cloudinaryPublicId
+  cloudflareImageId,
+  cloudflareR2Url,
+  accountHash,
+  style
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  // If Cloudinary public ID is provided, generate optimized URL
-  const getOptimizedUrl = () => {
-    if (cloudinaryPublicId) {
-      const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'your-cloud-name';
-      const transformations = [
-        'f_auto', // Auto format (WebP/AVIF)
-        'q_auto', // Auto quality
-        width ? `w_${width}` : 'w_auto', // Responsive width
-        'c_limit', // Maintain aspect ratio
-        'dpr_auto' // Device pixel ratio
-      ].filter(Boolean).join(',');
-      return `https://res.cloudinary.com/${cloudName}/image/upload/${transformations}/${cloudinaryPublicId}`;
+  // Determine which URL to use (priority: R2 > Images > local)
+  let imageUrl = src;
+  
+  if (cloudflareR2Url) {
+    // Use R2 URL for videos/large files
+    imageUrl = cloudflareR2Url;
+  } else if (cloudflareImageId) {
+    // Use Cloudflare Images with optimizations
+    const cloudflareUrl = generateCloudflareImageUrl(cloudflareImageId, accountHash, {
+      width: width,
+      height: height,
+      format: 'auto',
+      quality: 90, // High quality (adjust as needed)
+    });
+    
+    if (cloudflareUrl) {
+      imageUrl = cloudflareUrl;
     }
-    return src;
-  };
-
-  const imageUrl = getOptimizedUrl();
+  }
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative ${containerClassName}`}>
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-zinc-900">
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-zinc-900 z-10">
           <div className="w-8 h-8 border-2 border-gray-300 dark:border-gray-600 border-t-gray-600 dark:border-t-gray-400 rounded-full animate-spin" />
         </div>
       )}
       {hasError ? (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-zinc-900 text-gray-400">
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-zinc-900 text-gray-400 z-10">
           <span style={{ fontFamily: "'balto', sans-serif" }}>Failed to load image</span>
         </div>
       ) : (
@@ -63,6 +73,7 @@ export default function OptimizedImage({
           width={width}
           height={height}
           loading={loading}
+          style={style}
           className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
           onLoad={() => setIsLoading(false)}
           onError={() => {

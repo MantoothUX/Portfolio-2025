@@ -13,7 +13,10 @@
         "/projects/Mantooth_Portfolio/Figma.png",
         "/projects/Mantooth_Portfolio/Cursor.png"
       ],
-      "tags": ["UX/UI Design", "AI-assisted coding"],
+      "tags": [
+        "UX/UI Design",
+        "AI-assisted coding"
+      ],
       "year": "2025",
       "role": "Design, development",
       "category": "Personal",
@@ -29,7 +32,15 @@
         "Designed, built and launched this site in 4 days",
         "\"This is a pretty cool website\" - You, probably",
         "\"I'm really proud of you, Joshua\" - My Mom"
-      ]
+      ],
+      "cloudflareImageId": "2f955cf0-0192-4bbd-8be6-b0c91af75800",
+      "cloudflareGalleryIds": [
+        "2f955cf0-0192-4bbd-8be6-b0c91af75800",
+        "7da9240d-b57d-4a30-5620-18d653052e00",
+        "2580c345-0b52-4036-b622-10fb02207500",
+        "9c7a6eab-2e52-4a52-3f24-213d179fbf00"
+      ],
+      "cloudflareGalleryR2Urls": []
     },
     {
       "id": "1",
@@ -38,7 +49,10 @@
       "description": "Retro-style game I vibe coded in react",
       "image": "/projects/us-capitals-game/card.png",
       "modalImage": "/projects/us-capitals-game/Capitals.gif",
-      "tags": ["Prompt engineering", "UX/UI design"],
+      "tags": [
+        "Prompt engineering",
+        "UX/UI design"
+      ],
       "year": "2025",
       "role": "UX design, prompt engineer",
       "category": "Personal",
@@ -47,7 +61,9 @@
       "outcomes": [
         "My son asks to play the game almost every day",
         "\"This is awesome! Did you really build it?\" - My wife"
-      ]
+      ],
+      "cloudflareImageId": "7017671e-c5d8-4e4b-e0ea-b8c95fd58900",
+      "cloudflareModalR2Url": "https://pub-294d9724a3c946b6b825bb79c16414c1.r2.dev/projects/us-capitals-game/Capitals.gif"
     },
     {
       "id": "15",
@@ -56,7 +72,11 @@
       "description": "Interactive prototype of a Chrome extension music player",
       "cardDescription": "Interactive prototype of a Chrome extension music player",
       "image": "/projects/coming-soon/Coming-soon.png",
-      "tags": ["UX/UI Design", "Prototyping", "React"],
+      "tags": [
+        "UX/UI Design",
+        "Prototyping",
+        "React"
+      ],
       "year": "2025",
       "role": "Design, development",
       "category": "Personal",
@@ -67,7 +87,8 @@
         "Vercel"
       ],
       "prototypeUrl": "/prototypes/music-player-chrome-extension",
-      "hidden": true
+      "hidden": true,
+      "cloudflareImageId": "d2baa8eb-e8b4-4767-97c4-5abb4893f700"
     },
     {
       "id": "3",
@@ -85,7 +106,11 @@
         "/projects/variant-level-packages/All-variant_bulk_column.png",
         "/projects/variant-level-packages/All-variant_bulk_selector.png"
       ],
-      "tags": ["Product design lead", "Cross-team collaboration", "Cross-functional collaboration"],
+      "tags": [
+        "Product design lead",
+        "Cross-team collaboration",
+        "Cross-functional collaboration"
+      ],
       "year": "2025",
       "role": "Product design lead",
       "category": "Shopify",
@@ -100,6 +125,18 @@
       ],
       "outcomes": [
         "The feature was launched in Shopify Summer Edition 2025. It gained immediate and steady adoption, significantly improving shipping accuracy for thousands of merchants across 1 million+ product variants and counting."
+      ],
+      "cloudflareImageId": "058c0549-9be0-48e5-6048-fdead7862600",
+      "cloudflareModalR2Url": "https://pub-294d9724a3c946b6b825bb79c16414c1.r2.dev/projects/variant-level-packages/Variant-level package assignment.gif",
+      "cloudflareGalleryIds": [
+        "14743e03-db15-46cd-cdd8-9b326e0e4b00",
+        "16a9ec83-dc8b-4414-3c9a-581170c42500",
+        "73774db2-51b7-44fc-33dd-eb180ea6b000",
+        "c13d648e-fb78-49f0-b047-ebc70c11ea00",
+        "23c3b169-b81e-4d51-983f-939ff67a8300"
+      ],
+      "cloudflareGalleryR2Urls": [
+        "https://pub-294d9724a3c946b6b825bb79c16414c1.r2.dev/projects/variant-level-packages/Variant-level package assignment.gif"
       ]
     },
     {
@@ -112,12 +149,18 @@
       "galleryImages": [
         "/projects/fulfillment-future-vision/tbd.png"
       ],
-      "tags": ["Product design lead", "User research", "Product strategy"],
+      "tags": [
+        "Product design lead",
+        "User research",
+        "Product strategy"
+      ],
       "year": "2025",
       "role": "Product design lead",
       "category": "Shopify",
       "overview": "[tbd]",
-      "hidden": true
+      "hidden": true,
+      "cloudflareGalleryIds": [],
+      "cloudflareGalleryR2Urls": []
     },
     {
       "id": "7",
@@ -129,12 +172,17 @@
       "galleryImages": [
         "/projects/shipping-profiles-redesign/tbd.png"
       ],
-      "tags": ["Product design", "User research"],
+      "tags": [
+        "Product design",
+        "User research"
+      ],
       "year": "2024-2025",
       "role": "Product design, user testing",
       "category": "Shopify",
       "overview": "[tbd]",
-      "hidden": true
+      "hidden": true,
+      "cloudflareGalleryIds": [],
+      "cloudflareGalleryR2Urls": []
     },
     {
       "id": "8",
@@ -146,12 +194,17 @@
       "galleryImages": [
         "/projects/flat-rates/tbd.png"
       ],
-      "tags": ["Product design lead", "User research"],
+      "tags": [
+        "Product design lead",
+        "User research"
+      ],
       "year": "2024",
       "role": "Product design lead",
       "category": "Shopify",
       "overview": "[tbd]",
-      "hidden": true
+      "hidden": true,
+      "cloudflareGalleryIds": [],
+      "cloudflareGalleryR2Urls": []
     },
     {
       "id": "9",
@@ -168,7 +221,9 @@
         "/projects/order-printer-vision/OP_picklist_printpreview.png"
       ],
       "galleryFooter": "*Future vision work is ongoing and confidential. Additional work samples can be shared offline",
-      "tags": ["UX/UI Design"],
+      "tags": [
+        "UX/UI Design"
+      ],
       "year": "2024-2025",
       "role": "Design lead",
       "category": "Shopify",
@@ -184,7 +239,16 @@
         "Led design on a template refactor to work better with new features",
         "Designed an improved no-code editor experience for all templates",
         "Designed the future vision of the Order Printer app that incorporates Shopify Sidekick for AI-driven template creation and customization"
-      ]
+      ],
+      "cloudflareImageId": "8576840b-0d48-483f-cefe-e0ad08553d00",
+      "cloudflareModalR2Url": "https://pub-294d9724a3c946b6b825bb79c16414c1.r2.dev/projects/order-printer-vision/picklist visual.gif",
+      "cloudflareGalleryIds": [
+        "8576840b-0d48-483f-cefe-e0ad08553d00",
+        "293bf46f-1eca-4562-1adf-7d8c7635b900",
+        "270d077c-f45d-4ef6-c238-b2bb7a1fe700",
+        "2581450e-cea1-441e-de7b-b84b8a4e4300"
+      ],
+      "cloudflareGalleryR2Urls": []
     },
     {
       "id": "2",
@@ -200,7 +264,10 @@
         "/projects/marketing-automations/Custom_workflow.png",
         "/projects/marketing-automations/Marketing-automation-detail.png"
       ],
-      "tags": ["Product design", "User research"],
+      "tags": [
+        "Product design",
+        "User research"
+      ],
       "year": "2021-2023",
       "role": "Product design, user testing",
       "category": "Shopify",
@@ -212,12 +279,21 @@
       ],
       "solutions": [
         "I collaborated with multiple designers and cross-functional teams to design an automated email marketing platform. The platform integrated functionality from two existing apps into a cohesive experience that offered:",
-        "A library of marketing automation templates", 
-        "No-code email editing", 
+        "A library of marketing automation templates",
+        "No-code email editing",
         "Customizable workflow builder",
         "Metrics and reporting to help merchants monitor and improve their automated emails"
       ],
-      "growthAndEvolution": "After a successful launch, I spent the next year leading the vision, growth and evolution of the product. I established a series of collaborative, cross-functional design workshops that streamlined my team's process from concept design to production."
+      "growthAndEvolution": "After a successful launch, I spent the next year leading the vision, growth and evolution of the product. I established a series of collaborative, cross-functional design workshops that streamlined my team's process from concept design to production.",
+      "cloudflareImageId": "100883bf-c455-45f1-54b4-153b659b7500",
+      "cloudflareGalleryIds": [
+        "10f0210f-f892-4296-a3c8-46e95e082500",
+        "2e02a260-f551-4317-c90f-7b0952595500",
+        "808fdc09-efc2-4652-fc54-df871c312d00",
+        "187bab1f-765a-4c9c-1ef2-a4d497d82600",
+        "787f8a93-4615-4719-cf56-5ddb1d5df600"
+      ],
+      "cloudflareGalleryR2Urls": []
     },
     {
       "id": "10",
@@ -227,11 +303,16 @@
       "cardDescription": "Responsive web and mobile app design",
       "image": "/projects/rigup/rigup_hero.png",
       "modalImage": "/projects/rigup/rigup_hero.png",
-      "tags": ["UX/UI Design", "User research"],
+      "tags": [
+        "UX/UI Design",
+        "User research"
+      ],
       "year": "2019-2021",
       "role": "Product design, research, user testing",
       "category": "RigUp",
-      "overview": "From 2019-2021 I led design on key projects across user types and product areas:\n\n- Strategic redesign and refactor of the admin experience\n\n- End-to-end design of a worker management experience\n\n- Streamlined worker onboarding experience\n\n- Redesign of workforce marketplace profiles"
+      "overview": "From 2019-2021 I led design on key projects across user types and product areas:\n\n- Strategic redesign and refactor of the admin experience\n\n- End-to-end design of a worker management experience\n\n- Streamlined worker onboarding experience\n\n- Redesign of workforce marketplace profiles",
+      "cloudflareImageId": "5597e94d-444e-401d-7b8a-578ffbf89e00",
+      "cloudflareModalImageId": "5597e94d-444e-401d-7b8a-578ffbf89e00"
     },
     {
       "id": "12",
@@ -247,11 +328,23 @@
         "/projects/TxT/dashboard.jpg",
         "/projects/TxT/vehicle_lookup.jpg"
       ],
-      "tags": ["UX/UI Design", "User research"],
+      "tags": [
+        "UX/UI Design",
+        "User research"
+      ],
       "year": "2018-2019",
       "role": "Product design, user testing",
-      "category": "Texas by Texas",      
-      "overview": "Texas government online services were dated, poorly designed, disparate, unintuitive and untrustworthy. I collaborated with a small team at Deloitte Digital to design, build and test a user-friendly government services app. The app centralizes and simplifies the most common government services for Texans. The responsive website and mobile app launched in 2021."
+      "category": "Texas by Texas",
+      "overview": "Texas government online services were dated, poorly designed, disparate, unintuitive and untrustworthy. I collaborated with a small team at Deloitte Digital to design, build and test a user-friendly government services app. The app centralizes and simplifies the most common government services for Texans. The responsive website and mobile app launched in 2021.",
+      "cloudflareImageId": "23ce26cd-968c-4553-16be-b100a965e900",
+      "cloudflareGalleryIds": [
+        "23ce26cd-968c-4553-16be-b100a965e900",
+        "80588d4c-447e-4cca-9bc1-fd108db77800",
+        "972e273c-2f48-4688-f7d5-96cc266cfd00",
+        "b0afbc12-7f8c-4ac6-66d5-6c4d5712cc00",
+        "52e67847-4518-4f7f-c098-1cbc6d353600"
+      ],
+      "cloudflareGalleryR2Urls": []
     },
     {
       "id": "5",
@@ -265,11 +358,21 @@
         "/projects/thread/Thread-responsive.png",
         "/projects/thread/Thread_Pre-ICO_System Flow.png"
       ],
-      "tags": ["UX/UI Design", "Creative direction"],
+      "tags": [
+        "UX/UI Design",
+        "Creative direction"
+      ],
       "year": "2018",
       "role": "UX/UI design, research, creative direction",
       "category": "Thread",
-      "overview": "I led research, design, branding and social strategy to promote a blockchain service launch. The goal of the service was to power contracts and payments between companies and freelancers. The site needed to be trustworthy, professional, informative, persuasive, and responsive for all device sizes."
+      "overview": "I led research, design, branding and social strategy to promote a blockchain service launch. The goal of the service was to power contracts and payments between companies and freelancers. The site needed to be trustworthy, professional, informative, persuasive, and responsive for all device sizes.",
+      "cloudflareImageId": "6259dd11-c113-414a-56fe-1499e80e3300",
+      "cloudflareGalleryIds": [
+        "6259dd11-c113-414a-56fe-1499e80e3300",
+        "9bbc42ad-c375-40eb-2297-68ff70775400",
+        "0c0982ca-6edb-4cae-1a72-8534584ab600"
+      ],
+      "cloudflareGalleryR2Urls": []
     },
     {
       "id": "4",
@@ -284,11 +387,22 @@
         "/projects/loom/Loom_homepage.png",
         "/projects/loom/Loom_Dash_Master.png"
       ],
-      "tags": ["Product design", "Cross-functional collaboration"],
+      "tags": [
+        "Product design",
+        "Cross-functional collaboration"
+      ],
       "year": "2016-2018",
       "role": "Product design lead",
       "category": "Loom",
-      "overview": "I led product design, research and product strategy from MVP to polished product in a lean, fast-paced startup environment. I developed and evolved processes for collaborative, cross-functional problem solving and design. I also worked closely with my engineering partners to develop a design system and component library to increase our speed from concept to production."
+      "overview": "I led product design, research and product strategy from MVP to polished product in a lean, fast-paced startup environment. I developed and evolved processes for collaborative, cross-functional problem solving and design. I also worked closely with my engineering partners to develop a design system and component library to increase our speed from concept to production.",
+      "cloudflareImageId": "e77dd61e-3352-456b-1d21-f9689f36ca00",
+      "cloudflareGalleryIds": [
+        "670c8398-5618-45ce-6f5e-c3dbf7c4d100",
+        "e77dd61e-3352-456b-1d21-f9689f36ca00",
+        "65f2443f-723c-4c9e-30c9-dbe52df4e700",
+        "e0a218fc-658e-4b14-d20a-f4605c005c00"
+      ],
+      "cloudflareGalleryR2Urls": []
     },
     {
       "id": "6",
@@ -300,11 +414,19 @@
       "galleryImages": [
         "/projects/finish-line/Live_app_Images.png"
       ],
-      "tags": ["UX/UI Design", "User research"],
+      "tags": [
+        "UX/UI Design",
+        "User research"
+      ],
       "year": "2015",
       "role": "UX/UI design, research",
       "category": "Finish Line",
-      "overview": "As a freelance designer at GreenStone, I helped design the future vision of Finish Line's mobile app and online retail experiences to help them stand out and increase sales in a competitive market. Finish Line launched their overhauled mobile app in early 2017."
+      "overview": "As a freelance designer at GreenStone, I helped design the future vision of Finish Line's mobile app and online retail experiences to help them stand out and increase sales in a competitive market. Finish Line launched their overhauled mobile app in early 2017.",
+      "cloudflareImageId": "a1e8443a-3b0d-40e3-98d3-c87c50175600",
+      "cloudflareGalleryIds": [
+        "c5efd657-315f-45e8-b654-c1580957a300"
+      ],
+      "cloudflareGalleryR2Urls": []
     },
     {
       "id": "13",
@@ -313,11 +435,14 @@
       "description": "Redesigned shipping profiles to be market-driven and more intuitive",
       "cardDescription": "Redesigned shipping profiles to be market-driven and more intuitive",
       "image": "/projects/coming-soon/Coming-soon.png",
-      "tags": ["Product design"],
+      "tags": [
+        "Product design"
+      ],
       "year": "2024-2025",
       "role": "Product design",
       "category": "Shopify",
-      "disabled": true
+      "disabled": true,
+      "cloudflareImageId": "d2baa8eb-e8b4-4767-97c4-5abb4893f700"
     },
     {
       "id": "14",
@@ -326,11 +451,14 @@
       "description": "Designed the future vision of Shopify shipping and fulfillment workflows",
       "cardDescription": "Designed the future vision of Shopify shipping and fulfillment workflows",
       "image": "/projects/coming-soon/Coming-soon.png",
-      "tags": ["Product design"],
+      "tags": [
+        "Product design"
+      ],
       "year": "2024-2025",
       "role": "Product design",
       "category": "Shopify",
-      "disabled": true
+      "disabled": true,
+      "cloudflareImageId": "d2baa8eb-e8b4-4767-97c4-5abb4893f700"
     }
   ],
   "about": {
@@ -344,10 +472,36 @@
     ],
     "resume": "/JoshMantooth_Resume_2025.pdf",
     "skills": {
-      "Design": ["Collaborative design", "Rapid prototyping", "UI design", "Copywriting", "Critique", "Leadership and mentorship", "Stakeholder alignment"],
-      "Tools": ["Figma", "FigJam", "Framer", "Cursor", "Claude", "ChatGPT", "Midjourney"],
-      "Strategy & research": ["User research", "Concept and usability testing", "System mapping", "User journey mapping", "User-driven storytelling", "Marketing strategy", "Market research", "Product strategy"]
-    }
+      "Design": [
+        "Collaborative design",
+        "Rapid prototyping",
+        "UI design",
+        "Copywriting",
+        "Critique",
+        "Leadership and mentorship",
+        "Stakeholder alignment"
+      ],
+      "Tools": [
+        "Figma",
+        "FigJam",
+        "Framer",
+        "Cursor",
+        "Claude",
+        "ChatGPT",
+        "Midjourney"
+      ],
+      "Strategy & research": [
+        "User research",
+        "Concept and usability testing",
+        "System mapping",
+        "User journey mapping",
+        "User-driven storytelling",
+        "Marketing strategy",
+        "Market research",
+        "Product strategy"
+      ]
+    },
+    "cloudflareImageId": "c45b843e-3a73-4c9e-c5cd-b4a0e9820c00"
   },
   "contact": {
     "email": "mantoothux@gmail.com",

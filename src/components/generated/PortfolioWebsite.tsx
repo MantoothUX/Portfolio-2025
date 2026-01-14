@@ -6,6 +6,8 @@ import { cn } from '../../lib/utils';
 import contentData from '../../content.json';
 import { useDarkMode } from '../../contexts/DarkModeContext';
 import { useIsMobile } from '../../hooks/use-mobile';
+import OptimizedImage from '../OptimizedImage';
+import { generateCloudflareImageUrl } from '../../lib/cloudflare';
 
 type Project = {
   id: string;
@@ -15,6 +17,12 @@ type Project = {
   cardDescription?: string; // Optional: shorter description for card (falls back to description)
   image: string; // Image for the project card
   modalImage?: string; // Optional: separate image for the modal hero (falls back to image if not provided)
+  cloudflareImageId?: string; // Cloudflare Images ID for main image
+  cloudflareR2Url?: string; // Cloudflare R2 URL for main image (videos/large files)
+  cloudflareModalImageId?: string; // Cloudflare Images ID for modal image
+  cloudflareModalR2Url?: string; // Cloudflare R2 URL for modal image
+  cloudflareGalleryIds?: string[]; // Cloudflare Images IDs for gallery
+  cloudflareGalleryR2Urls?: string[]; // Cloudflare R2 URLs for gallery
   tags: string[];
   year: string;
   role: string;
@@ -152,11 +160,16 @@ const ProjectCard = ({
         <div className="relative overflow-hidden bg-gray-50 dark:bg-zinc-950/50 aspect-[4/3] flex-shrink-0" style={{
         borderRadius: '12px 12px 0 0'
       }}>
-          <motion.img src={project.image} alt={project.title} className="w-full h-full object-cover" whileHover={isDisabled ? {} : {
-          scale: 1.05
-        }} transition={{
-          duration: 0.4
-        }} style={isDisabled ? { filter: 'grayscale(100%)' } : {}} />
+          <OptimizedImage
+            src={project.image}
+            alt={project.title}
+            cloudflareImageId={project.cloudflareImageId}
+            cloudflareR2Url={project.cloudflareR2Url}
+            className={`w-full h-full object-cover transition-transform duration-400 ${!isDisabled ? 'group-hover:scale-105' : ''}`}
+            containerClassName="w-full h-full"
+            loading="lazy"
+            style={isDisabled ? { filter: 'grayscale(100%)' } : {}}
+          />
           {!isDisabled && <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />}
         </div>
         <div className="p-4 flex flex-col flex-grow">
@@ -171,10 +184,14 @@ const ProjectCard = ({
 
 const SingleImageDisplay = ({
   image,
-  alt
+  alt,
+  cloudflareImageId,
+  cloudflareR2Url
 }: {
   image: string;
   alt: string;
+  cloudflareImageId?: string;
+  cloudflareR2Url?: string;
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isMobile = useIsMobile();
@@ -199,12 +216,21 @@ const SingleImageDisplay = ({
   return (
     <>
       <div className={cn("w-full max-w-full sm:max-w-2xl md:max-w-4xl rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800", isMobile && "cursor-pointer")} onClick={() => isMobile && setIsExpanded(true)}>
-        <img src={image} alt={alt} className="w-full h-auto" />
+        <OptimizedImage
+          src={image}
+          alt={alt}
+          cloudflareImageId={cloudflareImageId}
+          cloudflareR2Url={cloudflareR2Url}
+          className="w-full h-auto"
+          containerClassName="w-full"
+        />
       </div>
       <AnimatePresence>
         {isExpanded && (
           <ExpandedImageModal
             images={[image]}
+            cloudflareImageIds={cloudflareImageId ? [cloudflareImageId] : undefined}
+            cloudflareR2Urls={cloudflareR2Url ? [cloudflareR2Url] : undefined}
             initialIndex={0}
             onClose={() => setIsExpanded(false)}
           />
@@ -216,10 +242,14 @@ const SingleImageDisplay = ({
 
 const ExpandedImageModal = ({
   images,
+  cloudflareImageIds,
+  cloudflareR2Urls,
   initialIndex,
   onClose
 }: {
   images: string[];
+  cloudflareImageIds?: string[];
+  cloudflareR2Urls?: string[];
   initialIndex: number;
   onClose: () => void;
 }) => {
@@ -251,6 +281,21 @@ const ExpandedImageModal = ({
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
+  // Get the best URL for the current image
+  const getCurrentImageUrl = () => {
+    // Priority: R2 URL > Cloudflare Image URL > local src
+    const r2Url = cloudflareR2Urls?.[currentIndex];
+    if (r2Url) return r2Url;
+    
+    const cloudflareId = cloudflareImageIds?.[currentIndex];
+    if (cloudflareId) {
+      const url = generateCloudflareImageUrl(cloudflareId, undefined, { format: 'auto', quality: 95 });
+      if (url) return url;
+    }
+    
+    return images[currentIndex];
   };
 
   return (
@@ -305,10 +350,13 @@ const ExpandedImageModal = ({
         className="relative w-full h-full flex items-center justify-center p-4"
         onClick={(e) => e.stopPropagation()}
       >
-        <img
+        <OptimizedImage
           src={images[currentIndex]}
           alt={`Expanded image ${currentIndex + 1}`}
+          cloudflareImageId={cloudflareImageIds?.[currentIndex]}
+          cloudflareR2Url={cloudflareR2Urls?.[currentIndex]}
           className="max-w-full max-h-full object-contain"
+          containerClassName="max-w-full max-h-full flex items-center justify-center"
         />
       </motion.div>
 
@@ -324,9 +372,13 @@ const ExpandedImageModal = ({
 
 const ImageGallery = ({
   images,
+  cloudflareImageIds,
+  cloudflareR2Urls,
   footer
 }: {
   images: string[];
+  cloudflareImageIds?: string[];
+  cloudflareR2Urls?: string[];
   footer?: string;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -334,6 +386,20 @@ const ImageGallery = ({
   const [isPreloading, setIsPreloading] = useState(true);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const isMobile = useIsMobile();
+
+  // Get the best URL for an image at a given index
+  const getImageUrl = (index: number): string => {
+    const r2Url = cloudflareR2Urls?.[index];
+    if (r2Url) return r2Url;
+    
+    const cloudflareId = cloudflareImageIds?.[index];
+    if (cloudflareId) {
+      const url = generateCloudflareImageUrl(cloudflareId, undefined, { format: 'auto', quality: 90 });
+      if (url) return url;
+    }
+    
+    return images[index];
+  };
 
   // Preload all images when component mounts
   useEffect(() => {
@@ -346,12 +412,13 @@ const ImageGallery = ({
         return;
       }
 
-      images.forEach((src) => {
+      images.forEach((src, index) => {
         const img = new Image();
+        const actualSrc = getImageUrl(index);
         img.onload = () => {
           setLoadedImages((prev) => {
             const next = new Set(prev);
-            next.add(src);
+            next.add(actualSrc);
             loadedCount++;
             // Once all images are loaded, hide preloading state
             if (loadedCount === totalImages) {
@@ -366,12 +433,12 @@ const ImageGallery = ({
             setIsPreloading(false);
           }
         };
-        img.src = src;
+        img.src = actualSrc;
       });
     };
     
     preloadImages();
-  }, [images]);
+  }, [images, cloudflareImageIds, cloudflareR2Urls]);
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -402,7 +469,8 @@ const ImageGallery = ({
           <div className={cn("relative w-full", isMobile && "cursor-pointer")} onClick={() => isMobile && setExpandedIndex(currentIndex)}>
             {images.map((src, index) => {
               const isActive = index === currentIndex;
-              const isLoaded = loadedImages.has(src);
+              const actualSrc = getImageUrl(index);
+              const isLoaded = loadedImages.has(actualSrc);
               
               // Render all loaded images, or the active one if not yet loaded
               if (!isLoaded && !isActive) {
@@ -411,8 +479,8 @@ const ImageGallery = ({
               
               return (
                 <motion.img
-                  key={src}
-                  src={src}
+                  key={actualSrc}
+                  src={actualSrc}
                   alt={`Gallery image ${index + 1}`}
                   className={cn("w-full h-auto", isActive ? "relative block" : "absolute top-0 left-0 w-full h-auto")}
                   style={{
@@ -427,10 +495,10 @@ const ImageGallery = ({
                     ease: "easeInOut"
                   }}
                   onLoad={() => {
-                    if (!loadedImages.has(src)) {
+                    if (!loadedImages.has(actualSrc)) {
                       setLoadedImages((prev) => {
                         const next = new Set(prev);
-                        next.add(src);
+                        next.add(actualSrc);
                         return next;
                       });
                     }
@@ -440,7 +508,7 @@ const ImageGallery = ({
             })}
           </div>
           {/* Loading indicator */}
-          {(isPreloading || !loadedImages.has(images[currentIndex])) && (
+          {(isPreloading || !loadedImages.has(getImageUrl(currentIndex))) && (
             <div className="absolute inset-0 flex items-center justify-center z-0 bg-gray-100 dark:bg-zinc-900">
               <div className="w-8 h-8 border-2 border-gray-300 dark:border-gray-600 border-t-gray-600 dark:border-t-gray-400 rounded-full animate-spin" />
             </div>
@@ -456,6 +524,8 @@ const ImageGallery = ({
         {expandedIndex !== null && (
           <ExpandedImageModal
             images={images}
+            cloudflareImageIds={cloudflareImageIds}
+            cloudflareR2Urls={cloudflareR2Urls}
             initialIndex={expandedIndex}
             onClose={() => setExpandedIndex(null)}
           />
@@ -659,13 +729,23 @@ const ProjectModal = ({
             {/* Image carousel - show right after title/year if galleryImages exist */}
             {project.galleryImages && project.galleryImages.length > 0 && (
               <div className="mb-12">
-                <ImageGallery images={project.galleryImages} footer={project.galleryFooter} />
+                <ImageGallery 
+                  images={project.galleryImages} 
+                  cloudflareImageIds={project.cloudflareGalleryIds}
+                  cloudflareR2Urls={project.cloudflareGalleryR2Urls}
+                  footer={project.galleryFooter} 
+                />
               </div>
             )}
 
             {/* Hero image - show modalImage if available and no galleryImages */}
             {project.modalImage && (!project.galleryImages || project.galleryImages.length === 0) && (
-              <SingleImageDisplay image={project.modalImage} alt={project.title} />
+              <SingleImageDisplay 
+                image={project.modalImage} 
+                alt={project.title}
+                cloudflareImageId={project.cloudflareModalImageId}
+                cloudflareR2Url={project.cloudflareModalR2Url}
+              />
             )}
 
             <div className="max-w-4xl space-y-12">
@@ -917,14 +997,14 @@ const AboutPage = ({
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {aboutContent.photo && (
                 <div className="flex-shrink-0">
-                  <img 
+                  <OptimizedImage 
                     src={aboutContent.photo} 
                     alt="Josh Mantooth" 
+                    cloudflareImageId={(contentData?.about as any)?.cloudflareImageId}
+                    cloudflareR2Url={(contentData?.about as any)?.cloudflareR2Url}
                     className="w-64 h-80 sm:w-72 sm:h-96 object-cover"
+                    containerClassName="w-64 h-80 sm:w-72 sm:h-96"
                     style={{ borderRadius: '20px' }}
-                    onError={(e) => {
-                      console.error('Image failed to load:', aboutContent.photo);
-                    }}
                   />
                 </div>
               )}

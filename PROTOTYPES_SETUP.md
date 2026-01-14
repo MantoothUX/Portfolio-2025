@@ -78,31 +78,42 @@ To password-protect a prototype, set the `password` field in `prototypes.json`:
 
 **Note:** This is client-side protection only. It prevents casual access but can be bypassed by inspecting the code. Suitable for portfolio demos but not for real security.
 
-## Cloudinary Setup (Optional - for Media Optimization)
+## Cloudflare Setup (Optional - for Media Optimization)
 
-For optimized image/video hosting:
+This project uses Cloudflare for optimized image and video hosting:
+- **Cloudflare Images** - For images (automatic optimization, WebP/AVIF conversion)
+- **Cloudflare R2** - For videos and large GIFs (> 10MB)
 
-1. **Create a Cloudinary account**: https://cloudinary.com (free tier: 25GB storage, 25GB bandwidth/month)
+### Setup Steps
 
-2. **Get your credentials** from the Cloudinary dashboard:
-   - Cloud Name
-   - API Key
-   - API Secret
+1. **Enable Cloudflare Images** in your Cloudflare dashboard
 
-3. **Add environment variables** to Vercel project settings:
-   - `VITE_CLOUDINARY_CLOUD_NAME` - Your cloud name
-   - `VITE_CLOUDINARY_API_KEY` - Your API key
-   - `CLOUDINARY_API_SECRET` - Your API secret (server-side only, if needed)
+2. **Create an R2 bucket** for videos/large files
 
-4. **Create `.env.local` file** for local development (add to `.gitignore`):
+3. **Get your credentials**:
+   - Account ID (from Cloudflare dashboard)
+   - Images API Token (Account → Cloudflare Images → Edit)
+   - R2 Access Key ID and Secret (R2 → Manage R2 API Tokens)
+
+4. **Create `.env.local` file** for local development:
    ```
-   VITE_CLOUDINARY_CLOUD_NAME=your-cloud-name
-   VITE_CLOUDINARY_API_KEY=your-api-key
+   VITE_CLOUDFLARE_ACCOUNT_ID=your_account_id
+   VITE_CLOUDFLARE_ACCOUNT_HASH=your_account_hash
+   CLOUDFLARE_IMAGES_API_TOKEN=your_images_api_token
+   CLOUDFLARE_R2_ACCESS_KEY_ID=your_r2_access_key
+   CLOUDFLARE_R2_SECRET_ACCESS_KEY=your_r2_secret
+   CLOUDFLARE_R2_BUCKET_NAME=portfolio-assets
+   CLOUDFLARE_R2_ENDPOINT=https://your_account_id.r2.cloudflarestorage.com
    ```
-   
-   **Note**: `.env.local` is already in `.gitignore` - never commit actual credentials!
 
-5. **Use the `OptimizedImage` component**:
+5. **Upload assets**:
+   ```bash
+   npm run upload:images    # Upload images to Cloudflare Images
+   npm run upload:r2        # Upload videos/large GIFs to R2
+   npm run update:cloudflare-content  # Update content.json with IDs
+   ```
+
+6. **Use the `OptimizedImage` component**:
 
 ```tsx
 import OptimizedImage from '@/components/OptimizedImage';
@@ -110,19 +121,17 @@ import OptimizedImage from '@/components/OptimizedImage';
 <OptimizedImage
   src="/path/to/image.jpg"
   alt="Description"
-  cloudinaryPublicId="portfolio/projects/image-name"
-  width={800}
+  cloudflareImageId="image-uuid-from-cloudflare"
 />
 ```
 
-### Cloudinary Benefits
+### Benefits
 
-- **Automatic optimization**: Upload originals, Cloudinary optimizes automatically
-- **Format conversion**: Auto WebP/AVIF when browser supports
-- **Responsive images**: Automatic sizing based on device
-- **Video optimization**: Automatic transcoding and multiple quality levels
-- **Global CDN**: Fast worldwide delivery
-- **Zero pre-processing**: Upload originals, use transformation URLs
+- **High quality images** - No compression artifacts
+- **Automatic optimization** - WebP/AVIF when browser supports
+- **No file size limits** - Large files go to R2
+- **Global CDN** - Fast worldwide delivery
+- **Cost effective** - Pay for what you use
 
 ## Prototype Structure
 
@@ -153,9 +162,9 @@ Currently migrated prototypes:
 - Verify password comparison logic (case-sensitive)
 
 ### Images/videos not optimized?
-- Set up Cloudinary credentials (see above)
-- Use `OptimizedImage` component with `cloudinaryPublicId`
-- Or manually optimize images before adding to `public/`
+- Set up Cloudflare credentials (see above)
+- Run upload scripts to push assets to Cloudflare
+- Use `OptimizedImage` component with `cloudflareImageId`
 - Check that environment variables are set in Vercel
 
 ### Build errors?
