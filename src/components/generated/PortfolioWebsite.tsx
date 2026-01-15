@@ -134,6 +134,12 @@ const getProjects = (): Project[] => {
 
 const projects = getProjects();
 
+// Helper function to detect video URLs
+const isVideoUrl = (url?: string): boolean => {
+  if (!url) return false;
+  return /\.(mp4|webm|ogg|mov)$/i.test(url);
+};
+
 const ProjectCard = ({
   project,
   onClick
@@ -142,6 +148,7 @@ const ProjectCard = ({
   onClick: () => void;
 }) => {
   const isDisabled = project.disabled === true;
+  const videoUrl = project.cloudflareR2Url && isVideoUrl(project.cloudflareR2Url) ? project.cloudflareR2Url : null;
   
   return <motion.div whileHover={isDisabled ? {} : {
     scale: 1.05,
@@ -160,16 +167,28 @@ const ProjectCard = ({
         <div className="relative overflow-hidden bg-gray-50 dark:bg-zinc-950/50 aspect-[4/3] flex-shrink-0" style={{
         borderRadius: '12px 12px 0 0'
       }}>
-          <OptimizedImage
-            src={project.image}
-            alt={project.title}
-            cloudflareImageId={project.cloudflareImageId}
-            cloudflareR2Url={project.cloudflareR2Url}
-            className={`w-full h-full object-cover transition-transform duration-400 ${!isDisabled ? 'group-hover:scale-105' : ''}`}
-            containerClassName="w-full h-full"
-            loading="lazy"
-            style={isDisabled ? { filter: 'grayscale(100%)' } : {}}
-          />
+          {videoUrl ? (
+            <video
+              src={videoUrl}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={`w-full h-full object-cover transition-transform duration-400 ${!isDisabled ? 'group-hover:scale-105' : ''}`}
+              style={isDisabled ? { filter: 'grayscale(100%)' } : {}}
+            />
+          ) : (
+            <OptimizedImage
+              src={project.image}
+              alt={project.title}
+              cloudflareImageId={project.cloudflareImageId}
+              cloudflareR2Url={project.cloudflareR2Url}
+              className={`w-full h-full object-cover transition-transform duration-400 ${!isDisabled ? 'group-hover:scale-105' : ''}`}
+              containerClassName="w-full h-full"
+              loading="lazy"
+              style={isDisabled ? { filter: 'grayscale(100%)' } : {}}
+            />
+          )}
           {!isDisabled && <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />}
         </div>
         <div className="p-4 flex flex-col flex-grow">
@@ -180,6 +199,42 @@ const ProjectCard = ({
         </div>
       </div>
     </motion.div>;
+};
+
+// Helper function to parse markdown-style links [text](url) and convert to React elements
+const parseLinks = (text: string): React.ReactNode[] => {
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match;
+  let key = 0;
+
+  while ((match = linkRegex.exec(text)) !== null) {
+    // Add text before the link
+    if (match.index > lastIndex) {
+      parts.push(text.substring(lastIndex, match.index));
+    }
+    // Add the link with external icon
+    parts.push(
+      <a
+        key={key++}
+        href={match[2]}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1 text-green-600 dark:text-green-400 hover:underline font-medium"
+      >
+        {match[1]}
+        <ExternalLink className="w-3.5 h-3.5" />
+      </a>
+    );
+    lastIndex = linkRegex.lastIndex;
+  }
+  // Add remaining text
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+  
+  return parts.length > 0 ? parts : [text];
 };
 
 const SingleImageDisplay = ({
@@ -195,6 +250,7 @@ const SingleImageDisplay = ({
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isMobile = useIsMobile();
+  const isVideo = isVideoUrl(cloudflareR2Url);
 
   useEffect(() => {
     if (isExpanded) {
@@ -215,18 +271,30 @@ const SingleImageDisplay = ({
 
   return (
     <>
-      <div className={cn("w-full max-w-full sm:max-w-2xl md:max-w-4xl rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800", isMobile && "cursor-pointer")} onClick={() => isMobile && setIsExpanded(true)}>
-        <OptimizedImage
-          src={image}
-          alt={alt}
-          cloudflareImageId={cloudflareImageId}
-          cloudflareR2Url={cloudflareR2Url}
-          className="w-full h-auto"
-          containerClassName="w-full"
-        />
+      <div className={cn("rounded-2xl overflow-hidden mb-12 border border-gray-200 dark:border-zinc-800", isVideo ? "inline-block bg-[#1e3a5f]" : "w-full max-w-full sm:max-w-2xl md:max-w-4xl", isMobile && !isVideo && "cursor-pointer")} onClick={() => isMobile && !isVideo && setIsExpanded(true)}>
+        {isVideo && cloudflareR2Url ? (
+          <video
+            src={cloudflareR2Url}
+            autoPlay
+            loop
+            muted
+            playsInline
+            controls
+            className="block max-w-full h-auto max-h-[50vh] sm:max-h-[60vh] md:max-h-[70vh] object-contain"
+          />
+        ) : (
+          <OptimizedImage
+            src={image}
+            alt={alt}
+            cloudflareImageId={cloudflareImageId}
+            cloudflareR2Url={cloudflareR2Url}
+            className="w-full h-auto"
+            containerClassName="w-full"
+          />
+        )}
       </div>
       <AnimatePresence>
-        {isExpanded && (
+        {isExpanded && !isVideo && (
           <ExpandedImageModal
             images={[image]}
             cloudflareImageIds={cloudflareImageId ? [cloudflareImageId] : undefined}
@@ -719,14 +787,17 @@ const ProjectModal = ({
               )}
             </div>
 
-            {/* Prototype embed - show right after title/description if prototypeUrl exists */}
-            {project.prototypeUrl && (
-              <div className="mb-12">
-                <PrototypeEmbed url={project.prototypeUrl} title={project.title} />
-              </div>
+            {/* Hero image/video - show FIRST if modalImage or video R2 URL available and no galleryImages */}
+            {(project.modalImage || isVideoUrl(project.cloudflareModalR2Url)) && (!project.galleryImages || project.galleryImages.length === 0) && (
+              <SingleImageDisplay 
+                image={project.modalImage || ''} 
+                alt={project.title}
+                cloudflareImageId={project.cloudflareModalImageId}
+                cloudflareR2Url={project.cloudflareModalR2Url}
+              />
             )}
 
-            {/* Image carousel - show right after title/year if galleryImages exist */}
+            {/* Image carousel - show if galleryImages exist */}
             {project.galleryImages && project.galleryImages.length > 0 && (
               <div className="mb-12">
                 <ImageGallery 
@@ -738,14 +809,11 @@ const ProjectModal = ({
               </div>
             )}
 
-            {/* Hero image - show modalImage if available and no galleryImages */}
-            {project.modalImage && (!project.galleryImages || project.galleryImages.length === 0) && (
-              <SingleImageDisplay 
-                image={project.modalImage} 
-                alt={project.title}
-                cloudflareImageId={project.cloudflareModalImageId}
-                cloudflareR2Url={project.cloudflareModalR2Url}
-              />
+            {/* Prototype embed - show after hero/gallery if prototypeUrl exists */}
+            {project.prototypeUrl && (
+              <div className="mb-12">
+                <PrototypeEmbed url={project.prototypeUrl} title={project.title} />
+              </div>
             )}
 
             <div className="max-w-4xl space-y-12">
@@ -764,7 +832,7 @@ const ProjectModal = ({
                             </div>
                           );
                         } else if (line.trim()) {
-                          return <p key={index} className="mb-3">{line.trim()}</p>;
+                          return <p key={index} className="mb-3">{parseLinks(line.trim())}</p>;
                         }
                         return null;
                       })}
@@ -773,13 +841,13 @@ const ProjectModal = ({
                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
                       {project.overview.split('\n').map((line, index) => {
                         if (line.trim()) {
-                          return <p key={index} className={index > 0 ? "mt-4" : ""}>{line.trim()}</p>;
+                          return <p key={index} className={index > 0 ? "mt-4" : ""}>{parseLinks(line.trim())}</p>;
                         }
                         return null;
                       })}
                     </div>
                   ) : (
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>{project.overview}</p>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>{parseLinks(project.overview)}</p>
                   )}
                   {project.externalUrl && (
                     <a 
@@ -1184,10 +1252,10 @@ const HomePage = ({
     title: "Staff-level UX designer crafting impactful and delightful experiences",
     subtitle: "I help companies build products that users love through research-driven design and thoughtful interactions."
   };
-  const categories = ['all', 'Shopify', 'RigUp', 'Texas by Texas', 'Loom', 'Thread', 'Finish Line', 'Personal'];
+  const categories = ['all', 'Shopify', 'Personal', 'RigUp', 'Texas by Texas', 'Loom', 'Thread', 'Finish Line'];
   const visibleProjects = projects.filter(p => !p.hidden);
   const filteredProjects = selectedCategory === 'all' 
-    ? [...visibleProjects.filter(p => p.category !== 'Personal' && !p.disabled), ...visibleProjects.filter(p => p.category === 'Personal' && !p.disabled), ...visibleProjects.filter(p => p.disabled)]
+    ? [...visibleProjects.filter(p => p.category === 'Shopify' && !p.disabled), ...visibleProjects.filter(p => p.category === 'Personal' && !p.disabled), ...visibleProjects.filter(p => p.category !== 'Shopify' && p.category !== 'Personal' && !p.disabled), ...visibleProjects.filter(p => p.disabled)]
     : visibleProjects.filter(p => p.category === selectedCategory).sort((a, b) => {
         // Move disabled projects to the end
         if (a.disabled && !b.disabled) return 1;

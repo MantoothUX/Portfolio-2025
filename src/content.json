@@ -1,96 +1,6 @@
 {
   "projects": [
     {
-      "id": "0",
-      "title": "MantoothUX.com",
-      "company": "Personal",
-      "description": "Responsive portfolio website I designed and built with AI tools",
-      "cardDescription": "This website 🤯",
-      "image": "/projects/Mantooth_Portfolio/Portfolio_hero.png",
-      "galleryImages": [
-        "/projects/Mantooth_Portfolio/Portfolio_hero.png",
-        "/projects/Mantooth_Portfolio/Magic_path.png",
-        "/projects/Mantooth_Portfolio/Figma.png",
-        "/projects/Mantooth_Portfolio/Cursor.png"
-      ],
-      "tags": [
-        "UX/UI Design",
-        "AI-assisted coding"
-      ],
-      "year": "2025",
-      "role": "Design, development",
-      "category": "Personal",
-      "overview": "I built and managed my previous portfolio site through Squarespace. Squarespace is a trusted no-code solution, but I wanted more control over the structure, content, motion, and design details.\n\nI challenged myself to design and build a new portfolio site in a week to test my proficiency with Cursor and other AI tools.",
-      "toolsUsed": [
-        "Figma",
-        "Magic Path AI",
-        "Cursor",
-        "GitHub https://github.com/MantoothUX/Portfolio-2025",
-        "Vercel"
-      ],
-      "outcomes": [
-        "Designed, built and launched this site in 4 days",
-        "\"This is a pretty cool website\" - You, probably",
-        "\"I'm really proud of you, Joshua\" - My Mom"
-      ],
-      "cloudflareImageId": "2f955cf0-0192-4bbd-8be6-b0c91af75800",
-      "cloudflareGalleryIds": [
-        "2f955cf0-0192-4bbd-8be6-b0c91af75800",
-        "7da9240d-b57d-4a30-5620-18d653052e00",
-        "2580c345-0b52-4036-b622-10fb02207500",
-        "9c7a6eab-2e52-4a52-3f24-213d179fbf00"
-      ],
-      "cloudflareGalleryR2Urls": []
-    },
-    {
-      "id": "1",
-      "title": "U.S. capitals quiz game",
-      "company": "Personal",
-      "description": "Retro-style game I vibe coded in react",
-      "image": "/projects/us-capitals-game/card.png",
-      "modalImage": "/projects/us-capitals-game/Capitals.gif",
-      "tags": [
-        "Prompt engineering",
-        "UX/UI design"
-      ],
-      "year": "2025",
-      "role": "UX design, prompt engineer",
-      "category": "Personal",
-      "overview": "As a kid, one of my greatest feats in academia was my knowledge of all U.S. capitals. When my son became interested in learning states and capitals, I decided to create this game to help him learn. I wanted to create a game that was fun and engaging, but also educational. It took me about 5 hours to build, test, iterate and deploy.",
-      "externalUrl": "https://us-capitals-game.vercel.app/",
-      "outcomes": [
-        "My son asks to play the game almost every day",
-        "\"This is awesome! Did you really build it?\" - My wife"
-      ],
-      "cloudflareImageId": "7017671e-c5d8-4e4b-e0ea-b8c95fd58900",
-      "cloudflareModalR2Url": "https://pub-294d9724a3c946b6b825bb79c16414c1.r2.dev/projects/us-capitals-game/Capitals.gif"
-    },
-    {
-      "id": "15",
-      "title": "Music Player Chrome Extension",
-      "company": "Personal",
-      "description": "Interactive prototype of a Chrome extension music player",
-      "cardDescription": "Interactive prototype of a Chrome extension music player",
-      "image": "/projects/coming-soon/Coming-soon.png",
-      "tags": [
-        "UX/UI Design",
-        "Prototyping",
-        "React"
-      ],
-      "year": "2025",
-      "role": "Design, development",
-      "category": "Personal",
-      "overview": "I designed and built a Spotify Chrome extension prototype. The goal is to enable seamless cross-device switching for non-app Spotify users via authed Chrome sessions. Built with React and TypeScript, this project showcases my ability to rapidly prototype complex UI interactions and bring design concepts to life through code.\n\nDid I concept and build this in 20 minutes during an on-site design challenge? ...Well, yes. But I really liked the outcome.",
-      "toolsUsed": [
-        "Figma Make",
-        "Cursor",
-        "Vercel"
-      ],
-      "prototypeUrl": "/prototypes/music-player-chrome-extension",
-      "hidden": true,
-      "cloudflareImageId": "d2baa8eb-e8b4-4767-97c4-5abb4893f700"
-    },
-    {
       "id": "3",
       "title": "Shopify package management",
       "company": "Shopify",
@@ -138,73 +48,6 @@
       "cloudflareGalleryR2Urls": [
         "https://pub-294d9724a3c946b6b825bb79c16414c1.r2.dev/projects/variant-level-packages/Variant-level package assignment.gif"
       ]
-    },
-    {
-      "id": "11",
-      "title": "Shopify fulfillment future vision",
-      "company": "Shopify",
-      "description": "Designed future vision of Shopify shipping and fulfillment",
-      "cardDescription": "Designed future vision of Shopify shipping and fulfillment",
-      "image": "/projects/fulfillment-future-vision/tbd.jpg",
-      "galleryImages": [
-        "/projects/fulfillment-future-vision/tbd.png"
-      ],
-      "tags": [
-        "Product design lead",
-        "User research",
-        "Product strategy"
-      ],
-      "year": "2025",
-      "role": "Product design lead",
-      "category": "Shopify",
-      "overview": "[tbd]",
-      "hidden": true,
-      "cloudflareGalleryIds": [],
-      "cloudflareGalleryR2Urls": []
-    },
-    {
-      "id": "7",
-      "title": "Shopify shipping profiles redesign",
-      "company": "Shopify",
-      "description": "Redesigning shipping profiles to work better with markets feature",
-      "cardDescription": "Redesigning shipping profiles to work better with markets feature",
-      "image": "/projects/shipping-profiles-redesign/tbd.jpg",
-      "galleryImages": [
-        "/projects/shipping-profiles-redesign/tbd.png"
-      ],
-      "tags": [
-        "Product design",
-        "User research"
-      ],
-      "year": "2024-2025",
-      "role": "Product design, user testing",
-      "category": "Shopify",
-      "overview": "[tbd]",
-      "hidden": true,
-      "cloudflareGalleryIds": [],
-      "cloudflareGalleryR2Urls": []
-    },
-    {
-      "id": "8",
-      "title": "Flat rates for Shopify shipping profiles",
-      "company": "Shopify",
-      "description": "Changing the foundational structure of rates in shipping profiles",
-      "cardDescription": "Changing the foundational structure of rates in shipping profiles",
-      "image": "/projects/flat-rates/tbd.jpg",
-      "galleryImages": [
-        "/projects/flat-rates/tbd.png"
-      ],
-      "tags": [
-        "Product design lead",
-        "User research"
-      ],
-      "year": "2024",
-      "role": "Product design lead",
-      "category": "Shopify",
-      "overview": "[tbd]",
-      "hidden": true,
-      "cloudflareGalleryIds": [],
-      "cloudflareGalleryR2Urls": []
     },
     {
       "id": "9",
@@ -293,6 +136,186 @@
         "187bab1f-765a-4c9c-1ef2-a4d497d82600",
         "787f8a93-4615-4719-cf56-5ddb1d5df600"
       ],
+      "cloudflareGalleryR2Urls": []
+    },
+    {
+      "id": "15",
+      "title": "Music Player Chrome Extension",
+      "company": "Personal",
+      "description": "Interactive prototype of a Chrome extension music player",
+      "cardDescription": "Interactive prototype of a Chrome extension music player",
+      "image": "/projects/coming-soon/Coming-soon.png",
+      "tags": [
+        "UX/UI Design",
+        "Prototyping",
+        "React"
+      ],
+      "year": "2025",
+      "role": "Design, development",
+      "category": "Personal",
+      "overview": "I designed and built a Spotify Chrome extension prototype. The goal is to enable seamless cross-device switching for non-app Spotify users via authed Chrome sessions.\n\nDid I concept and build this in 20 minutes during an on-site design challenge? ...Well, yes. But I really liked the outcome.\n\nBuilt with React, TypeScript, Tailwind CSS, and Framer Motion. [Interactive prototype](http://localhost:5173/prototypes/music-player-chrome-extension)",
+      "toolsUsed": [
+        "Figma Make",
+        "Cursor",
+        "Vercel"
+      ],
+      "cloudflareImageId": "b8aec56f-6750-47e9-131d-e636c21dd600",
+      "cloudflareModalR2Url": "https://pub-294d9724a3c946b6b825bb79c16414c1.r2.dev/projects/Chrome/Full-screen-video.mp4"
+    },
+    {
+      "id": "16",
+      "title": "Vibe coded motion experiment",
+      "company": "Personal",
+      "description": "Micro-interaction prototype for a hospitality app",
+      "cardDescription": "Micro-interaction prototype for a hospitality app",
+      "image": "/projects/coming-soon/Coming-soon.png",
+      "cloudflareR2Url": "https://pub-294d9724a3c946b6b825bb79c16414c1.r2.dev/projects/Door-swing-animation/door-swing-Jan15.mp4",
+      "cloudflareModalR2Url": "https://pub-294d9724a3c946b6b825bb79c16414c1.r2.dev/projects/Door-swing-animation/door-swing-Jan15.mp4",
+      "tags": [
+        "Motion Design",
+        "Prototyping",
+        "React"
+      ],
+      "year": "2025",
+      "role": "Design, development",
+      "category": "Personal",
+      "overview": "I was perusing hospitality apps and got an idea... What if the process of checking in to a hotel felt more welcoming, like someone opening the door to your room? Then I thought: if you squint just right, that badge looks a lot like a door handle. And this was the result.\n\nBuilt with React, TypeScript, Tailwind CSS, and Framer Motion. [Interactive prototype](https://www.mantoothux.com/prototypes/door-handle-checkin)",
+      "toolsUsed": [
+        "Figma",
+        "Cursor",
+        "Vercel"
+      ]
+    },
+    {
+      "id": "0",
+      "title": "MantoothUX.com",
+      "company": "Personal",
+      "description": "Responsive portfolio website I designed and built with AI tools",
+      "cardDescription": "This website 🤯",
+      "image": "/projects/Mantooth_Portfolio/Portfolio_hero.png",
+      "galleryImages": [
+        "/projects/Mantooth_Portfolio/Portfolio_hero.png",
+        "/projects/Mantooth_Portfolio/Magic_path.png",
+        "/projects/Mantooth_Portfolio/Figma.png",
+        "/projects/Mantooth_Portfolio/Cursor.png"
+      ],
+      "tags": [
+        "UX/UI Design",
+        "AI-assisted coding"
+      ],
+      "year": "2025",
+      "role": "Design, development",
+      "category": "Personal",
+      "overview": "I built and managed my previous portfolio site through Squarespace. Squarespace is a trusted no-code solution, but I wanted more control over the structure, content, motion, and design details.\n\nI challenged myself to design and build a new portfolio site in a week to test my proficiency with Cursor and other AI tools.",
+      "toolsUsed": [
+        "Figma",
+        "Magic Path AI",
+        "Cursor",
+        "GitHub https://github.com/MantoothUX/Portfolio-2025",
+        "Vercel"
+      ],
+      "outcomes": [
+        "Designed, built and launched this site in 4 days",
+        "\"This is a pretty cool website\" - You, probably",
+        "\"I'm really proud of you, Joshua\" - My Mom"
+      ],
+      "cloudflareImageId": "2f955cf0-0192-4bbd-8be6-b0c91af75800",
+      "cloudflareGalleryIds": [
+        "2f955cf0-0192-4bbd-8be6-b0c91af75800",
+        "7da9240d-b57d-4a30-5620-18d653052e00",
+        "2580c345-0b52-4036-b622-10fb02207500",
+        "9c7a6eab-2e52-4a52-3f24-213d179fbf00"
+      ],
+      "cloudflareGalleryR2Urls": []
+    },
+    {
+      "id": "1",
+      "title": "U.S. capitals quiz game",
+      "company": "Personal",
+      "description": "Retro-style game I vibe coded in react",
+      "image": "/projects/us-capitals-game/card.png",
+      "modalImage": "/projects/us-capitals-game/Capitals.gif",
+      "tags": [
+        "Prompt engineering",
+        "UX/UI design"
+      ],
+      "year": "2025",
+      "role": "UX design, prompt engineer",
+      "category": "Personal",
+      "overview": "As a kid, one of my greatest feats in academia was my knowledge of all U.S. capitals. When my son became interested in learning states and capitals, I decided to create this game to help him learn. I wanted to create a game that was fun and engaging, but also educational. It took me about 5 hours to build, test, iterate and deploy.",
+      "externalUrl": "https://us-capitals-game.vercel.app/",
+      "outcomes": [
+        "My son asks to play the game almost every day",
+        "\"This is awesome! Did you really build it?\" - My wife"
+      ],
+      "cloudflareImageId": "7017671e-c5d8-4e4b-e0ea-b8c95fd58900",
+      "cloudflareModalR2Url": "https://pub-294d9724a3c946b6b825bb79c16414c1.r2.dev/projects/us-capitals-game/Capitals.gif"
+    },
+    {
+      "id": "11",
+      "title": "Shopify fulfillment future vision",
+      "company": "Shopify",
+      "description": "Designed future vision of Shopify shipping and fulfillment",
+      "cardDescription": "Designed future vision of Shopify shipping and fulfillment",
+      "image": "/projects/fulfillment-future-vision/tbd.jpg",
+      "galleryImages": [
+        "/projects/fulfillment-future-vision/tbd.png"
+      ],
+      "tags": [
+        "Product design lead",
+        "User research",
+        "Product strategy"
+      ],
+      "year": "2025",
+      "role": "Product design lead",
+      "category": "Shopify",
+      "overview": "[tbd]",
+      "hidden": true,
+      "cloudflareGalleryIds": [],
+      "cloudflareGalleryR2Urls": []
+    },
+    {
+      "id": "7",
+      "title": "Shopify shipping profiles redesign",
+      "company": "Shopify",
+      "description": "Redesigning shipping profiles to work better with markets feature",
+      "cardDescription": "Redesigning shipping profiles to work better with markets feature",
+      "image": "/projects/shipping-profiles-redesign/tbd.jpg",
+      "galleryImages": [
+        "/projects/shipping-profiles-redesign/tbd.png"
+      ],
+      "tags": [
+        "Product design",
+        "User research"
+      ],
+      "year": "2024-2025",
+      "role": "Product design, user testing",
+      "category": "Shopify",
+      "overview": "[tbd]",
+      "hidden": true,
+      "cloudflareGalleryIds": [],
+      "cloudflareGalleryR2Urls": []
+    },
+    {
+      "id": "8",
+      "title": "Flat rates for Shopify shipping profiles",
+      "company": "Shopify",
+      "description": "Changing the foundational structure of rates in shipping profiles",
+      "cardDescription": "Changing the foundational structure of rates in shipping profiles",
+      "image": "/projects/flat-rates/tbd.jpg",
+      "galleryImages": [
+        "/projects/flat-rates/tbd.png"
+      ],
+      "tags": [
+        "Product design lead",
+        "User research"
+      ],
+      "year": "2024",
+      "role": "Product design lead",
+      "category": "Shopify",
+      "overview": "[tbd]",
+      "hidden": true,
+      "cloudflareGalleryIds": [],
       "cloudflareGalleryR2Urls": []
     },
     {
