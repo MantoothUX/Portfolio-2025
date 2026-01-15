@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { generateCloudflareImageUrl } from '../lib/cloudflare';
 
 interface OptimizedImageProps {
@@ -34,26 +34,33 @@ export default function OptimizedImage({
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [useFallback, setUseFallback] = useState(false);
 
   // Determine which URL to use (priority: R2 > Images > local)
-  let imageUrl = src;
-  
-  if (cloudflareR2Url) {
-    // Use R2 URL for videos/large files
-    imageUrl = cloudflareR2Url;
-  } else if (cloudflareImageId) {
-    // Use Cloudflare Images with optimizations
-    const cloudflareUrl = generateCloudflareImageUrl(cloudflareImageId, accountHash, {
-      width: width,
-      height: height,
-      format: 'auto',
-      quality: 90, // High quality (adjust as needed)
-    });
-    
-    if (cloudflareUrl) {
-      imageUrl = cloudflareUrl;
+  const imageUrl = useMemo(() => {
+    if (useFallback) {
+      return src;
     }
-  }
+    
+    if (cloudflareR2Url) {
+      // Use R2 URL for videos/large files
+      return cloudflareR2Url;
+    } else if (cloudflareImageId) {
+      // Use Cloudflare Images with optimizations
+      const cloudflareUrl = generateCloudflareImageUrl(cloudflareImageId, accountHash, {
+        width: width,
+        height: height,
+        format: 'auto',
+        quality: 90, // High quality (adjust as needed)
+      });
+      
+      if (cloudflareUrl) {
+        return cloudflareUrl;
+      }
+    }
+    
+    return src;
+  }, [useFallback, cloudflareR2Url, cloudflareImageId, accountHash, src, width, height]);
 
   return (
     <div className={`relative ${containerClassName}`}>
@@ -68,6 +75,7 @@ export default function OptimizedImage({
         </div>
       ) : (
         <img
+          key={imageUrl}
           src={imageUrl}
           alt={alt}
           width={width}
@@ -77,8 +85,15 @@ export default function OptimizedImage({
           className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
           onLoad={() => setIsLoading(false)}
           onError={() => {
-            setIsLoading(false);
-            setHasError(true);
+            // If Cloudflare URL failed and we haven't tried fallback yet, retry with local src
+            if (!useFallback && (cloudflareR2Url || cloudflareImageId)) {
+              setUseFallback(true);
+              setIsLoading(true);
+              setHasError(false);
+            } else {
+              setIsLoading(false);
+              setHasError(true);
+            }
           }}
         />
       )}

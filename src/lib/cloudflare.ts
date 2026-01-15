@@ -30,7 +30,7 @@ export function generateCloudflareImageUrl(
   // Cloudflare Images URL format: https://imagedelivery.net/{accountHash}/{imageId}/{variant}
   // Account hash is obtained from the upload API response
   // If not provided, we'll need to get it from environment or mapping file
-  const hash = accountHash || import.meta.env.VITE_CLOUDFLARE_ACCOUNT_HASH;
+  const hash = accountHash || import.meta.env.VITE_CLOUDFLARE_ACCOUNT_HASH || 'jyJmIknJh-I15ZZwzhbZ4Q';
   
   if (!hash) {
     // Fallback: try to construct URL without hash (may not work)
