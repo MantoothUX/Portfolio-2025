@@ -16,6 +16,13 @@
           "slug": "music-player-chrome-extension",
           "iterations": 1,
           "password": null
+        },
+        {
+          "id": "circle-chart-viz",
+          "title": "Interactive Circle Chart",
+          "slug": "circle-chart-viz",
+          "iterations": 1,
+          "password": null
         }
       ]
     },

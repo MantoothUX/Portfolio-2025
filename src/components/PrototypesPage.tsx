@@ -10,6 +10,7 @@ import { useDarkMode } from '../contexts/DarkModeContext';
 // Lazy load prototype components
 const DoorHandleCheckin = lazy(() => import('../prototypes/door-handle-checkin/DoorHandleCheckin'));
 const MusicPlayerChromeExtension = lazy(() => import('../prototypes/music-player-chrome-extension/App'));
+const CircleChartViz = lazy(() => import('../prototypes/circle-chart-viz/CircleChartViz'));
 
 interface PrototypeItem {
   id: string;
@@ -305,6 +306,8 @@ const PrototypeViewer = ({ slug, prototype, darkMode, onToggleDarkMode }: { slug
         return DoorHandleCheckin;
       case 'music-player-chrome-extension':
         return MusicPlayerChromeExtension;
+      case 'circle-chart-viz':
+        return CircleChartViz;
       default:
         return null;
     }
