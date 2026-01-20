@@ -1,6 +1,6 @@
 import { useState, useEffect, lazy, Suspense, useMemo } from 'react';
 import { useNavigate, useParams, Link, useLocation, useSearchParams } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Lock, Folder, FileText, ExternalLink } from 'lucide-react';
 import prototypesData from '../content/prototypes.json';
 import { cn } from '../lib/utils';
@@ -42,6 +42,7 @@ const PasswordModal = ({
 }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const shouldReduceMotion = useReducedMotion();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,16 +61,16 @@ const PasswordModal = ({
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4" onClick={onClose}>
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        exit={shouldReduceMotion ? false : { opacity: 0 }}
         className="absolute inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm"
         onClick={onClose}
       />
       <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        exit={shouldReduceMotion ? false : { opacity: 0, scale: 0.95, y: 20 }}
         className="relative w-full max-w-md bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl p-6"
         onClick={(e) => e.stopPropagation()}
       >
@@ -85,6 +86,7 @@ const PasswordModal = ({
               setError('');
             }}
             placeholder="Enter password"
+            autoComplete="current-password"
             className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-gray-900 dark:text-white mb-4 focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400"
             style={{ fontFamily: "'balto', sans-serif" }}
             autoFocus
@@ -98,14 +100,14 @@ const PasswordModal = ({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors"
+              className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:focus-visible:ring-green-400 transition-colors"
               style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 rounded-lg bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 hover:bg-green-800 dark:hover:bg-green-600 transition-colors"
+              className="flex-1 px-4 py-2 rounded-lg bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 hover:bg-green-800 dark:hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:focus-visible:ring-green-400 transition-colors"
               style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}
             >
               Submit
@@ -130,6 +132,7 @@ export default function PrototypesPage() {
   });
   const [authenticatedPrototypes, setAuthenticatedPrototypes] = useState<Set<string>>(new Set());
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const shouldReduceMotion = useReducedMotion();
   
   const isPrototypes = location.pathname.startsWith('/prototypes');
   const isWork = location.pathname === '/' || location.pathname === '/work';
@@ -190,12 +193,12 @@ export default function PrototypesPage() {
   // Landing page
   return (
     <>
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
+      <motion.div
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
+        exit={shouldReduceMotion ? false : { opacity: 0, y: -20 }}
         transition={{
-          duration: 0.4,
+          duration: shouldReduceMotion ? 0 : 0.4,
           ease: [0.25, 0.1, 0.25, 1]
         }}
         className="min-h-screen pb-24 transition-colors duration-300 relative"
@@ -206,9 +209,9 @@ export default function PrototypesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10" style={{ isolation: 'isolate' }}>
           <div className="max-w-3xl">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
               className="mb-12"
             >
               <h1 className="mb-4 leading-tight" style={{
@@ -223,24 +226,24 @@ export default function PrototypesPage() {
 
             {/* Projects List Container */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
+              transition={{ delay: shouldReduceMotion ? 0 : 0.2, duration: shouldReduceMotion ? 0 : 0.5 }}
               className="bg-white/90 dark:bg-gray-900/80 backdrop-blur-md rounded-xl md:rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-4 sm:p-6 md:p-8 shadow-2xl"
             >
             <div className="space-y-4 sm:space-y-6">
               {data.categories.map((category, categoryIndex) => (
                 <motion.div
                   key={category.name}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: categoryIndex * 0.1 + 0.3 }}
+                  transition={{ delay: shouldReduceMotion ? 0 : categoryIndex * 0.1 + 0.3 }}
                 >
                   <button
-                    className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 text-left w-full"
+                    className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 text-left w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:focus-visible:ring-green-400 rounded-lg"
                     style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}
                   >
-                    <Folder className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-400 flex-shrink-0" />
+                    <Folder className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-400 flex-shrink-0" aria-hidden="true" />
                     <span className="text-gray-900 dark:text-white text-sm sm:text-base md:text-lg">{category.name}</span>
                   </button>
                   <div className="ml-6 sm:ml-8 space-y-1.5 sm:space-y-2">
@@ -248,19 +251,19 @@ export default function PrototypesPage() {
                       <motion.button
                         key={item.id}
                         onClick={() => handlePrototypeClick(item)}
-                        className="flex items-center gap-2 sm:gap-3 w-full text-left p-2 sm:p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5 transition-colors group"
-                        whileHover={{ x: 4 }}
+                        className="flex items-center gap-2 sm:gap-3 w-full text-left p-2 sm:p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:focus-visible:ring-green-400 transition-colors group"
+                        whileHover={shouldReduceMotion ? {} : { x: 4 }}
                       >
-                        <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-500 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors flex-shrink-0" />
+                        <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-500 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors flex-shrink-0" aria-hidden="true" />
                         <span className="text-gray-700 dark:text-gray-200 flex-1 text-sm sm:text-base flex items-center gap-2" style={{ fontFamily: "'balto', sans-serif" }}>
                           {item.title}
                           {item.slug === "order-printer" && (
-                            <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />
+                            <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" aria-hidden="true" />
                           )}
                         </span>
-                        {item.externalUrl && <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />}
+                        {item.externalUrl && <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" aria-hidden="true" />}
                         {item.password && (
-                          <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" />
+                          <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 dark:text-gray-500 flex-shrink-0" aria-hidden="true" />
                         )}
                         <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 flex-shrink-0" style={{ fontFamily: "'balto', sans-serif" }}>
                           ({item.iterations} {item.iterations === 1 ? 'iteration' : 'iterations'})
@@ -321,7 +324,7 @@ const PrototypeViewer = ({ slug, prototype, darkMode, onToggleDarkMode }: { slug
             </p>
             <button
               onClick={() => navigate('/prototypes')}
-              className="px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 transition-colors"
+              className="px-6 py-3 bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50 rounded-full hover:bg-green-800 dark:hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:focus-visible:ring-green-400 transition-colors"
               style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}
             >
               ← All prototypes
@@ -341,7 +344,7 @@ const PrototypeViewer = ({ slug, prototype, darkMode, onToggleDarkMode }: { slug
       <div className="sticky top-0 z-10 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-sm border-b border-gray-200 dark:border-zinc-800 px-6 py-4">
         <button
           onClick={() => navigate('/prototypes')}
-          className="text-green-600 dark:text-green-400 hover:underline"
+          className="text-green-600 dark:text-green-400 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:focus-visible:ring-green-400 rounded"
           style={{ fontFamily: "'balto', sans-serif", fontWeight: 500 }}
         >
           ← All prototypes

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowLeft, Mail, Linkedin, Github, X, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '../../lib/utils';
@@ -1420,6 +1420,7 @@ const HomePage = ({
 export const PortfolioWebsite = (props: PortfolioWebsiteProps) => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const shouldReduceMotion = useReducedMotion();
   const location = useLocation();
   const navigate = useNavigate();
 
