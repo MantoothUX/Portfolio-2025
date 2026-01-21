@@ -61,16 +61,16 @@ const PasswordModal = ({
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4" onClick={onClose}>
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0 }}
+        initial={shouldReduceMotion ? undefined : { opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={shouldReduceMotion ? false : { opacity: 0 }}
+        exit={shouldReduceMotion ? undefined : { opacity: 0 }}
         className="absolute inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm"
         onClick={onClose}
       />
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.95, y: 20 }}
+        initial={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={shouldReduceMotion ? false : { opacity: 0, scale: 0.95, y: 20 }}
+        exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.95, y: 20 }}
         className="relative w-full max-w-md bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl p-6"
         onClick={(e) => e.stopPropagation()}
       >
@@ -194,9 +194,9 @@ export default function PrototypesPage() {
   return (
     <>
       <motion.div
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+        initial={shouldReduceMotion ? undefined : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={shouldReduceMotion ? false : { opacity: 0, y: -20 }}
+        exit={shouldReduceMotion ? undefined : { opacity: 0, y: -20 }}
         transition={{
           duration: shouldReduceMotion ? 0 : 0.4,
           ease: [0.25, 0.1, 0.25, 1]
@@ -209,7 +209,7 @@ export default function PrototypesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10" style={{ isolation: 'isolate' }}>
           <div className="max-w-3xl">
             <motion.div
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? undefined : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
               className="mb-12"
@@ -226,7 +226,7 @@ export default function PrototypesPage() {
 
             {/* Projects List Container */}
             <motion.div
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+              initial={shouldReduceMotion ? undefined : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: shouldReduceMotion ? 0 : 0.2, duration: shouldReduceMotion ? 0 : 0.5 }}
               className="bg-white/90 dark:bg-gray-900/80 backdrop-blur-md rounded-xl md:rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-4 sm:p-6 md:p-8 shadow-2xl"
@@ -235,7 +235,7 @@ export default function PrototypesPage() {
               {data.categories.map((category, categoryIndex) => (
                 <motion.div
                   key={category.name}
-                  initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+                  initial={shouldReduceMotion ? undefined : { opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: shouldReduceMotion ? 0 : categoryIndex * 0.1 + 0.3 }}
                 >
