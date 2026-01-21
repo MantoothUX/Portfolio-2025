@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface DataPoint {
   id: string;
@@ -8,13 +8,18 @@ interface DataPoint {
   color: string;
 }
 
-// Sample tech stack data
+// Website traffic by country data
 const sampleData: DataPoint[] = [
-  { id: '1', label: 'Frontend Development', value: 35, color: '#3b82f6' },
-  { id: '2', label: 'Backend Development', value: 25, color: '#8b5cf6' },
-  { id: '3', label: 'UI/UX Design', value: 20, color: '#ec4899' },
-  { id: '4', label: 'DevOps & Cloud', value: 12, color: '#10b981' },
-  { id: '5', label: 'Data Visualization', value: 8, color: '#f59e0b' },
+  { id: '1', label: 'United States', value: 32.5, color: '#3b82f6' },
+  { id: '2', label: 'United Kingdom', value: 18.3, color: '#8b5cf6' },
+  { id: '3', label: 'Germany', value: 12.7, color: '#ec4899' },
+  { id: '4', label: 'Canada', value: 10.2, color: '#10b981' },
+  { id: '5', label: 'France', value: 8.4, color: '#f59e0b' },
+  { id: '6', label: 'Australia', value: 6.8, color: '#ef4444' },
+  { id: '7', label: 'Japan', value: 4.5, color: '#06b6d4' },
+  { id: '8', label: 'Netherlands', value: 3.2, color: '#a855f7' },
+  { id: '9', label: 'Spain', value: 2.1, color: '#84cc16' },
+  { id: '10', label: 'Italy', value: 1.3, color: '#f97316' },
 ];
 
 const CircleChartViz = () => {
@@ -45,11 +50,11 @@ const CircleChartViz = () => {
 
   const sliceData = getSliceData();
 
-  // Create SVG path for pie slice
+  // Create SVG path for pie slice with rounded corners
   const createSlicePath = (startAngle: number, endAngle: number, radius: number) => {
     const centerX = 150;
     const centerY = 150;
-    const innerRadius = radius * 0.5; // Donut chart
+    const innerRadius = radius - 40; // 40px wide sections
 
     const startRad = (startAngle * Math.PI) / 180;
     const endRad = (endAngle * Math.PI) / 180;
@@ -76,175 +81,151 @@ const CircleChartViz = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950 flex items-center justify-center p-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-6xl"
-      >
-        <div className="mb-12 text-center">
-          <h1 className="text-4xl font-mono font-bold text-gray-900 dark:text-gray-100 mb-3">
-            Interactive Circle Chart
-          </h1>
-          <p className="text-sm font-mono text-gray-600 dark:text-gray-400">
-            Hover over sections to explore the data
-          </p>
-        </div>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 p-8">
+      {/* Analytics Dashboard Header */}
+      <div className="max-w-7xl mx-auto mb-8">
+        <h1 className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100 mb-2">
+          Analytics Dashboard
+        </h1>
+        <p className="text-sm font-mono text-gray-600 dark:text-gray-400">
+          Website Traffic by Country
+        </p>
+      </div>
 
-        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-16 lg:gap-24">
-          {/* Circle Chart */}
-          <div className="relative">
-            <svg
-              width="300"
-              height="300"
-              viewBox="0 0 300 300"
-              className="filter drop-shadow-sm"
-            >
-              {/* Background circle with border */}
-              <circle
-                cx="150"
-                cy="150"
-                r="145"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                opacity="0.8"
-                className="text-gray-300 dark:text-gray-700"
-              />
+      {/* Main Content Grid */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Traffic Source Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="lg:col-span-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6"
+          style={{ borderWidth: '1px', borderOpacity: 0.8 }}
+        >
+          <h2 className="text-lg font-mono font-semibold text-gray-900 dark:text-gray-100 mb-6">
+            Traffic Distribution
+          </h2>
 
-              {/* Pie slices */}
-              {sliceData.map((slice) => {
-                const isHovered = hoveredId === slice.id;
-                const isOtherHovered = hoveredId !== null && hoveredId !== slice.id;
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-8">
+            {/* Circle Chart */}
+            <div className="relative flex-shrink-0">
+              <svg
+                width="280"
+                height="280"
+                viewBox="0 0 300 300"
+                className="filter drop-shadow-sm"
+              >
+                {/* Pie slices */}
+                {sliceData.map((slice) => {
+                  const isHovered = hoveredId === slice.id;
+                  const isOtherHovered = hoveredId !== null && hoveredId !== slice.id;
 
-                return (
+                  return (
+                    <motion.g
+                      key={slice.id}
+                      animate={{
+                        scale: isHovered ? 1.05 : 1,
+                      }}
+                      transition={{
+                        duration: 0.25,
+                        ease: 'easeOut',
+                      }}
+                      style={{
+                        transformOrigin: '150px 150px',
+                      }}
+                    >
+                      <motion.path
+                        d={createSlicePath(slice.startAngle, slice.endAngle, 140)}
+                        fill={slice.color}
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinejoin="round"
+                        strokeLinecap="round"
+                        className="cursor-pointer dark:stroke-gray-900"
+                        onMouseEnter={() => setHoveredId(slice.id)}
+                        onMouseLeave={() => setHoveredId(null)}
+                        animate={{
+                          opacity: isOtherHovered ? 0.3 : 1,
+                          filter: isHovered
+                            ? 'drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15))'
+                            : 'drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.05))',
+                        }}
+                        transition={{
+                          duration: 0.25,
+                        }}
+                        style={{
+                          rx: '4px',
+                          ry: '4px',
+                        }}
+                      />
+                    </motion.g>
+                  );
+                })}
+
+                {/* Center text */}
+                {hoveredId && (
                   <motion.g
-                    key={slice.id}
-                    animate={{
-                      opacity: isOtherHovered ? 0.3 : 1,
-                      scale: isHovered ? 1.08 : 1,
-                    }}
-                    transition={{
-                      duration: 0.3,
-                      ease: 'easeOut',
-                    }}
-                    style={{
-                      transformOrigin: '150px 150px',
-                    }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
                   >
-                    <motion.path
-                      d={createSlicePath(slice.startAngle, slice.endAngle, 140)}
-                      fill={slice.color}
-                      stroke="white"
-                      strokeWidth="2"
-                      className="cursor-pointer dark:stroke-gray-950"
-                      onMouseEnter={() => setHoveredId(slice.id)}
+                    <text
+                      x="150"
+                      y="145"
+                      textAnchor="middle"
+                      className="text-3xl font-mono font-bold fill-gray-900 dark:fill-gray-100"
+                    >
+                      {sliceData.find((s) => s.id === hoveredId)?.percentage.toFixed(1)}%
+                    </text>
+                    <text
+                      x="150"
+                      y="165"
+                      textAnchor="middle"
+                      className="text-xs font-mono fill-gray-500 dark:fill-gray-400"
+                    >
+                      {sliceData.find((s) => s.id === hoveredId)?.label}
+                    </text>
+                  </motion.g>
+                )}
+              </svg>
+            </div>
+
+            {/* Data List */}
+            <div className="w-full flex-1">
+              <div className="space-y-1">
+                {sliceData.map((item) => {
+                  const isHovered = hoveredId === item.id;
+                  const isOtherHovered = hoveredId !== null && hoveredId !== item.id;
+
+                  return (
+                    <motion.div
+                      key={item.id}
+                      className="relative cursor-pointer py-2 px-3 rounded-lg"
+                      onMouseEnter={() => setHoveredId(item.id)}
                       onMouseLeave={() => setHoveredId(null)}
                       animate={{
-                        filter: isHovered
-                          ? 'drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.3))'
-                          : 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))',
+                        opacity: isOtherHovered ? 0.4 : 1,
+                        backgroundColor: isHovered
+                          ? 'rgba(0, 0, 0, 0.03)'
+                          : 'rgba(0, 0, 0, 0)',
                       }}
-                      transition={{
-                        duration: 0.3,
-                      }}
-                    />
-                  </motion.g>
-                );
-              })}
-
-              {/* Center circle */}
-              <circle
-                cx="150"
-                cy="150"
-                r="70"
-                fill="white"
-                className="dark:fill-gray-950"
-              />
-              <circle
-                cx="150"
-                cy="150"
-                r="70"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                opacity="0.8"
-                className="text-gray-300 dark:text-gray-700"
-              />
-
-              {/* Center text */}
-              <text
-                x="150"
-                y="145"
-                textAnchor="middle"
-                className="text-2xl font-mono font-bold fill-gray-900 dark:fill-gray-100"
-              >
-                {hoveredId
-                  ? `${sliceData.find((s) => s.id === hoveredId)?.percentage.toFixed(1)}%`
-                  : '100%'}
-              </text>
-              <text
-                x="150"
-                y="165"
-                textAnchor="middle"
-                className="text-xs font-mono fill-gray-500 dark:fill-gray-400"
-              >
-                {hoveredId
-                  ? sliceData.find((s) => s.id === hoveredId)?.label.split(' ')[0]
-                  : 'Total'}
-              </text>
-            </svg>
-          </div>
-
-          {/* Data List */}
-          <div className="w-full max-w-md">
-            <div className="space-y-3">
-              {sliceData.map((item) => {
-                const isHovered = hoveredId === item.id;
-                const isOtherHovered = hoveredId !== null && hoveredId !== item.id;
-
-                return (
-                  <motion.div
-                    key={item.id}
-                    className="relative cursor-pointer"
-                    onMouseEnter={() => setHoveredId(item.id)}
-                    onMouseLeave={() => setHoveredId(null)}
-                    animate={{
-                      opacity: isOtherHovered ? 0.4 : 1,
-                    }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <motion.div
-                      className="relative border border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-950"
+                      transition={{ duration: 0.2 }}
                       style={{
-                        borderColor: isHovered ? item.color : undefined,
-                        borderOpacity: 0.8,
-                      }}
-                      animate={{
-                        scale: isHovered ? 1.02 : 1,
-                        borderColor: isHovered ? item.color : undefined,
-                        boxShadow: isHovered
-                          ? `0 8px 24px ${item.color}40, 0 0 0 1px ${item.color}cc`
-                          : '0 2px 4px rgba(0, 0, 0, 0.05)',
-                      }}
-                      transition={{
-                        duration: 0.3,
-                        ease: 'easeOut',
+                        backgroundColor: isHovered
+                          ? 'var(--hover-bg, rgba(0, 0, 0, 0.03))'
+                          : 'transparent',
                       }}
                     >
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          {/* Color indicator */}
+                        <div className="flex items-center gap-2.5">
+                          {/* Color indicator - square with rounded corners */}
                           <motion.div
-                            className="w-4 h-4 rounded-full border"
+                            className="w-3 h-3 rounded-sm"
                             style={{
                               backgroundColor: item.color,
-                              borderColor: item.color,
-                              borderOpacity: 0.8,
                             }}
                             animate={{
-                              scale: isHovered ? 1.2 : 1,
+                              scale: isHovered ? 1.15 : 1,
                             }}
                             transition={{ duration: 0.2 }}
                           />
@@ -252,56 +233,65 @@ const CircleChartViz = () => {
                             {item.label}
                           </span>
                         </div>
-                        <motion.span
-                          className="font-mono text-lg font-bold"
-                          style={{ color: item.color }}
-                          animate={{
-                            scale: isHovered ? 1.1 : 1,
-                          }}
-                          transition={{ duration: 0.2 }}
-                        >
+                        <span className="font-mono text-sm text-gray-600 dark:text-gray-400">
                           {item.percentage.toFixed(1)}%
-                        </motion.span>
-                      </div>
-
-                      {/* Progress bar */}
-                      <div className="mt-3 h-1 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full rounded-full"
-                          style={{ backgroundColor: item.color }}
-                          initial={{ width: 0 }}
-                          animate={{ width: `${item.percentage}%` }}
-                          transition={{ duration: 0.8, delay: 0.2 }}
-                        />
+                        </span>
                       </div>
                     </motion.div>
-                  </motion.div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-
-            {/* Summary */}
-            <motion.div
-              className="mt-6 p-4 border border-gray-300 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-900"
-              style={{ borderOpacity: 0.8 }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              <div className="flex items-center justify-between font-mono text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Total Categories</span>
-                <span className="font-bold text-gray-900 dark:text-gray-100">
-                  {sampleData.length}
-                </span>
-              </div>
-              <div className="mt-2 flex items-center justify-between font-mono text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Total Value</span>
-                <span className="font-bold text-gray-900 dark:text-gray-100">{total}</span>
-              </div>
-            </motion.div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+
+        {/* Additional Dashboard Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="space-y-6"
+        >
+          {/* Total Visitors Card */}
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6" style={{ borderWidth: '1px', borderOpacity: 0.8 }}>
+            <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
+              Total Visitors
+            </h3>
+            <p className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
+              124,583
+            </p>
+            <p className="text-xs font-mono text-green-600 dark:text-green-400 mt-1">
+              +12.5% from last month
+            </p>
+          </div>
+
+          {/* Page Views Card */}
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6" style={{ borderWidth: '1px', borderOpacity: 0.8 }}>
+            <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
+              Page Views
+            </h3>
+            <p className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
+              342,891
+            </p>
+            <p className="text-xs font-mono text-green-600 dark:text-green-400 mt-1">
+              +8.3% from last month
+            </p>
+          </div>
+
+          {/* Avg Session Duration Card */}
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6" style={{ borderWidth: '1px', borderOpacity: 0.8 }}>
+            <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
+              Avg. Session Duration
+            </h3>
+            <p className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
+              4m 32s
+            </p>
+            <p className="text-xs font-mono text-red-600 dark:text-red-400 mt-1">
+              -2.1% from last month
+            </p>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };
