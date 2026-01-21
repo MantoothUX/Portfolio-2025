@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { ArrowUp, ArrowDown } from 'lucide-react';
 
 interface DataPoint {
   id: string;
@@ -10,16 +11,16 @@ interface DataPoint {
 
 // Website traffic by country data
 const sampleData: DataPoint[] = [
-  { id: '1', label: 'United States', value: 32.5, color: '#3b82f6' },
-  { id: '2', label: 'United Kingdom', value: 18.3, color: '#8b5cf6' },
-  { id: '3', label: 'Germany', value: 12.7, color: '#ec4899' },
-  { id: '4', label: 'Canada', value: 10.2, color: '#10b981' },
-  { id: '5', label: 'France', value: 8.4, color: '#f59e0b' },
-  { id: '6', label: 'Australia', value: 6.8, color: '#ef4444' },
-  { id: '7', label: 'Japan', value: 4.5, color: '#06b6d4' },
-  { id: '8', label: 'Netherlands', value: 3.2, color: '#a855f7' },
-  { id: '9', label: 'Spain', value: 2.1, color: '#84cc16' },
-  { id: '10', label: 'Italy', value: 1.3, color: '#f97316' },
+  { id: '1', label: 'United States', value: 32.5, color: '#78716C' },
+  { id: '2', label: 'United Kingdom', value: 18.3, color: '#A78BFA' },
+  { id: '3', label: 'Germany', value: 12.7, color: '#D97706' },
+  { id: '4', label: 'Canada', value: 10.2, color: '#059669' },
+  { id: '5', label: 'France', value: 8.4, color: '#CA8A04' },
+  { id: '6', label: 'Australia', value: 6.8, color: '#DC2626' },
+  { id: '7', label: 'Japan', value: 4.5, color: '#0891B2' },
+  { id: '8', label: 'Netherlands', value: 3.2, color: '#9333EA' },
+  { id: '9', label: 'Spain', value: 2.1, color: '#65A30D' },
+  { id: '10', label: 'Italy', value: 1.3, color: '#EA580C' },
 ];
 
 const CircleChartViz = () => {
@@ -99,8 +100,8 @@ const CircleChartViz = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="lg:col-span-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6"
-          style={{ borderWidth: '1px', borderOpacity: 0.8 }}
+          className="lg:col-span-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6"
+          style={{ borderWidth: '1px', borderOpacity: 0.8, borderRadius: '12px' }}
         >
           <h2 className="text-lg font-mono font-semibold text-gray-900 dark:text-gray-100 mb-6">
             Traffic Distribution
@@ -137,11 +138,7 @@ const CircleChartViz = () => {
                       <motion.path
                         d={createSlicePath(slice.startAngle, slice.endAngle, 140)}
                         fill={slice.color}
-                        stroke="white"
-                        strokeWidth="2"
-                        strokeLinejoin="round"
-                        strokeLinecap="round"
-                        className="cursor-pointer dark:stroke-gray-900"
+                        className="cursor-pointer"
                         onMouseEnter={() => setHoveredId(slice.id)}
                         onMouseLeave={() => setHoveredId(null)}
                         animate={{
@@ -152,10 +149,6 @@ const CircleChartViz = () => {
                         }}
                         transition={{
                           duration: 0.25,
-                        }}
-                        style={{
-                          rx: '4px',
-                          ry: '4px',
                         }}
                       />
                     </motion.g>
@@ -200,27 +193,21 @@ const CircleChartViz = () => {
                   return (
                     <motion.div
                       key={item.id}
-                      className="relative cursor-pointer py-2 px-3 rounded-lg"
+                      className="relative cursor-pointer py-2 px-3 rounded-lg border border-transparent"
                       onMouseEnter={() => setHoveredId(item.id)}
                       onMouseLeave={() => setHoveredId(null)}
                       animate={{
                         opacity: isOtherHovered ? 0.4 : 1,
-                        backgroundColor: isHovered
-                          ? 'rgba(0, 0, 0, 0.03)'
-                          : 'rgba(0, 0, 0, 0)',
+                        borderColor: isHovered ? 'rgba(107, 114, 128, 0.6)' : 'rgba(0, 0, 0, 0)',
+                        borderWidth: isHovered ? '1.5px' : '0px',
                       }}
-                      transition={{ duration: 0.2 }}
-                      style={{
-                        backgroundColor: isHovered
-                          ? 'var(--hover-bg, rgba(0, 0, 0, 0.03))'
-                          : 'transparent',
-                      }}
+                      transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
                     >
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2.5">
+                        <div className="flex items-center gap-1.5">
                           {/* Color indicator - square with rounded corners */}
                           <motion.div
-                            className="w-3 h-3 rounded-sm"
+                            className="w-3 h-3 rounded-md"
                             style={{
                               backgroundColor: item.color,
                             }}
@@ -253,41 +240,44 @@ const CircleChartViz = () => {
           className="space-y-6"
         >
           {/* Total Visitors Card */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6" style={{ borderWidth: '1px', borderOpacity: 0.8 }}>
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderOpacity: 0.8, borderRadius: '12px' }}>
             <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
               Total Visitors
             </h3>
             <p className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
               124,583
             </p>
-            <p className="text-xs font-mono text-green-600 dark:text-green-400 mt-1">
-              +12.5% from last month
+            <p className="text-xs font-mono text-green-600 dark:text-green-400 mt-1 flex items-center gap-1">
+              <ArrowUp className="w-8 h-8" />
+              <span>+12.5% from last month</span>
             </p>
           </div>
 
           {/* Page Views Card */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6" style={{ borderWidth: '1px', borderOpacity: 0.8 }}>
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderOpacity: 0.8, borderRadius: '12px' }}>
             <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
               Page Views
             </h3>
             <p className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
               342,891
             </p>
-            <p className="text-xs font-mono text-green-600 dark:text-green-400 mt-1">
-              +8.3% from last month
+            <p className="text-xs font-mono text-green-600 dark:text-green-400 mt-1 flex items-center gap-1">
+              <ArrowUp className="w-8 h-8" />
+              <span>+8.3% from last month</span>
             </p>
           </div>
 
           {/* Avg Session Duration Card */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6" style={{ borderWidth: '1px', borderOpacity: 0.8 }}>
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderOpacity: 0.8, borderRadius: '12px' }}>
             <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
               Avg. Session Duration
             </h3>
             <p className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
               4m 32s
             </p>
-            <p className="text-xs font-mono text-red-600 dark:text-red-400 mt-1">
-              -2.1% from last month
+            <p className="text-xs font-mono text-red-600 dark:text-red-400 mt-1 flex items-center gap-1">
+              <ArrowDown className="w-8 h-8" />
+              <span>-2.1% from last month</span>
             </p>
           </div>
         </motion.div>
