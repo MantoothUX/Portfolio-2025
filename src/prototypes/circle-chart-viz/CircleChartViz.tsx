@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 interface DataPoint {
   id: string;
@@ -52,61 +53,14 @@ const CircleChartViz = () => {
 
   const sliceData = getSliceData();
 
-  // Create SVG path for pie slice with rounded corners
-  const createSlicePath = (startAngle: number, endAngle: number, radius: number) => {
-    const centerX = 150;
-    const centerY = 150;
-    const innerRadius = radius - 40; // 40px wide sections
-    const cornerRadius = 4; // Radius for rounded corners
-
-    const startRad = (startAngle * Math.PI) / 180;
-    const endRad = (endAngle * Math.PI) / 180;
-
-    // Calculate angle offsets for the rounded corners
-    const outerCornerAngle = cornerRadius / radius;
-    const innerCornerAngle = cornerRadius / innerRadius;
-
-    // Outer arc start/end with corner offset
-    const outerStartRad = startRad + outerCornerAngle;
-    const outerEndRad = endRad - outerCornerAngle;
-
-    // Inner arc start/end with corner offset
-    const innerStartRad = startRad + innerCornerAngle;
-    const innerEndRad = endRad - innerCornerAngle;
-
-    // Outer arc points (with offset for corners)
-    const ox1 = centerX + radius * Math.cos(outerStartRad);
-    const oy1 = centerY + radius * Math.sin(outerStartRad);
-    const ox2 = centerX + radius * Math.cos(outerEndRad);
-    const oy2 = centerY + radius * Math.sin(outerEndRad);
-
-    // Inner arc points (with offset for corners)
-    const ix1 = centerX + innerRadius * Math.cos(innerStartRad);
-    const iy1 = centerY + innerRadius * Math.sin(innerStartRad);
-    const ix2 = centerX + innerRadius * Math.cos(innerEndRad);
-    const iy2 = centerY + innerRadius * Math.sin(innerEndRad);
-
-    // Actual corner points (not offset)
-    const outerStart = { x: centerX + radius * Math.cos(startRad), y: centerY + radius * Math.sin(startRad) };
-    const outerEnd = { x: centerX + radius * Math.cos(endRad), y: centerY + radius * Math.sin(endRad) };
-    const innerStart = { x: centerX + innerRadius * Math.cos(startRad), y: centerY + innerRadius * Math.sin(startRad) };
-    const innerEnd = { x: centerX + innerRadius * Math.cos(endRad), y: centerY + innerRadius * Math.sin(endRad) };
-
-    const largeArc = endAngle - startAngle > 180 ? 1 : 0;
-
-    return `
-      M ${innerStart.x} ${innerStart.y}
-      L ${outerStart.x} ${outerStart.y}
-      A ${cornerRadius} ${cornerRadius} 0 0 1 ${ox1} ${oy1}
-      A ${radius} ${radius} 0 ${largeArc} 1 ${ox2} ${oy2}
-      A ${cornerRadius} ${cornerRadius} 0 0 1 ${outerEnd.x} ${outerEnd.y}
-      L ${innerEnd.x} ${innerEnd.y}
-      A ${cornerRadius} ${cornerRadius} 0 0 1 ${ix2} ${iy2}
-      A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${ix1} ${iy1}
-      A ${cornerRadius} ${cornerRadius} 0 0 1 ${innerStart.x} ${innerStart.y}
-      Z
-    `;
-  };
+  // Prepare data for Recharts
+  const chartData = sliceData.map(slice => ({
+    id: slice.id,
+    name: slice.label,
+    value: slice.value,
+    percentage: slice.percentage,
+    color: slice.color
+  }));
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 p-8">
@@ -136,79 +90,60 @@ const CircleChartViz = () => {
 
           <div className="flex flex-col lg:flex-row items-start justify-between gap-8">
             {/* Circle Chart */}
-            <div className="relative flex-shrink-0">
-              <svg
-                width="280"
-                height="280"
-                viewBox="0 0 300 300"
-                className="filter drop-shadow-sm"
-              >
-                {/* Pie slices */}
-                {sliceData.map((slice) => {
-                  const isHovered = hoveredId === slice.id;
-                  const isOtherHovered = hoveredId !== null && hoveredId !== slice.id;
-
-                  return (
-                    <motion.g
-                      key={slice.id}
-                      animate={{
-                        scale: isHovered ? 1.05 : 1,
-                      }}
-                      transition={{
-                        duration: 0.25,
-                        ease: 'easeOut',
-                      }}
-                      style={{
-                        transformOrigin: '150px 150px',
-                      }}
-                    >
-                      <motion.path
-                        d={createSlicePath(slice.startAngle, slice.endAngle, 140)}
-                        fill={slice.color}
-                        stroke="rgba(243, 244, 246, 0.5)"
-                        strokeWidth="2"
-                        strokeLinejoin="round"
-                        strokeLinecap="round"
-                        className="cursor-pointer dark:stroke-gray-950/50"
-                        onMouseEnter={() => setHoveredId(slice.id)}
-                        onMouseLeave={() => setHoveredId(null)}
-                        animate={{
-                          opacity: isOtherHovered ? 0.3 : 1,
-                        }}
-                        transition={{
-                          duration: 0.25,
-                        }}
-                      />
-                    </motion.g>
-                  );
-                })}
-
-                {/* Center text */}
-                {hoveredId && (
-                  <motion.g
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
+            <div className="relative flex-shrink-0" style={{ width: 280, height: 280 }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={chartData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={80}
+                    outerRadius={120}
+                    paddingAngle={2}
+                    dataKey="value"
+                    startAngle={90}
+                    endAngle={-270}
+                    onMouseEnter={(_, index) => setHoveredId(chartData[index].id)}
+                    onMouseLeave={() => setHoveredId(null)}
+                    animationDuration={300}
+                    animationEasing="ease-out"
                   >
-                    <text
-                      x="150"
-                      y="145"
-                      textAnchor="middle"
-                      className="text-3xl font-mono font-bold fill-gray-900 dark:fill-gray-100"
-                    >
-                      {sliceData.find((s) => s.id === hoveredId)?.percentage.toFixed(1)}%
-                    </text>
-                    <text
-                      x="150"
-                      y="165"
-                      textAnchor="middle"
-                      className="text-xs font-mono fill-gray-500 dark:fill-gray-400"
-                    >
-                      {sliceData.find((s) => s.id === hoveredId)?.label}
-                    </text>
-                  </motion.g>
-                )}
-              </svg>
+                    {chartData.map((entry) => {
+                      const isHovered = hoveredId === entry.id;
+                      const isOtherHovered = hoveredId !== null && hoveredId !== entry.id;
+
+                      return (
+                        <Cell
+                          key={entry.id}
+                          fill={entry.color}
+                          opacity={isOtherHovered ? 0.3 : 1}
+                          style={{
+                            cursor: 'pointer',
+                            transition: 'opacity 0.3s ease-out'
+                          }}
+                        />
+                      );
+                    })}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+
+              {/* Center text overlay */}
+              {hoveredId && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+                >
+                  <div className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
+                    {chartData.find((s) => s.id === hoveredId)?.percentage.toFixed(1)}%
+                  </div>
+                  <div className="text-xs font-mono text-gray-500 dark:text-gray-400">
+                    {chartData.find((s) => s.id === hoveredId)?.name}
+                  </div>
+                </motion.div>
+              )}
             </div>
 
             {/* Data List */}
