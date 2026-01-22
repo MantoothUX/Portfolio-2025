@@ -184,10 +184,8 @@ export const Navigation = () => {
               x: activeIndicator.x
             }}
             transition={{
-              type: "spring",
-              stiffness: 150,
-              damping: 20,
-              mass: 1
+              duration: 0.3,
+              ease: "easeInOut"
             }}
             style={{
               borderRadius: '9999px'

@@ -6,6 +6,7 @@ import { PortfolioWebsite } from './components/generated/PortfolioWebsite';
 import PrototypesPage from './components/PrototypesPage';
 import { DarkModeProvider } from './contexts/DarkModeContext';
 import { Navigation } from './components/Navigation';
+import { Agentation } from 'agentation';
 import React from 'react';
 let theme: Theme = 'light';
 // only use 'centered' container for standalone components, never for full page apps or websites.
@@ -38,9 +39,10 @@ function App() {
 
 function AppWithRoutes() {
   const location = useLocation();
-  
+
   return (
     <>
+      {import.meta.env.DEV && <Agentation />}
       <Navigation />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>

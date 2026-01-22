@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
 interface DataPoint {
   id: string;
@@ -24,6 +25,7 @@ const sampleData: DataPoint[] = [
 
 const CircleChartViz = () => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Calculate total for percentages
   const total = sampleData.reduce((sum, item) => sum + item.value, 0);
@@ -55,7 +57,7 @@ const CircleChartViz = () => {
     const centerX = 150;
     const centerY = 150;
     const innerRadius = radius - 40; // 40px wide sections
-    const cornerRadius = 8; // Radius for rounded corners
+    const cornerRadius = 4; // Radius for rounded corners
 
     const startRad = (startAngle * Math.PI) / 180;
     const endRad = (endAngle * Math.PI) / 180;
@@ -84,7 +86,7 @@ const CircleChartViz = () => {
     const ix2 = centerX + innerRadius * Math.cos(innerEndRad);
     const iy2 = centerY + innerRadius * Math.sin(innerEndRad);
 
-    // Corner control points
+    // Actual corner points (not offset)
     const outerStart = { x: centerX + radius * Math.cos(startRad), y: centerY + radius * Math.sin(startRad) };
     const outerEnd = { x: centerX + radius * Math.cos(endRad), y: centerY + radius * Math.sin(endRad) };
     const innerStart = { x: centerX + innerRadius * Math.cos(startRad), y: centerY + innerRadius * Math.sin(startRad) };
@@ -93,14 +95,15 @@ const CircleChartViz = () => {
     const largeArc = endAngle - startAngle > 180 ? 1 : 0;
 
     return `
-      M ${outerStart.x} ${outerStart.y}
-      Q ${outerStart.x} ${outerStart.y} ${ox1} ${oy1}
+      M ${innerStart.x} ${innerStart.y}
+      L ${outerStart.x} ${outerStart.y}
+      A ${cornerRadius} ${cornerRadius} 0 0 1 ${ox1} ${oy1}
       A ${radius} ${radius} 0 ${largeArc} 1 ${ox2} ${oy2}
-      Q ${outerEnd.x} ${outerEnd.y} ${outerEnd.x} ${outerEnd.y}
+      A ${cornerRadius} ${cornerRadius} 0 0 1 ${outerEnd.x} ${outerEnd.y}
       L ${innerEnd.x} ${innerEnd.y}
-      Q ${innerEnd.x} ${innerEnd.y} ${ix2} ${iy2}
+      A ${cornerRadius} ${cornerRadius} 0 0 1 ${ix2} ${iy2}
       A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${ix1} ${iy1}
-      Q ${innerStart.x} ${innerStart.y} ${innerStart.x} ${innerStart.y}
+      A ${cornerRadius} ${cornerRadius} 0 0 1 ${innerStart.x} ${innerStart.y}
       Z
     `;
   };
@@ -125,7 +128,7 @@ const CircleChartViz = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="lg:col-span-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6"
-          style={{ borderWidth: '1px', borderOpacity: 0.8, borderRadius: '12px' }}
+          style={{ borderWidth: '1px', borderRadius: '12px' }}
         >
           <h2 className="text-lg font-mono font-semibold text-gray-900 dark:text-gray-100 mb-6">
             Traffic Distribution
@@ -211,7 +214,8 @@ const CircleChartViz = () => {
             {/* Data List */}
             <div className="w-full flex-1">
               <div className="space-y-1">
-                {sliceData.map((item) => {
+                {/* First 6 items */}
+                {sliceData.slice(0, 6).map((item) => {
                   const isHovered = hoveredId === item.id;
                   const isOtherHovered = hoveredId !== null && hoveredId !== item.id;
 
@@ -232,7 +236,7 @@ const CircleChartViz = () => {
                       }}
                       transition={{ duration: 0.2 }}
                     >
-                      <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center justify-between gap-1.5">
                         <div className="flex items-center gap-2.5">
                           {/* Color indicator - square with rounded corners */}
                           <motion.div
@@ -256,6 +260,103 @@ const CircleChartViz = () => {
                     </motion.div>
                   );
                 })}
+
+                {/* Other countries - collapsed/expanded */}
+                {sliceData.length > 6 && (
+                  <>
+                    {/* Other countries summary row */}
+                    <motion.div
+                      className="relative cursor-pointer py-2 px-3 border border-transparent"
+                      onClick={() => setIsExpanded(!isExpanded)}
+                      animate={{
+                        borderColor: 'rgba(0, 0, 0, 0)',
+                        borderRadius: '12px',
+                      }}
+                      whileHover={{
+                        borderColor: 'rgba(0, 0, 0, 0.08)',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06)',
+                      }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <div className="flex items-center justify-between gap-1.5">
+                        <div className="flex items-center gap-2.5">
+                          <motion.div
+                            animate={{ rotate: isExpanded ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <ChevronDown className="w-3 h-3 text-gray-500 dark:text-gray-400" />
+                          </motion.div>
+                          <span className="font-mono text-sm text-gray-900 dark:text-gray-100">
+                            Other countries
+                          </span>
+                        </div>
+                        <span className="font-mono text-sm text-gray-600 dark:text-gray-400">
+                          {sliceData.slice(6).reduce((sum, item) => sum + item.percentage, 0).toFixed(1)}%
+                        </span>
+                      </div>
+                    </motion.div>
+
+                    {/* Expanded items */}
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: 'easeInOut' }}
+                          className="overflow-hidden"
+                        >
+                          <div className="space-y-1 pl-5">
+                            {sliceData.slice(6).map((item) => {
+                              const isHovered = hoveredId === item.id;
+                              const isOtherHovered = hoveredId !== null && hoveredId !== item.id;
+
+                              return (
+                                <motion.div
+                                  key={item.id}
+                                  className="relative cursor-pointer py-2 px-3 border border-transparent"
+                                  onMouseEnter={() => setHoveredId(item.id)}
+                                  onMouseLeave={() => setHoveredId(null)}
+                                  animate={{
+                                    borderColor: isHovered
+                                      ? 'rgba(0, 0, 0, 0.08)'
+                                      : 'rgba(0, 0, 0, 0)',
+                                    boxShadow: isHovered
+                                      ? '0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06)'
+                                      : '0 0 0 rgba(0, 0, 0, 0)',
+                                    borderRadius: '12px',
+                                  }}
+                                  transition={{ duration: 0.2 }}
+                                >
+                                  <div className="flex items-center justify-between gap-1.5">
+                                    <div className="flex items-center gap-2.5">
+                                      <motion.div
+                                        className="w-3 h-3 rounded"
+                                        style={{
+                                          backgroundColor: item.color,
+                                        }}
+                                        animate={{
+                                          scale: isHovered ? 1.15 : 1,
+                                        }}
+                                        transition={{ duration: 0.2 }}
+                                      />
+                                      <span className="font-mono text-sm text-gray-900 dark:text-gray-100">
+                                        {item.label}
+                                      </span>
+                                    </div>
+                                    <span className="font-mono text-sm text-gray-600 dark:text-gray-400">
+                                      {item.percentage.toFixed(1)}%
+                                    </span>
+                                  </div>
+                                </motion.div>
+                              );
+                            })}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -269,7 +370,7 @@ const CircleChartViz = () => {
           className="space-y-6"
         >
           {/* Total Visitors Card */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderOpacity: 0.8, borderRadius: '12px' }}>
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderRadius: '12px' }}>
             <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
               Total Visitors
             </h3>
@@ -283,7 +384,7 @@ const CircleChartViz = () => {
           </div>
 
           {/* Page Views Card */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderOpacity: 0.8, borderRadius: '12px' }}>
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderRadius: '12px' }}>
             <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
               Page Views
             </h3>
@@ -297,7 +398,7 @@ const CircleChartViz = () => {
           </div>
 
           {/* Avg Session Duration Card */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderOpacity: 0.8, borderRadius: '12px' }}>
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderRadius: '12px' }}>
             <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
               Avg. Session Duration
             </h3>

@@ -151,7 +151,7 @@ const ProjectCard = ({
   const videoUrl = project.cloudflareR2Url && isVideoUrl(project.cloudflareR2Url) ? project.cloudflareR2Url : null;
   
   return <motion.div whileHover={isDisabled ? {} : {
-    scale: 1.05,
+    scale: 1.02,
     y: -8,
     transition: {
       type: "spring",
@@ -161,7 +161,7 @@ const ProjectCard = ({
   }} className={cn("group flex flex-col h-full", isDisabled ? "cursor-not-allowed" : "cursor-pointer")} onClick={isDisabled ? undefined : onClick} style={{
     perspective: 1000
   }}>
-      <div className={cn("bg-white dark:bg-zinc-900 overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-lg shadow-gray-500/10 dark:shadow-black/30 transition-all duration-300 flex flex-col h-full", !isDisabled && "hover:shadow-2xl hover:shadow-gray-500/20 dark:hover:shadow-black/40", isDisabled && "border-gray-300 dark:border-zinc-700")} style={{
+      <div className={cn("bg-white dark:bg-zinc-900 overflow-hidden border border-gray-200 dark:border-zinc-800 shadow-sm shadow-gray-500/5 dark:shadow-black/20 transition-all duration-300 flex flex-col h-full", !isDisabled && "hover:shadow-md hover:shadow-gray-500/10 dark:hover:shadow-black/30", isDisabled && "border-gray-300 dark:border-zinc-700")} style={{
       borderRadius: '12px'
     }}>
         <div className="relative overflow-hidden bg-gray-50 dark:bg-zinc-950/50 aspect-[4/3] flex-shrink-0" style={{
@@ -189,7 +189,7 @@ const ProjectCard = ({
               style={isDisabled ? { filter: 'grayscale(100%)' } : {}}
             />
           )}
-          {!isDisabled && <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />}
+          {!isDisabled && <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-inner" />}
         </div>
         <div className="p-4 flex flex-col flex-grow">
           <h3 className={cn("text-base font-semibold line-clamp-1 mb-1 transition-colors", isDisabled ? "text-gray-400 dark:text-gray-500" : "text-gray-900 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-300")} style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '18px' }}>
@@ -1309,30 +1309,20 @@ const HomePage = ({
               <motion.button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={cn('px-4 py-2 rounded-full text-sm font-semibold', selectedCategory === category ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')}
+                className={cn('px-4 py-2 rounded-full text-sm font-semibold cursor-pointer', selectedCategory === category ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')}
                 style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{
                   delay: 0.2 + index * 0.03,
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 25
+                  ease: "easeOut",
+                  duration: 0.15
                 }}
                 whileTap={{
-                  scale: 0.95,
+                  scale: 0.97,
                   transition: {
-                    type: "spring",
-                    stiffness: 500,
-                    damping: 30
-                  }
-                }}
-                whileHover={{
-                  scale: 1.05,
-                  transition: {
-                    type: "spring",
-                    stiffness: 400,
-                    damping: 20
+                    ease: "easeOut",
+                    duration: 0.15
                   }
                 }}
               >
@@ -1379,31 +1369,25 @@ const HomePage = ({
                 }}
                 transition={{
                   opacity: {
-                    duration: 0.6,
-                    ease: [0.25, 0.1, 0.25, 1]
+                    duration: 0.4,
+                    ease: "easeInOut"
                   },
                   y: {
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 30,
-                    mass: 1
+                    duration: 0.4,
+                    ease: "easeInOut"
                   },
                   scale: {
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 30,
-                    mass: 1
+                    duration: 0.4,
+                    ease: "easeInOut"
                   },
                   filter: {
-                    duration: 0.5,
-                    ease: [0.25, 0.1, 0.25, 1]
+                    duration: 0.4,
+                    ease: "easeInOut"
                   },
                   delay: index * 0.04,
                   layout: {
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 30,
-                    mass: 1
+                    duration: 0.4,
+                    ease: "easeInOut"
                   }
                 }}
               >
