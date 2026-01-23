@@ -76,6 +76,56 @@ const CircleChartViz = () => {
 
       {/* Main Content Grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Additional Dashboard Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="space-y-6"
+        >
+          {/* Total Visitors Card */}
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderRadius: '12px' }}>
+            <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
+              Total Visitors
+            </h3>
+            <p className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
+              124,583
+            </p>
+            <p className="text-xs font-mono text-green-600 dark:text-green-400 mt-1 flex items-center gap-1">
+              <span className="text-[10px]">↑</span>
+              <span>12.5% from last month</span>
+            </p>
+          </div>
+
+          {/* Page Views Card */}
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderRadius: '12px' }}>
+            <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
+              Page Views
+            </h3>
+            <p className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
+              342,891
+            </p>
+            <p className="text-xs font-mono text-green-600 dark:text-green-400 mt-1 flex items-center gap-1">
+              <span className="text-[10px]">↑</span>
+              <span>8.3% from last month</span>
+            </p>
+          </div>
+
+          {/* Avg Session Duration Card */}
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderRadius: '12px' }}>
+            <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
+              Avg. Session Duration
+            </h3>
+            <p className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
+              4m 32s
+            </p>
+            <p className="text-xs font-mono text-red-600 dark:text-red-400 mt-1 flex items-center gap-1">
+              <span className="text-[10px]">↓</span>
+              <span>2.1% from last month</span>
+            </p>
+          </div>
+        </motion.div>
+
         {/* Traffic Source Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -119,7 +169,8 @@ const CircleChartViz = () => {
                           opacity={isOtherHovered ? 0.3 : 1}
                           style={{
                             cursor: 'pointer',
-                            transition: 'opacity 0.3s ease-out'
+                            transition: 'opacity 0.3s ease-out',
+                            outline: 'none'
                           }}
                         />
                       );
@@ -294,56 +345,6 @@ const CircleChartViz = () => {
                 )}
               </div>
             </div>
-          </div>
-        </motion.div>
-
-        {/* Additional Dashboard Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="space-y-6"
-        >
-          {/* Total Visitors Card */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderRadius: '12px' }}>
-            <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
-              Total Visitors
-            </h3>
-            <p className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
-              124,583
-            </p>
-            <p className="text-xs font-mono text-green-600 dark:text-green-400 mt-1 flex items-center gap-1">
-              <span className="text-[10px]">↑</span>
-              <span>12.5% from last month</span>
-            </p>
-          </div>
-
-          {/* Page Views Card */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderRadius: '12px' }}>
-            <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
-              Page Views
-            </h3>
-            <p className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
-              342,891
-            </p>
-            <p className="text-xs font-mono text-green-600 dark:text-green-400 mt-1 flex items-center gap-1">
-              <span className="text-[10px]">↑</span>
-              <span>8.3% from last month</span>
-            </p>
-          </div>
-
-          {/* Avg Session Duration Card */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6" style={{ borderWidth: '1px', borderRadius: '12px' }}>
-            <h3 className="text-xs font-mono text-gray-500 dark:text-gray-400 mb-2">
-              Avg. Session Duration
-            </h3>
-            <p className="text-3xl font-mono font-bold text-gray-900 dark:text-gray-100">
-              4m 32s
-            </p>
-            <p className="text-xs font-mono text-red-600 dark:text-red-400 mt-1 flex items-center gap-1">
-              <span className="text-[10px]">↓</span>
-              <span>2.1% from last month</span>
-            </p>
           </div>
         </motion.div>
       </div>
