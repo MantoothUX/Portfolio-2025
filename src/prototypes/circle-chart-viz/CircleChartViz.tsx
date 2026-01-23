@@ -199,7 +199,7 @@ const CircleChartViz = () => {
 
             {/* Data List */}
             <div className="w-full flex-1">
-              <div className="space-y-1">
+              <div>
                 {/* First 6 items */}
                 {sliceData.slice(0, 6).map((item) => {
                   const isHovered = hoveredId === item.id;
@@ -292,7 +292,7 @@ const CircleChartViz = () => {
                           transition={{ duration: 0.3, ease: 'easeInOut' }}
                           className="overflow-hidden"
                         >
-                          <div className="space-y-1 pl-5">
+                          <div className="pl-5">
                             {sliceData.slice(6).map((item) => {
                               const isHovered = hoveredId === item.id;
                               const isOtherHovered = hoveredId !== null && hoveredId !== item.id;
