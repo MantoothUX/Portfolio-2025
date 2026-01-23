@@ -1043,7 +1043,7 @@ const AboutPage = ({
   return <motion.div exit={{
     opacity: 0
   }} className="min-h-screen pb-24">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-15 py-12">
         <motion.div initial={{
         y: 20,
         opacity: 0
@@ -1065,18 +1065,18 @@ const AboutPage = ({
             <div className="flex flex-col md:flex-row gap-8 items-start">
               {aboutContent.photo && (
                 <div className="flex-shrink-0">
-                  <OptimizedImage 
-                    src={aboutContent.photo} 
-                    alt="Josh Mantooth" 
+                  <OptimizedImage
+                    src={aboutContent.photo}
+                    alt="Josh Mantooth"
                     cloudflareImageId={(contentData?.about as any)?.cloudflareImageId}
                     cloudflareR2Url={(contentData?.about as any)?.cloudflareR2Url}
-                    className="w-64 h-80 sm:w-72 sm:h-96 object-cover"
-                    containerClassName="w-64 h-80 sm:w-72 sm:h-96"
+                    className="w-[252px] h-[315px] object-cover"
+                    containerClassName="w-[252px] h-[315px]"
                     style={{ borderRadius: '20px' }}
                   />
                 </div>
               )}
-              <div className="flex-1 space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
+              <div className="flex-1 max-w-xl space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed" style={{ fontFamily: "'balto', sans-serif", fontSize: '18px' }}>
                 {aboutContent.bio.map((paragraph, index) => {
                   // Check if paragraph contains "resume" and we have a resume URL
                   if (paragraph.toLowerCase().includes("resume") && aboutContent.resume) {
@@ -1265,7 +1265,7 @@ const HomePage = ({
   return <motion.div exit={{
     opacity: 0
   }} className="min-h-screen pb-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-15 py-12">
         <motion.div initial={{
         y: 20,
         opacity: 0
