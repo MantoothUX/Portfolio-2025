@@ -227,7 +227,7 @@ export default function PrototypesPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="bg-white/90 dark:bg-gray-900/80 backdrop-blur-md rounded-xl md:rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-4 sm:p-6 md:p-8 shadow-2xl"
+              className="bg-white/90 dark:bg-gray-900/80 backdrop-blur-md rounded-xl md:rounded-2xl border border-gray-200/50 dark:border-gray-700/50 p-4 sm:p-6 md:p-8 shadow-2xl overflow-hidden"
             >
             <div className="space-y-4 sm:space-y-6">
               {data.categories.map((category, categoryIndex) => (
