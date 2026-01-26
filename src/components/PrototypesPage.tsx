@@ -204,7 +204,7 @@ export default function PrototypesPage() {
         {/* Spinning Globe Background */}
         <SpinningGlobe darkMode={darkMode} />
 
-        <div className="max-w-7xl mx-auto px-15 py-12 relative z-10" style={{ isolation: 'isolate' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 relative z-10" style={{ isolation: 'isolate' }}>
           <div className="max-w-3xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

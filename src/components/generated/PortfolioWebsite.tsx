@@ -455,6 +455,54 @@ const ImageGallery = ({
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const isMobile = useIsMobile();
 
+  // Touch/swipe state
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [isSwiping, setIsSwiping] = useState(false);
+
+  // Minimum swipe distance to trigger navigation (in pixels)
+  const minSwipeDistance = 50;
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+    setIsSwiping(false);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const currentTouch = e.targetTouches[0].clientX;
+    setTouchEnd(currentTouch);
+    // If moved more than a small threshold, consider it a swipe
+    if (touchStart !== null && Math.abs(touchStart - currentTouch) > 10) {
+      setIsSwiping(true);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && images.length > 1) {
+      goToNext();
+    } else if (isRightSwipe && images.length > 1) {
+      goToPrevious();
+    }
+
+    // Reset touch state
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+
+  const handleImageClick = () => {
+    // Only expand if it wasn't a swipe gesture
+    if (!isSwiping) {
+      setExpandedIndex(currentIndex);
+    }
+  };
+
   // Get the best URL for an image at a given index
   const getImageUrl = (index: number): string => {
     const r2Url = cloudflareR2Urls?.[index];
@@ -520,6 +568,7 @@ const ImageGallery = ({
     <>
       <div className="w-full max-w-full sm:max-w-2xl md:max-w-4xl mb-12">
         <div className="relative rounded-2xl overflow-hidden border border-gray-200 dark:border-zinc-800 bg-gray-100 dark:bg-zinc-900">
+          {/* Arrow buttons - desktop only */}
           {images.length > 1 && !isMobile && (
             <>
               <button onClick={goToPrevious} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Previous image">
@@ -528,13 +577,34 @@ const ImageGallery = ({
               <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 dark:bg-white/20 text-white dark:text-white hover:bg-black/70 dark:hover:bg-white/30 transition-colors" aria-label="Next image">
                 <ChevronRight className="w-6 h-6" />
               </button>
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-                {images.map((_, index) => <button key={index} onClick={() => setCurrentIndex(index)} className={cn('w-2 h-2 rounded-full transition-all', index === currentIndex ? 'bg-white w-6' : 'bg-white/50')} aria-label={`Go to image ${index + 1}`} />)}
-              </div>
             </>
           )}
+          {/* Dot indicators - all screen sizes */}
+          {images.length > 1 && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2 px-3 py-2 rounded-full bg-black/20 dark:bg-black/40 backdrop-blur-sm">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={cn(
+                    'w-2 h-2 rounded-full transition-all',
+                    index === currentIndex
+                      ? 'bg-gray-800 dark:bg-white w-6'
+                      : 'bg-transparent border border-gray-800 dark:border-white/70'
+                  )}
+                  aria-label={`Go to image ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
           {/* Crossfade transition - all images preloaded and stacked */}
-          <div className={cn("relative w-full", isMobile && "cursor-pointer")} onClick={() => isMobile && setExpandedIndex(currentIndex)}>
+          <div
+            className={cn("relative w-full cursor-pointer")}
+            onClick={handleImageClick}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             {images.map((src, index) => {
               const isActive = index === currentIndex;
               const actualSrc = getImageUrl(index);
@@ -1043,7 +1113,7 @@ const AboutPage = ({
   return <motion.div exit={{
     opacity: 0
   }} className="min-h-screen pb-24">
-      <div className="max-w-7xl mx-auto px-15 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12">
         <motion.div initial={{
         y: 20,
         opacity: 0
@@ -1265,7 +1335,7 @@ const HomePage = ({
   return <motion.div exit={{
     opacity: 0
   }} className="min-h-screen pb-24">
-      <div className="max-w-7xl mx-auto px-15 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12">
         <motion.div initial={{
         y: 20,
         opacity: 0
