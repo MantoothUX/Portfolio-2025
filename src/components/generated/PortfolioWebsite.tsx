@@ -1355,7 +1355,7 @@ const HomePage = ({
             <p className="text-3xl text-gray-700 dark:text-gray-300 max-w-3xl" style={{
               fontFamily: "'balto', sans-serif",
               fontWeight: 300,
-              fontSize: '32px'
+              fontSize: 'clamp(1.25rem, 3vw, 2rem)' // Responsive: 20px on small, 32px on large
             }}>
               {heroContent.subtitle}
             </p>
@@ -1374,12 +1374,12 @@ const HomePage = ({
       }} transition={{
         delay: 0.2
       }} className="mb-8">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
             {categories.map((category, index) => (
               <motion.button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={cn('px-4 py-2 rounded-full text-sm font-semibold cursor-pointer', selectedCategory === category ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')}
+                className={cn('px-4 py-2 rounded-full text-sm font-semibold cursor-pointer whitespace-nowrap flex-shrink-0', selectedCategory === category ? 'bg-[#13531C] dark:bg-green-700 text-white dark:text-green-50' : 'bg-green-50 dark:bg-green-900/50 text-green-800 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/70 border border-green-200 dark:border-green-900/50')}
                 style={{ fontFamily: "'balto', sans-serif", fontWeight: 500, fontSize: '16px' }}
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
