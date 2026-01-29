@@ -1,51 +1,6 @@
 {
   "projects": [
     {
-      "id": "2",
-      "title": "Shopify marketing automations",
-      "company": "Shopify",
-      "description": "Designed, launched and evolved a no-code automated email marketing platform that helped merchants engage with customers and grow sales",
-      "cardDescription": "End-to-end design from MVP launch to full-scale platform",
-      "image": "/projects/marketing-automations/marketing_automations_hero.png",
-      "galleryImages": [
-        "/projects/marketing-automations/Template-library.png",
-        "/projects/marketing-automations/Template-detail.png",
-        "/projects/marketing-automations/WYSIWYG_Email_Editor.png",
-        "/projects/marketing-automations/Custom_workflow.png",
-        "/projects/marketing-automations/Marketing-automation-detail.png"
-      ],
-      "tags": [
-        "Product design",
-        "User research"
-      ],
-      "year": "2021-2023",
-      "role": "Product design, user testing",
-      "category": "Shopify",
-      "overview": "Shopify automated email features were limited and required knowledge of code to make edits, which led merchants to pay for 3rd-party automated marketing services.",
-      "challenges": [
-        "Shopify did not offer customizable marketing email workflows",
-        "Editing emails was clunky and required coding experience",
-        "Merchants were paying for 3rd-party automated marketing services"
-      ],
-      "solutions": [
-        "I collaborated with multiple designers and cross-functional teams to design an automated email marketing platform. The platform integrated functionality from two existing apps into a cohesive experience that offered:",
-        "A library of marketing automation templates",
-        "No-code email editing",
-        "Customizable workflow builder",
-        "Metrics and reporting to help merchants monitor and improve their automated emails"
-      ],
-      "growthAndEvolution": "After a successful launch, I spent the next year leading the vision, growth and evolution of the product. I established a series of collaborative, cross-functional design workshops that streamlined my team's process from concept design to production.",
-      "cloudflareImageId": "100883bf-c455-45f1-54b4-153b659b7500",
-      "cloudflareGalleryIds": [
-        "10f0210f-f892-4296-a3c8-46e95e082500",
-        "2e02a260-f551-4317-c90f-7b0952595500",
-        "808fdc09-efc2-4652-fc54-df871c312d00",
-        "187bab1f-765a-4c9c-1ef2-a4d497d82600",
-        "787f8a93-4615-4719-cf56-5ddb1d5df600"
-      ],
-      "cloudflareGalleryR2Urls": []
-    },
-    {
       "id": "3",
       "title": "Shopify package management",
       "company": "Shopify",
@@ -139,6 +94,51 @@
       "cloudflareGalleryR2Urls": []
     },
     {
+      "id": "2",
+      "title": "Shopify marketing automations",
+      "company": "Shopify",
+      "description": "Designed, launched and evolved a no-code automated email marketing platform that helped merchants engage with customers and grow sales",
+      "cardDescription": "End-to-end design from MVP launch to full-scale platform",
+      "image": "/projects/marketing-automations/marketing_automations_hero.png",
+      "galleryImages": [
+        "/projects/marketing-automations/Template-library.png",
+        "/projects/marketing-automations/Template-detail.png",
+        "/projects/marketing-automations/WYSIWYG_Email_Editor.png",
+        "/projects/marketing-automations/Custom_workflow.png",
+        "/projects/marketing-automations/Marketing-automation-detail.png"
+      ],
+      "tags": [
+        "Product design",
+        "User research"
+      ],
+      "year": "2021-2023",
+      "role": "Product design, user testing",
+      "category": "Shopify",
+      "overview": "Shopify automated email features were limited and required knowledge of code to make edits, which led merchants to pay for 3rd-party automated marketing services.",
+      "challenges": [
+        "Shopify did not offer customizable marketing email workflows",
+        "Editing emails was clunky and required coding experience",
+        "Merchants were paying for 3rd-party automated marketing services"
+      ],
+      "solutions": [
+        "I collaborated with multiple designers and cross-functional teams to design an automated email marketing platform. The platform integrated functionality from two existing apps into a cohesive experience that offered:",
+        "A library of marketing automation templates",
+        "No-code email editing",
+        "Customizable workflow builder",
+        "Metrics and reporting to help merchants monitor and improve their automated emails"
+      ],
+      "growthAndEvolution": "After a successful launch, I spent the next year leading the vision, growth and evolution of the product. I established a series of collaborative, cross-functional design workshops that streamlined my team's process from concept design to production.",
+      "cloudflareImageId": "100883bf-c455-45f1-54b4-153b659b7500",
+      "cloudflareGalleryIds": [
+        "10f0210f-f892-4296-a3c8-46e95e082500",
+        "2e02a260-f551-4317-c90f-7b0952595500",
+        "808fdc09-efc2-4652-fc54-df871c312d00",
+        "187bab1f-765a-4c9c-1ef2-a4d497d82600",
+        "787f8a93-4615-4719-cf56-5ddb1d5df600"
+      ],
+      "cloudflareGalleryR2Urls": []
+    },
+    {
       "id": "15",
       "title": "Music Player Chrome Extension",
       "company": "Personal",
@@ -153,7 +153,7 @@
       "year": "2025",
       "role": "Design, development",
       "category": "Personal",
-      "overview": "I designed and built a Spotify Chrome extension prototype. The goal is to enable seamless cross-device switching for non-app Spotify users via authed Chrome sessions.\n\nDid I concept and build this in 20 minutes during an on-site design challenge? ...Well, yes. But I really liked the outcome.\n\nBuilt with React, TypeScript, Tailwind CSS, and Framer Motion. [Interactive prototype](http://localhost:5173/prototypes/music-player-chrome-extension)",
+      "overview": "I designed and built a Spotify Chrome extension prototype. The goal is to enable seamless cross-device switching for non-app Spotify users via authed Chrome sessions.\n\nDid I concept and build this in 20 minutes during an on-site design challenge? ...Well, yes. But I really liked the outcome.\n\nBuilt with React, TypeScript, Tailwind CSS, and Framer Motion. [Interactive prototype](https://www.mantoothux.com/prototypes/music-player-chrome-extension)",
       "toolsUsed": [
         "Figma Make",
         "Cursor",
