@@ -8,6 +8,7 @@ import { useDarkMode } from '../../contexts/DarkModeContext';
 import { useIsMobile } from '../../hooks/use-mobile';
 import OptimizedImage from '../OptimizedImage';
 import { generateCloudflareImageUrl } from '../../lib/cloudflare';
+import { ProcessCards } from '../ProcessCards';
 
 type Project = {
   id: string;
@@ -807,7 +808,7 @@ const ProjectModal = ({
       {/* Modal Content */}
       <motion.div initial={{
       opacity: 0,
-      scale: 0.95,
+      scale: 0.6,
       y: 20
     }} animate={{
       opacity: 1,
@@ -815,12 +816,13 @@ const ProjectModal = ({
       y: 0
     }} exit={{
       opacity: 0,
-      scale: 0.95,
-      y: 20
+      scale: 0.9,
+      y: 10
     }} transition={{
       type: "spring",
       damping: 25,
-      stiffness: 300
+      stiffness: 300,
+      mass: 0.8
     }} className="relative w-full max-w-6xl max-h-[90vh] bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl overflow-hidden flex flex-col" onClick={e => e.stopPropagation()}>
         {/* Header with close button */}
         <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-zinc-800">
@@ -829,9 +831,16 @@ const ProjectModal = ({
             <span>•</span>
             <span>{project.role}</span>
           </div>
-          <button onClick={onClose} className="flex items-center justify-center w-10 h-10 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors" style={{ fontFamily: "'balto', sans-serif" }} aria-label="Close modal">
+          <motion.button 
+            onClick={onClose} 
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-zinc-800 text-gray-600 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors" 
+            style={{ fontFamily: "'balto', sans-serif" }} 
+            aria-label="Close modal"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
             <X className="w-5 h-5" />
-          </button>
+          </motion.button>
         </div>
 
         {/* Scrollable content */}
@@ -1177,28 +1186,7 @@ const AboutPage = ({
             </div>
           </div>
 
-          <div className="my-12">
-            <h2 className="text-2xl text-gray-900 dark:text-white mb-6" style={{
-              fontFamily: "'Instrument Serif', serif",
-              fontWeight: 400
-            }}>Process</h2>
-            {/* Mobile/vertical layout SVG */}
-            <div className="md:hidden max-w-[192px]">
-              <img 
-                src={darkMode ? "/Process_diagram_vertical_dark.svg" : "/Process_diagram_vertical_light.svg"}
-                alt="Design process"
-                className="w-full h-auto"
-              />
-            </div>
-            {/* Desktop/horizontal layout SVG */}
-            <div className="hidden md:block max-w-6xl mx-auto">
-              <img 
-                src={darkMode ? "/Process_diagram_horizontal_dark.svg" : "/Process_diagram_horizontal_light.svg"}
-                alt="Design process"
-                className="w-full h-auto"
-              />
-            </div>
-          </div>
+          <ProcessCards darkMode={darkMode} />
 
           <div>
             <h2 className="text-2xl text-gray-900 dark:text-white mb-6" style={{
