@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence, useMotionValue, useAnimationControls, PanInfo } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Search, 
   FileText, 
@@ -319,109 +319,43 @@ interface ProcessCardsProps {
 }
 
 export function ProcessCards({ darkMode }: ProcessCardsProps) {
-  const [isPaused, setIsPaused] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
   const [selectedCard, setSelectedCard] = useState<typeof processCards[0] | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const controls = useAnimationControls();
-  const x = useMotionValue(0);
-  const dragStartX = useRef(0);
+  const dragState = useRef({ isDown: false, startX: 0, scrollLeft: 0 });
   
-  // Triple the cards for seamless infinite scroll in both directions
-  const tripleCards = [...processCards, ...processCards, ...processCards];
-  
-  // Card dimensions for calculations (matching smaller card size)
-  const cardWidth = 220;
-  const cardGap = 24;
-  const singleSetWidth = (cardWidth + cardGap) * processCards.length;
-  
-  // Check if animation should be paused (hovering, dragging, or modal open)
-  const shouldPause = isPaused || isDragging || selectedCard !== null;
-  
-  // Normalize position to keep it within the middle set of cards
-  const normalizePosition = useCallback((position: number) => {
-    // We want to keep the position within -singleSetWidth to -singleSetWidth*2
-    // This keeps us in the "middle" set of the tripled cards
-    let normalized = position;
-    
-    while (normalized > 0) {
-      normalized -= singleSetWidth;
-    }
-    while (normalized < -singleSetWidth * 2) {
-      normalized += singleSetWidth;
-    }
-    
-    return normalized;
-  }, [singleSetWidth]);
-  
-  // Start position in the middle set
-  useEffect(() => {
-    x.set(-singleSetWidth);
-  }, [x, singleSetWidth]);
-  
-  // Handle the infinite scroll animation
-  useEffect(() => {
-    if (shouldPause) {
-      controls.stop();
-    } else {
-      const currentX = x.get();
-      const normalizedX = normalizePosition(currentX);
-      
-      // If position was normalized, update it
-      if (normalizedX !== currentX) {
-        x.set(normalizedX);
-      }
-      
-      // Calculate remaining distance to complete one loop
-      const targetX = normalizedX - singleSetWidth;
-      const distance = Math.abs(targetX - normalizedX);
-      const duration = (distance / singleSetWidth) * 30;
-      
-      controls.start({
-        x: targetX,
-        transition: {
-          duration: duration,
-          ease: 'linear',
-          onComplete: () => {
-            // Reset to middle position and continue
-            x.set(-singleSetWidth);
-          }
-        }
-      });
-    }
-    
-    return () => {
-      controls.stop();
+  // Mouse drag handlers for click-and-drag scrolling
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    dragState.current = {
+      isDown: true,
+      startX: e.pageX - containerRef.current.offsetLeft,
+      scrollLeft: containerRef.current.scrollLeft
     };
-  }, [shouldPause, controls, x, singleSetWidth, normalizePosition]);
-  
-  // Handle drag start
-  const handleDragStart = () => {
-    setIsDragging(true);
-    controls.stop();
-    dragStartX.current = x.get();
+    setIsDragging(false);
   };
   
-  // Handle drag
-  const handleDrag = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    let newX = dragStartX.current + info.offset.x;
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!dragState.current.isDown || !containerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - containerRef.current.offsetLeft;
+    const walk = (x - dragState.current.startX) * 1.5; // Scroll speed multiplier
+    containerRef.current.scrollLeft = dragState.current.scrollLeft - walk;
     
-    // Normalize during drag to create infinite effect
-    newX = normalizePosition(newX);
-    x.set(newX);
+    // Mark as dragging if moved more than 5px (to prevent accidental clicks)
+    if (Math.abs(walk) > 5) {
+      setIsDragging(true);
+    }
   };
   
-  // Handle drag end
-  const handleDragEnd = () => {
-    // Normalize position after drag
-    const currentX = x.get();
-    const normalizedX = normalizePosition(currentX);
-    x.set(normalizedX);
-    
-    // Small delay before resuming animation to allow user to click
-    setTimeout(() => {
-      setIsDragging(false);
-    }, 150);
+  const handleMouseUp = () => {
+    dragState.current.isDown = false;
+    // Small delay before resetting isDragging to prevent card click
+    setTimeout(() => setIsDragging(false), 100);
+  };
+  
+  const handleMouseLeave = () => {
+    dragState.current.isDown = false;
   };
   
   return (
@@ -433,55 +367,37 @@ export function ProcessCards({ darkMode }: ProcessCardsProps) {
         Process
       </h2>
       
-      {/* Marquee container */}
+      {/* Scrollable container with drag support */}
       <div 
         ref={containerRef}
-        className="relative overflow-hidden cursor-grab active:cursor-grabbing"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => !isDragging && setIsPaused(false)}
+        className="relative overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
       >
-        {/* Gradient masks for fade effect */}
+        {/* Subtle right edge gradient to hint at more content */}
         <div 
           className={`
-            absolute left-0 top-0 bottom-0 w-6 sm:w-10 z-10 pointer-events-none
+            absolute right-0 top-0 bottom-0 w-8 sm:w-12 z-10 pointer-events-none
             ${darkMode 
-              ? 'bg-gradient-to-r from-[#1a1a2e] to-transparent' 
-              : 'bg-gradient-to-r from-white to-transparent'
-            }
-          `} 
-        />
-        <div 
-          className={`
-            absolute right-0 top-0 bottom-0 w-6 sm:w-10 z-10 pointer-events-none
-            ${darkMode 
-              ? 'bg-gradient-to-l from-[#1a1a2e] to-transparent' 
-              : 'bg-gradient-to-l from-white to-transparent'
+              ? 'bg-gradient-to-l from-[#1a1a2e]/40 to-transparent' 
+              : 'bg-gradient-to-l from-white/50 to-transparent'
             }
           `} 
         />
         
-        {/* Draggable scrolling cards */}
-        <motion.div
-          className="flex gap-4 sm:gap-5 md:gap-6 py-4"
-          style={{ x, width: 'fit-content' }}
-          animate={controls}
-          drag="x"
-          dragConstraints={{ left: -singleSetWidth * 3, right: singleSetWidth }}
-          dragElastic={0}
-          dragMomentum={false}
-          onDragStart={handleDragStart}
-          onDrag={handleDrag}
-          onDragEnd={handleDragEnd}
-        >
-          {tripleCards.map((card, index) => (
+        {/* Scrollable cards */}
+        <div className="flex gap-4 sm:gap-5 md:gap-6 py-4 pl-1 w-fit">
+          {processCards.map((card) => (
             <ProcessCard
-              key={`${card.id}-${index}`}
+              key={card.id}
               card={card}
               onClick={() => !isDragging && setSelectedCard(card)}
               darkMode={darkMode}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
       
       {/* Modal */}
