@@ -1153,7 +1153,7 @@ const AboutPage = ({
                   />
                 </div>
               )}
-              <div className="flex-1 max-w-xl space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed" style={{ fontFamily: "'balto', sans-serif", fontSize: '16px' }}>
+              <div className="flex-1 max-w-lg space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed" style={{ fontFamily: "'balto', sans-serif", fontSize: '16px' }}>
                 {aboutContent.bio.map((paragraph, index) => {
                   // Check if paragraph contains "resume" and we have a resume URL
                   if (paragraph.toLowerCase().includes("resume") && aboutContent.resume) {
