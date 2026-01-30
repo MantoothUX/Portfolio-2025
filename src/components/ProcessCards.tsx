@@ -102,16 +102,16 @@ function ProcessCard({ card, onClick, darkMode }: ProcessCardProps) {
       className={`
         relative flex flex-col gap-4 sm:gap-5 h-[200px] sm:h-[220px] md:h-[240px] w-[180px] sm:w-[200px] md:w-[220px] 
         px-4 sm:px-5 py-4 sm:py-5 cursor-pointer shrink-0 overflow-hidden
-        border shadow-sm transition-all duration-300
+        border shadow-sm transition-shadow duration-300 card-shimmer
         ${darkMode 
-          ? 'bg-zinc-900 border-green-400/30 shadow-black/20 hover:shadow-md hover:shadow-black/30' 
-          : 'bg-white border-[#13531C]/20 shadow-gray-500/5 hover:shadow-md hover:shadow-gray-500/10'
+          ? 'bg-zinc-900 border-zinc-800/80 shadow-black/20' 
+          : 'bg-white border-gray-200/80 shadow-gray-500/5'
         }
       `}
-      style={{ borderRadius: '12px' }}
+      style={{ borderRadius: '12px', borderWidth: '1.5px' }}
       whileHover={{ 
-        scale: 1.05,
-        transition: { type: 'spring', stiffness: 400, damping: 25 }
+        scale: 1.04,
+        transition: { type: 'spring', stiffness: 400, damping: 15 }
       }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
@@ -260,8 +260,8 @@ function CardModal({ card, isOpen, onClose, darkMode }: CardModalProps) {
                 
                 {/* Description */}
                 <motion.p 
-                  className={`text-base leading-relaxed mb-6 whitespace-pre-line ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
-                  style={{ fontFamily: "'balto', sans-serif" }}
+                  className={`leading-relaxed mb-6 whitespace-pre-line ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
+                  style={{ fontFamily: "'balto', sans-serif", fontSize: '16px' }}
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ 
                     opacity: 1, 
@@ -286,13 +286,13 @@ function CardModal({ card, isOpen, onClose, darkMode }: CardModalProps) {
                       <motion.span
                         key={index}
                         className={`
-                          px-3 py-1.5 rounded-full text-sm
+                          px-3 py-1.5 rounded-full
                           ${darkMode 
                             ? 'bg-gray-700 text-gray-300' 
                             : 'bg-gray-100 text-gray-700'
                           }
                         `}
-                        style={{ fontFamily: "'balto', sans-serif" }}
+                        style={{ fontFamily: "'balto', sans-serif", fontSize: '14px' }}
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ 
                           opacity: 1, 

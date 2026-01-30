@@ -164,7 +164,7 @@
     },
     {
       "id": "16",
-      "title": "Vibe coded motion experiment",
+      "title": "Swinging door animation experiment",
       "company": "Personal",
       "description": "Micro-interaction prototype for a hospitality app",
       "cardDescription": "Micro-interaction prototype for a hospitality app",
@@ -232,7 +232,7 @@
       "id": "1",
       "title": "U.S. capitals quiz game",
       "company": "Personal",
-      "description": "Retro-style game I vibe coded in react",
+      "description": "Retro-style geography game",
       "image": "/projects/us-capitals-game/card.png",
       "modalImage": "/projects/us-capitals-game/Capitals.gif",
       "tags": [
@@ -242,8 +242,9 @@
       "year": "2025",
       "role": "UX design, prompt engineer",
       "category": "Personal",
-      "overview": "As a kid, one of my greatest feats in academia was my knowledge of all U.S. capitals. When my son became interested in learning states and capitals, I decided to create this game to help him learn. I wanted to create a game that was fun and engaging, but also educational. It took me about 5 hours to build, test, iterate and deploy.",
+      "overview": "As a kid, one of my greatest feats in academia was my knowledge of all U.S. capitals. When my son became interested in learning states and capitals, I decided to create this game to help him learn.\n\nI was inspired by the retro learning games I would play in my elementary computer lab. This was my first personal vibe coded app project.\n\nBuilt with Next.js, React, TypeScript, and Tailwind CSS",
       "externalUrl": "https://us-capitals-game.vercel.app/",
+      "toolsUsed": ["Figma", "Claude code", "Vercel"],
       "outcomes": [
         "My son asks to play the game almost every day",
         "\"This is awesome! Did you really build it?\" - My wife"
@@ -464,7 +465,7 @@
       "year": "2024-2025",
       "role": "Product design",
       "category": "Shopify",
-      "disabled": true,
+      "hidden": true,
       "cloudflareImageId": "d2baa8eb-e8b4-4767-97c4-5abb4893f700"
     },
     {
@@ -480,7 +481,7 @@
       "year": "2024-2025",
       "role": "Product design",
       "category": "Shopify",
-      "disabled": true,
+      "hidden": true,
       "cloudflareImageId": "d2baa8eb-e8b4-4767-97c4-5abb4893f700"
     }
   ],
