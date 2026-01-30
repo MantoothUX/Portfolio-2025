@@ -165,9 +165,7 @@ const ProjectCard = ({
       borderRadius: '12px',
       borderWidth: '1.5px'
     }}>
-        <div className="relative overflow-hidden bg-gray-50 dark:bg-zinc-950/50 aspect-[4/3] flex-shrink-0" style={{
-        borderRadius: '12px 12px 0 0'
-      }}>
+        <div className="relative overflow-hidden bg-gray-50 dark:bg-zinc-950/50 aspect-[4/3] flex-shrink-0">
           {videoUrl ? (
             <video
               src={videoUrl}
